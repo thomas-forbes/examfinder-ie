@@ -1,0 +1,398 @@
+{
+  "lc": {
+    "1": {
+      "2021": [
+        "LC001ALP200IV.pdf",
+        "LC001ALP100IV.pdf",
+        "LC001BLP000IV.pdf",
+        "LC001GLP100IV.pdf",
+        "LC001GLP200IV.pdf",
+        "LC001BLP017IV.mp3",
+        "LC001ZLP017IV.mp3"
+      ]
+    },
+    "2": {
+      "2021": [
+        "LC002ALP100EV.pdf",
+        "LC002ALP200EV.pdf",
+        "LC002GLP100EV.pdf",
+        "LC002GLP200EV.pdf"
+      ]
+    },
+    "3": {
+      "2021": [
+        "LC003ALP100IV.pdf",
+        "LC003ALP100EV.pdf",
+        "LC003ALP200EV.pdf",
+        "LC003ALP200IV.pdf",
+        "LC003BLP000EV.pdf",
+        "LC003BLP000IV.pdf",
+        "LC003GLP100EV.pdf",
+        "LC003GLP100IV.pdf",
+        "LC003GLP200EV.pdf",
+        "LC003GLP200IV.pdf"
+      ]
+    },
+    "4": {
+      "2021": [
+        "LC004ALP000EV.pdf",
+        "LC004ALP000IV.pdf",
+        "LC004GLP000EV.pdf",
+        "LC004GLP000IV.pdf"
+      ]
+    },
+    "5": {
+      "2021": [
+        "LC005ALP043EV.pdf",
+        "LC005ALP042IV.pdf",
+        "LC005ALP043IV.pdf",
+        "LC005CLP003EV.pdf",
+        "LC005CLP004EV.JPG",
+        "LC005GLP043IV.pdf",
+        "LC005CLPC00EV.pdf",
+        "LC005GLP042EV.pdf",
+        "LC005GLP042IV.pdf",
+        "LC005GLP043EV.pdf",
+        "LC005ALP042EV.pdf"
+      ]
+    },
+    "6": {
+      "2021": [
+        "LC006ALP000EV.pdf",
+        "LC006ALP000IV.pdf",
+        "LC006GLP000EV.pdf",
+        "LC006GLP000IV.pdf"
+      ]
+    },
+    "7": {
+      "2021": [
+        "LC007ALP000EV.pdf",
+        "LC007ALP000IV.pdf",
+        "LC007GLP000EV.pdf",
+        "LC007GLP000IV.pdf"
+      ]
+    },
+    "8": {
+      "2020": [
+        "LC008ALP000EV.pdf",
+        "LC008ALP000IV.pdf",
+        "LC008ALP004EV.pdf",
+        "LC008ALP004IV.pdf"
+      ]
+    },
+    "10": {
+      "2021": [
+        "LC010ALP000BV.pdf",
+        "LC010ALPA00BV.pdf",
+        "LC010GLP000BV.pdf",
+        "LC010GLPA00BV.pdf",
+        "LC010ZLP017EV.mp3"
+      ]
+    },
+    "11": {
+      "2021": [
+        "LC011ALPA00BV.pdf",
+        "LC011ALP000BV.pdf",
+        "LC011GLP000BV.pdf",
+        "LC011GLPA00BV.pdf",
+        "LC011ZLP017EV.mp3"
+      ]
+    },
+    "12": {
+      "2021": [
+        "LC012ALP000IV.pdf",
+        "LC012ALP000EV.pdf",
+        "LC012ALP015EV.pdf",
+        "LC012ALPA00EV.pdf",
+        "LC012ALPA00IV.pdf",
+        "LC012GLP000EV.pdf",
+        "LC012GLP000IV.pdf",
+        "LC012GLPA00EV.pdf",
+        "LC012GLPA00IV.pdf",
+        "LC012ZLP017EV.mp3"
+      ]
+    },
+    "13": {
+      "2021": [
+        "LC013ALP000BV.pdf",
+        "LC013ALPA00BV.pdf",
+        "LC013GLP000BV.pdf",
+        "LC013GLPA00BV.pdf",
+        "LC013ZLP017EV.mp3"
+      ]
+    },
+    "14": {
+      "2020": [
+        "LC014ALP004EV.pdf",
+        "LC014ALP013EV.pdf",
+        "LC014ALP013IV.pdf",
+        "LC014GLP004EV.pdf",
+        "LC014GLP013EV.pdf",
+        "LC014GLP013IV.pdf"
+      ]
+    },
+    "17": { "2021": ["LC017ALP000EV.pdf"] },
+    "18": { "2021": ["LC018ALP000EV.pdf"] },
+    "19": { "2021": ["LC019ALP000EV.pdf"] },
+    "20": { "2020": ["LC020ALP000EV.pdf", "LC020ALP000IV.pdf"] },
+    "21": {
+      "2021": [
+        "LC021ALP000EV.pdf",
+        "LC021ALP000IV.pdf",
+        "LC021GLP000EV.pdf",
+        "LC021GLP000IV.pdf"
+      ]
+    },
+    "22": {
+      "2020": [
+        "LC022ALP000EV.pdf",
+        "LC022ALP000IV.pdf",
+        "LC022GLP000EV.pdf",
+        "LC022GLP000IV.pdf"
+      ]
+    },
+    "23": {
+      "2021": [
+        "LC023ALP000EV.pdf",
+        "LC023ALP000IV.pdf",
+        "LC023GLP000EV.pdf",
+        "LC023GLP000IV.pdf"
+      ]
+    },
+    "24": {
+      "2020": [
+        "LC024ALP000EV.pdf",
+        "LC024ALP000IV.pdf",
+        "LC024GLP000EV.pdf",
+        "LC024GLP000IV.pdf"
+      ]
+    },
+    "25": {
+      "2020": [
+        "LC025ALP038EV.pdf",
+        "LC025ALP038IV.pdf",
+        "LC025ALP040EV.pdf",
+        "LC025ALP040IV.pdf",
+        "LC025GLP038EV.pdf",
+        "LC025GLP038IV.pdf",
+        "LC025GLP040EV.pdf",
+        "LC025GLP040IV.pdf"
+      ]
+    },
+    "27": {
+      "2021": [
+        "LC027ALP000EV.pdf",
+        "LC027ALP000IV.pdf",
+        "LC027GLP000EV.pdf",
+        "LC027GLP000IV.pdf"
+      ]
+    },
+    "29": {
+      "2021": [
+        "LC029ALP000EV.pdf",
+        "LC029ALP000IV.pdf",
+        "LC029GLP000EV.pdf",
+        "LC029GLP000IV.pdf"
+      ]
+    },
+    "32": {
+      "2020": [
+        "LC032ALP000EV.pdf",
+        "LC032ALP000IV.pdf",
+        "LC032GLP000EV.pdf",
+        "LC032GLP000IV.pdf"
+      ]
+    },
+    "33": {
+      "2020": [
+        "LC033ALP032EV.pdf",
+        "LC033ALP032IV.pdf",
+        "LC033ALP041EV.pdf",
+        "LC033ALP041IV.pdf",
+        "LC033GLP032EV.pdf",
+        "LC033GLP032IV.pdf",
+        "LC033GLP033EV.pdf",
+        "LC033GLP033IV.pdf"
+      ]
+    },
+    "34": {
+      "2021": [
+        "LC034ALP000EV.pdf",
+        "LC034ALP000IV.pdf",
+        "LC034GLP000EV.pdf",
+        "LC034GLP000IV.pdf"
+      ]
+    },
+    "39": { "2021": ["LC039ALP000EV.pdf"] },
+    "58": {
+      "2021": [
+        "LC058ALP000BV.pdf",
+        "LC058ALPA00BV.pdf",
+        "LC058GLP000BV.pdf",
+        "LC058GLPA00BV.pdf",
+        "LC058ZLP017EV.mp3"
+      ]
+    },
+    "59": { "2020": ["LC059ALP000EV.pdf"] },
+    "65": {
+      "2021": [
+        "LC065ALP014EV.pdf",
+        "LC065ALP014IV.pdf",
+        "LC065ALP039EV.pdf",
+        "LC065ALP039IV.pdf",
+        "LC065GLP014EV.pdf",
+        "LC065GLP014IV.pdf",
+        "LC065GLP039EV.pdf",
+        "LC065GLP039IV.pdf"
+      ]
+    },
+    "67": {
+      "2021": [
+        "LC067ALP006EV.pdf",
+        "LC067ALP006IV.pdf",
+        "LC067ALP007EV.pdf",
+        "LC067ALP007IV.pdf",
+        "LC067ALP008EV.pdf",
+        "LC067ALP008IV.pdf",
+        "LC067GLP006EV.pdf",
+        "LC067GLP006IV.pdf",
+        "LC067GLP008EV.pdf",
+        "LC067GLP008IV.pdf",
+        "LC067ZLP117EV.mp3",
+        "LC067ZLP117IV.mp3",
+        "LC067ZLP217EV.mp3",
+        "LC067ZLP217IV.mp3"
+      ]
+    },
+    "96": {
+      "2021": [
+        "LC096ALP000EV.pdf",
+        "LC096ALP000IV.pdf",
+        "LC096GLP000EV.pdf",
+        "LC096GLP000IV.pdf"
+      ]
+    },
+    "98": {
+      "2021": [
+        "LC098ALP014EV.pdf",
+        "LC098ALP014IV.pdf",
+        "LC098ALP039EV.pdf",
+        "LC098ALP039IV.pdf",
+        "LC098GLP014EV.pdf",
+        "LC098GLP014IV.pdf",
+        "LC098GLP039EV.pdf",
+        "LC098GLP039IV.pdf"
+      ]
+    },
+    "99": {
+      "2021": [
+        "LC099ALP000BV.pdf",
+        "LC099ALPA00BV.pdf",
+        "LC099GLP000BV.pdf",
+        "LC099GLPA00BV.pdf",
+        "LC099ZLP017EV.mp3"
+      ]
+    },
+    "219": {
+      "2021": [
+        "LC219ALP038EV.pdf",
+        "LC219ALP038IV.pdf",
+        "LC219ALP040EV.pdf",
+        "LC219ALP040IV.pdf",
+        "LC219GLP038EV.pdf",
+        "LC219GLP038IV.pdf",
+        "LC219GLP040EV.pdf",
+        "LC219GLP040IV.pdf"
+      ]
+    },
+    "223": {
+      "2021": [
+        "LC223ALP000EV.pdf",
+        "LC223ALP000IV.pdf",
+        "LC223GLP000EV.pdf",
+        "LC223GLP000IV.pdf"
+      ]
+    },
+    "225": {
+      "2021": [
+        "LC225ALP000EV.pdf",
+        "LC225ALP000IV.pdf",
+        "LC225GLP000EV.pdf",
+        "LC225GLP000IV.pdf"
+      ]
+    },
+    "462": {
+      "2021": [
+        "LC462CLP000EV.pdf",
+        "LC462CLP000IV.pdf",
+        "LC462CLP031EV.mov",
+        "LC462CLP031IV.mov"
+      ]
+    },
+    "547": { "2021": ["LC547ALP000EV.pdf"] },
+    "548": { "2021": ["LC548ALP000EV.pdf"] },
+    "549": { "2021": ["LC549ALP000EV.pdf"] },
+    "550": { "2021": ["LC550ALP000EV.pdf"] },
+    "551": { "2021": ["LC551ALP000EV.pdf"] },
+    "552": { "2021": ["LC552ALP000EV.pdf"] },
+    "553": { "2021": ["LC553ALP000EV.pdf"] },
+    "554": { "2021": ["LC554ALP000EV.pdf"] },
+    "559": { "2020": ["LC559ALP000EV.pdf"] },
+    "562": {
+      "2021": [
+        "LC562ALP014EV.pdf",
+        "LC562ALP014IV.pdf",
+        "LC562ALP039EV.pdf",
+        "LC562ALP039IV.pdf",
+        "LC562GLP014EV.pdf",
+        "LC562GLP014IV.pdf",
+        "LC562GLP039EV.pdf",
+        "LC562GLP039IV.pdf"
+      ]
+    },
+    "567": { "2021": ["LC567ALP000EV.pdf"] },
+    "568": {
+      "2021": [
+        "LC568ALP000EV.pdf",
+        "LC568ALP000IV.pdf",
+        "LC568GLP000EV.pdf",
+        "LC568GLP000IV.pdf"
+      ]
+    }
+  },
+  "jc": {},
+  "lb": {
+    "10": {
+      "2021": ["LB010CLP000EV.pdf", "LB010CLP000IV.pdf", "LB010ZLP017EV.mp3"]
+    },
+    "11": { "2021": ["LB011CLP000EV.pdf", "LB011ZLP017EV.mp3"] },
+    "12": {
+      "2021": ["LB012CLP000EV.pdf", "LB012CLP000IV.pdf", "LB012ZLP017EV.mp3"]
+    },
+    "13": { "2021": ["LB013CLP000EV.pdf", "LB013ZLP017EV.mp3"] },
+    "66": { "2021": ["LB066CLP000IV.pdf", "LB066ZLP017IV.mp3"] },
+    "810": { "2021": ["LB810CLP000EV.pdf", "LB810CLP031EV.mp4"] },
+    "815": {
+      "2021": [
+        "LB815CLP000EV.pdf",
+        "LB815CLP000IV.pdf",
+        "LB815ZLP017EV.mp3",
+        "LB815ZLP017IV.mp3"
+      ]
+    },
+    "825": { "2021": ["LB825CLP000EV.pdf"] },
+    "830": { "2021": ["LB830CLP000EV.pdf", "LB830CLP000IV.pdf"] },
+    "832": { "2021": ["LB832CLP000EV.pdf"] },
+    "833": { "2021": ["LB833CLP000EV.pdf", "LB833CLP000IV.pdf"] },
+    "835": { "2021": ["LB835CLP000EV.pdf"] },
+    "836": { "2021": ["LB836CLP000EV.pdf", "LB836CLP000IV.pdf"] },
+    "839": { "2021": ["LB839CLP000EV.pdf"] },
+    "845": { "2021": ["LB845CLP000EV.pdf", "LB845CLP000IV.pdf"] },
+    "846": { "2021": ["LB846CLP000EV.pdf"] },
+    "847": { "2021": ["LB847CLP000EV.pdf"] },
+    "848": {
+      "2021": ["LB848CLP000EV.pdf", "LB848CLP003EV.pdf", "LB848CLPC00EV.pdf"]
+    },
+    "850": { "2021": ["LB850CLP000EV.pdf"] }
+  }
+}
