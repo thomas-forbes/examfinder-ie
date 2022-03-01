@@ -25,6 +25,7 @@ import {
 // import DarkReader from 'darkreader'
 import data from './data.json'
 import './App.css'
+import { reverse } from 'dns'
 
 const SelectChoice = ({
   label,
@@ -79,7 +80,7 @@ const AutocompleteChoice = ({
       options={options}
       sx={{ width: width }}
       value={value}
-      onChange={(e, s) => setter(s)}
+      onChange={(e, s) => setter(s ? s : value)}
       renderInput={(params) => (
         <TextField
           {...params}
@@ -92,33 +93,74 @@ const AutocompleteChoice = ({
 }
 
 function App() {
-  const subNamesToNums = Object.keys(data.subNumsToNames).reduce((ret, key) => {
-    ret[data.subNumsToNames[key]] = key
-    return ret
-  }, {})
-
+  const updateSubList = () => {
+    return Array.from(
+      new Set(
+        Object.keys(data[exam])
+          .map((x) => data.subNumsToNames[x])
+          .sort()
+      )
+    )
+  }
+  const updateYearList = () => {
+    let tempYearList: string[] = []
+    for (const num of data.subNamesToNums[subject]) {
+      let tempList = data[exam]?.[num]
+      tempYearList = tempYearList.concat(tempList ? Object.keys(tempList) : [])
+    }
+    tempYearList.sort().reverse()
+    return tempYearList
+  }
+  const createUrl = (type: string, url: string) => {
+    let typeFormatter = {
+      'Exam Paper': 'exampapers',
+      'Marking Scheme': 'markingschemes',
+    }
+    return `https://www.examinations.ie/archive/${typeFormatter[type]}/${year}/${url}`
+  }
   const [exam, setExam] = useState('lc')
 
-  const [subList, setSubList] = useState(
-    Object.keys(data[exam])
-      .map((x) => data.subNumsToNames[x])
-      .sort()
-  )
-  const [subject, setSubject] = useState(subList[0])
+  const [subList, setSubList]: [string[], any] = useState(updateSubList())
+  const [subject, setSubject]: [string, any] = useState(subList[0])
 
-  const [yearList, setYearList] = useState([])
+  const [yearList, setYearList]: [string[], any] = useState(updateYearList())
   const [year, setYear] = useState(yearList[0])
 
   const [level, setLevel] = useState('AL')
   const [lang, setLang] = useState('EV')
 
+  const [papers, setPapers]: [any, any] = useState([])
+
   useEffect(() => {
-    let tempSubList = Object.keys(data[exam])
-      .map((x) => data.subNumsToNames[x])
-      .sort()
+    let tempSubList = updateSubList()
     setSubList(tempSubList)
     setSubject(tempSubList[0])
   }, [exam])
+
+  useEffect(() => {
+    let tempYearList = updateYearList()
+    setYearList(tempYearList)
+    if (!tempYearList.includes(year)) setYear(tempYearList[0])
+  }, [subject])
+
+  useEffect(() => {
+    console.log(exam, subject, year)
+    let place = { exampapers: [{}], markingschemes: [{}] }
+    for (const num of data.subNamesToNums[subject]) {
+      let tempList = data[exam]?.[num]
+      if (tempList && Object.keys(tempList).includes(year))
+        place = tempList[year]
+    }
+    let examPapers = place.exampapers.map((x) => ({ ...x, type: 'Exam Paper' }))
+    let markingschemes = place.markingschemes.map((x) => ({
+      ...x,
+      type: 'Marking Scheme',
+    }))
+    let finalPapers: any = examPapers.concat(markingschemes)
+    setPapers(
+      finalPapers.filter((x) => x.url.includes(lang) && x.url.includes(level))
+    )
+  }, [exam, subject, year, level, lang])
 
   const prefersDarkMode = true // useMediaQuery('(prefers-color-scheme: dark)') // no light mode for u
 
@@ -168,9 +210,9 @@ function App() {
             <AutocompleteChoice
               options={yearList}
               width={150}
+              label="Year"
               value={year}
               setter={setYear}
-              label="Year"
               useNumber
             />
           </Grid>
@@ -206,40 +248,47 @@ function App() {
       </Container>
       {/* PAPERS */}
       <Container sx={{ marginTop: 3 }}>
-        <Grid container justifyContent="center">
-          <Grid item>
-            {/* {papers.map()} */}
-            <Paper elevation={3} sx={{ width: 225 }}>
-              <Box
-                sx={{
-                  background: '#2196f3',
-                  paddingX: 2,
-                  paddingY: 1,
-                  borderRadius: 1,
-                }}
+        <Grid container spacing={5} justifyContent="center">
+          {papers.map((paper, i) => (
+            <Grid item key={i}>
+              <Paper
+                onClick={() => window.open(createUrl(paper.type, paper.url))}
+                elevation={3}
+                sx={{ width: 300 }}
               >
-                <Container disableGutters>
-                  <Typography variant="h4">Exam Paper</Typography>
-                </Container>
-              </Box>
-              <Box sx={{ paddingX: 2, paddingY: 1 }}>
-                <Grid
-                  container
-                  spacing={1}
-                  alignItems="center"
-                  justifyContent="space-between"
+                <Box
+                  sx={{
+                    background: '#2196f3',
+                    paddingX: 2,
+                    paddingY: 1,
+                    borderRadius: 1,
+                  }}
                 >
-                  <Grid item>
-                    <Typography variant="h6">Maths</Typography>
+                  <Container disableGutters>
+                    <Typography variant="h4">{paper.type}</Typography>
+                  </Container>
+                </Box>
+                <Box sx={{ paddingX: 2, paddingY: 1 }}>
+                  <Grid
+                    container
+                    spacing={1}
+                    alignItems="center"
+                    justifyContent="space-between"
+                  >
+                    <Grid item>
+                      <Typography variant="h6">{subject}</Typography>
+                    </Grid>
+                    <Grid item>
+                      <Typography variant="subtitle1">
+                        {paper.details}
+                      </Typography>
+                    </Grid>
                   </Grid>
-                  <Grid item>
-                    <Typography variant="subtitle1">Paper 1</Typography>
-                  </Grid>
-                </Grid>
-                <Typography variant="body1">2021</Typography>
-              </Box>
-            </Paper>
-          </Grid>
+                  <Typography variant="body1">{year}</Typography>
+                </Box>
+              </Paper>
+            </Grid>
+          ))}
         </Grid>
       </Container>
     </ThemeProvider>
