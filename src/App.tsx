@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   TextField,
   Autocomplete,
@@ -12,12 +12,18 @@ import {
   Container,
   Box,
   Stack,
+  AppBar,
+  Grid,
+  Paper,
   ThemeProvider,
   createTheme,
   CssBaseline,
   useMediaQuery,
+  Typography,
+  paperClasses,
 } from '@mui/material'
 // import DarkReader from 'darkreader'
+import data from './data.json'
 import './App.css'
 
 const SelectChoice = ({
@@ -43,24 +49,78 @@ const SelectChoice = ({
         sx={{ width: width }}
       >
         {options.map((v: any) => (
-          <MenuItem value={v.value}>{v.label}</MenuItem>
+          <MenuItem value={v.value} key={v.value}>
+            {v.label}
+          </MenuItem>
         ))}
       </Select>
     </FormControl>
   )
 }
 
-function App() {
-  const [lang, setLang]: [string, any] = useState('EV')
-  const [exam, setExam]: [string, any] = useState('LC')
-  const [level, setLevel]: [string, any] = useState('GL')
-  const [year, setYear]: [number, any] = useState(2021)
+const AutocompleteChoice = ({
+  options,
+  value,
+  setter,
+  label,
+  useNumber,
+  width,
+}: {
+  options: string[]
+  value: string
+  setter: any
+  label: string
+  useNumber?: boolean
+  width: number
+}) => {
+  return (
+    <Autocomplete
+      disablePortal
+      options={options}
+      sx={{ width: width }}
+      value={value}
+      onChange={(e, s) => setter(s)}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          type={useNumber ? 'number' : 'text'}
+          label={label}
+        />
+      )}
+    />
+  )
+}
 
-  let yearList = []
-  for (let i = 2021; i >= 1995; i--) {
-    yearList.push(i)
-  }
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
+function App() {
+  const subNamesToNums = Object.keys(data.subNumsToNames).reduce((ret, key) => {
+    ret[data.subNumsToNames[key]] = key
+    return ret
+  }, {})
+
+  const [exam, setExam] = useState('lc')
+
+  const [subList, setSubList] = useState(
+    Object.keys(data[exam])
+      .map((x) => data.subNumsToNames[x])
+      .sort()
+  )
+  const [subject, setSubject] = useState(subList[0])
+
+  const [yearList, setYearList] = useState([])
+  const [year, setYear] = useState(yearList[0])
+
+  const [level, setLevel] = useState('AL')
+  const [lang, setLang] = useState('EV')
+
+  useEffect(() => {
+    let tempSubList = Object.keys(data[exam])
+      .map((x) => data.subNumsToNames[x])
+      .sort()
+    setSubList(tempSubList)
+    setSubject(tempSubList[0])
+  }, [exam])
+
+  const prefersDarkMode = true // useMediaQuery('(prefers-color-scheme: dark)') // no light mode for u
 
   const theme = React.useMemo(
     () =>
@@ -71,75 +131,116 @@ function App() {
       }),
     [prefersDarkMode]
   )
-
-  const createUrl = (markScheme: boolean, paper: number) => {
-    let type = 'exampapers'
-    if (markScheme) type = ''
-
-    return `https://www.examinations.ie/archive/${type}/${year}/${exam}003${level}P${paper}00${lang}.pdf`
-  }
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      {/* CHOICES */}
       <Container sx={{ marginTop: 5 }}>
-        <Stack spacing={4} direction="row">
+        <Grid container spacing={4} justifyContent="center">
           {/* EXAM */}
-          <SelectChoice
-            label="Exam"
-            value={exam}
-            setter={setExam}
-            width={200}
-            options={[
-              { value: 'LC', label: 'Leaving Cert' },
-              { value: 'JC', label: 'Junior Cert' },
-              { value: 'LB', label: 'Leaving Cert applied' },
-            ]}
-          />
+          <Grid item>
+            <SelectChoice
+              label="Exam"
+              value={exam}
+              setter={setExam}
+              width={200}
+              options={[
+                { value: 'lc', label: 'Leaving Cert' },
+                { value: 'jc', label: 'Junior Cert' },
+                { value: 'lb', label: 'Leaving Cert applied' },
+              ]}
+            />
+          </Grid>
 
           {/* SUBJECT */}
-          <Autocomplete
-            disablePortal
-            options={['test', 'test1']}
-            sx={{ width: 250 }}
-            renderInput={(params) => <TextField {...params} label="Subject" />}
-          />
+          <Grid item>
+            <AutocompleteChoice
+              options={subList}
+              width={250}
+              label="Subject"
+              value={subject}
+              setter={setSubject}
+            />
+          </Grid>
 
           {/* YEAR */}
-          <Autocomplete
-            disablePortal
-            options={yearList}
-            sx={{ width: 150 }}
-            value={year}
-            onChange={(e, y) => setYear(y)}
-            renderInput={(params) => (
-              <TextField {...params} type="number" label="Year" />
-            )}
-          />
+          <Grid item>
+            <AutocompleteChoice
+              options={yearList}
+              width={150}
+              value={year}
+              setter={setYear}
+              label="Year"
+              useNumber
+            />
+          </Grid>
+
           {/* LEVEL */}
-          <SelectChoice
-            label="Level"
-            value={level}
-            setter={setLevel}
-            width={200}
-            options={[
-              { value: 'AL', label: 'Higher Level' },
-              { value: 'GL', label: 'Ordinary Level' },
-              { value: 'BL', label: 'Foundational Level' },
-            ]}
-          />
+          <Grid item>
+            <SelectChoice
+              label="Level"
+              value={level}
+              setter={setLevel}
+              width={200}
+              options={[
+                { value: 'AL', label: 'Higher Level' },
+                { value: 'GL', label: 'Ordinary Level' },
+                { value: 'BL', label: 'Foundational Level' },
+              ]}
+            />
+          </Grid>
 
           {/* LANGUAGE */}
-          <ToggleButtonGroup
-            color="primary"
-            value={lang}
-            exclusive
-            onChange={(e: any, s: string) => setLang(s)}
-          >
-            <ToggleButton value="EV">English</ToggleButton>
-            <ToggleButton value="IV">Irish</ToggleButton>
-          </ToggleButtonGroup>
-        </Stack>
-        {createUrl(false, 1)}
+          <Grid item>
+            <ToggleButtonGroup
+              color="primary"
+              value={lang}
+              exclusive
+              onChange={(e: any, s: string) => setLang(s)}
+            >
+              <ToggleButton value="EV">English</ToggleButton>
+              <ToggleButton value="IV">Irish</ToggleButton>
+            </ToggleButtonGroup>
+          </Grid>
+        </Grid>
+      </Container>
+      {/* PAPERS */}
+      <Container sx={{ marginTop: 3 }}>
+        <Grid container justifyContent="center">
+          <Grid item>
+            {/* {papers.map()} */}
+            <Paper elevation={3} sx={{ width: 225 }}>
+              <Box
+                sx={{
+                  background: '#2196f3',
+                  paddingX: 2,
+                  paddingY: 1,
+                  borderRadius: 1,
+                }}
+              >
+                <Container disableGutters>
+                  <Typography variant="h4">Exam Paper</Typography>
+                </Container>
+              </Box>
+              <Box sx={{ paddingX: 2, paddingY: 1 }}>
+                <Grid
+                  container
+                  spacing={1}
+                  alignItems="center"
+                  justifyContent="space-between"
+                >
+                  <Grid item>
+                    <Typography variant="h6">Maths</Typography>
+                  </Grid>
+                  <Grid item>
+                    <Typography variant="subtitle1">Paper 1</Typography>
+                  </Grid>
+                </Grid>
+                <Typography variant="body1">2021</Typography>
+              </Box>
+            </Paper>
+          </Grid>
+        </Grid>
       </Container>
     </ThemeProvider>
   )
