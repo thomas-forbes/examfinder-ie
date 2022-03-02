@@ -8,24 +8,19 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
-  Slider,
   Container,
   Box,
-  Stack,
-  AppBar,
   Grid,
   Paper,
   ThemeProvider,
   createTheme,
   CssBaseline,
-  useMediaQuery,
+  // useMediaQuery,
   Typography,
-  paperClasses,
 } from '@mui/material'
 // import DarkReader from 'darkreader'
 import data from './data.json'
 import './App.css'
-import { reverse } from 'dns'
 
 const SelectChoice = ({
   label,
