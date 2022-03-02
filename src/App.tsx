@@ -20,7 +20,6 @@ import {
 } from '@mui/material'
 // import DarkReader from 'darkreader'
 import data from './data.json'
-import './App.css'
 
 const SelectChoice = ({
   label,
@@ -122,7 +121,13 @@ function App() {
   const [yearList, setYearList]: [string[], any] = useState(updateYearList())
   const [year, setYear] = useState(yearList[0])
 
-  const [level, setLevel] = useState('AL')
+  const [levelList, setLevelList] = useState([
+    { value: 'AL', label: 'Higher Level' },
+    { value: 'GL', label: 'Ordinary Level' },
+    { value: 'BL', label: 'Foundational Level' },
+    { value: 'CL', label: 'Common Level' },
+  ])
+  const [level, setLevel] = useState(levelList[0].value)
   const [lang, setLang] = useState('EV')
 
   const [papers, setPapers]: [any, any] = useState([])
@@ -139,21 +144,25 @@ function App() {
     if (!tempYearList.includes(year)) setYear(tempYearList[0])
   }, [subject])
 
+  // Changes papers
   useEffect(() => {
-    console.log(exam, subject, year)
     let place = { exampapers: [{}], markingschemes: [{}] }
     for (const num of data.subNamesToNums[subject]) {
       let tempList = data[exam]?.[num]
       if (tempList && Object.keys(tempList).includes(year))
         place = tempList[year]
     }
-    let examPapers = place.exampapers.map((x) => ({ ...x, type: 'Exam Paper' }))
-    let markingschemes = place.markingschemes.map((x) => ({
+    let examPapers = place?.exampapers?.map((x) => ({
+      ...x,
+      type: 'Exam Paper',
+    }))
+    let markingschemes = place?.markingschemes?.map((x) => ({
       ...x,
       type: 'Marking Scheme',
     }))
-    let finalPapers: any = examPapers.concat(markingschemes)
-    console.log(finalPapers)
+    let finalPapers: any = (examPapers ? examPapers : []).concat(
+      markingschemes ? markingschemes : []
+    )
     setPapers(
       finalPapers.filter(
         (x) =>
@@ -225,11 +234,7 @@ function App() {
               value={level}
               setter={setLevel}
               width={200}
-              options={[
-                { value: 'AL', label: 'Higher Level' },
-                { value: 'GL', label: 'Ordinary Level' },
-                { value: 'BL', label: 'Foundational Level' },
-              ]}
+              options={levelList}
             />
           </Grid>
 
@@ -256,11 +261,13 @@ function App() {
                 href={createUrl(paper.type, paper.url)}
                 target="_blank"
                 style={{ textDecoration: 'none' }}
+                rel="noreferrer"
               >
                 <Paper elevation={3} sx={{ width: 300 }}>
                   <Box
                     sx={{
-                      background: '#2196f3',
+                      background:
+                        paper.type == 'Exam Paper' ? '#2196f3' : '#f50057',
                       paddingX: 2,
                       paddingY: 1,
                       borderRadius: 1,
