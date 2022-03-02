@@ -81,6 +81,7 @@ const AutocompleteChoice = ({
       sx={{ width: width }}
       value={value}
       onChange={(e, s) => setter(s ? s : value)}
+      autoHighlight={true}
       renderInput={(params) => (
         <TextField
           {...params}
@@ -157,10 +158,15 @@ function App() {
       type: 'Marking Scheme',
     }))
     let finalPapers: any = examPapers.concat(markingschemes)
+    console.log(finalPapers)
     setPapers(
-      finalPapers.filter((x) => x.url.includes(lang) && x.url.includes(level))
+      finalPapers.filter(
+        (x) =>
+          (x.url.includes(lang) || x.url.includes('BV')) &&
+          x.url.includes(level)
+      )
     )
-  }, [exam, subject, year, level, lang])
+  }, [yearList, year, level, lang])
 
   const prefersDarkMode = true // useMediaQuery('(prefers-color-scheme: dark)') // no light mode for u
 
@@ -251,42 +257,44 @@ function App() {
         <Grid container spacing={5} justifyContent="center">
           {papers.map((paper, i) => (
             <Grid item key={i}>
-              <Paper
-                onClick={() => window.open(createUrl(paper.type, paper.url))}
-                elevation={3}
-                sx={{ width: 300 }}
+              <a
+                href={createUrl(paper.type, paper.url)}
+                target="_blank"
+                style={{ textDecoration: 'none' }}
               >
-                <Box
-                  sx={{
-                    background: '#2196f3',
-                    paddingX: 2,
-                    paddingY: 1,
-                    borderRadius: 1,
-                  }}
-                >
-                  <Container disableGutters>
-                    <Typography variant="h4">{paper.type}</Typography>
-                  </Container>
-                </Box>
-                <Box sx={{ paddingX: 2, paddingY: 1 }}>
-                  <Grid
-                    container
-                    spacing={1}
-                    alignItems="center"
-                    justifyContent="space-between"
+                <Paper elevation={3} sx={{ width: 300 }}>
+                  <Box
+                    sx={{
+                      background: '#2196f3',
+                      paddingX: 2,
+                      paddingY: 1,
+                      borderRadius: 1,
+                    }}
                   >
-                    <Grid item>
-                      <Typography variant="h6">{subject}</Typography>
+                    <Container disableGutters>
+                      <Typography variant="h4">{paper.type}</Typography>
+                    </Container>
+                  </Box>
+                  <Box sx={{ paddingX: 2, paddingY: 1 }}>
+                    <Grid
+                      container
+                      spacing={1}
+                      alignItems="center"
+                      justifyContent="space-between"
+                    >
+                      <Grid item>
+                        <Typography variant="h6">{subject}</Typography>
+                      </Grid>
+                      <Grid item>
+                        <Typography variant="subtitle1">
+                          {paper.details}
+                        </Typography>
+                      </Grid>
                     </Grid>
-                    <Grid item>
-                      <Typography variant="subtitle1">
-                        {paper.details}
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                  <Typography variant="body1">{year}</Typography>
-                </Box>
-              </Paper>
+                    <Typography variant="body1">{year}</Typography>
+                  </Box>
+                </Paper>
+              </a>
             </Grid>
           ))}
         </Grid>
