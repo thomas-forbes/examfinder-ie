@@ -44,7 +44,7 @@ const SelectChoice = ({
         sx={{ width: width }}
       >
         {options.map((v: any) => (
-          <MenuItem value={v.value} key={v.value}>
+          <MenuItem value={v.value} key={v.value} disabled={v.disabled}>
             {v.label}
           </MenuItem>
         ))}
@@ -80,6 +80,11 @@ const AutocompleteChoice = ({
         <TextField
           {...params}
           type={useNumber ? 'number' : 'text'}
+          onChange={(e) =>
+            options.some((x) => x == e.target.value)
+              ? setter(e.target.value)
+              : null
+          }
           label={label}
         />
       )}
@@ -103,8 +108,7 @@ function App() {
       let tempList = data[exam]?.[num]
       tempYearList = tempYearList.concat(tempList ? Object.keys(tempList) : [])
     }
-    tempYearList.sort().reverse()
-    return tempYearList
+    return Array.from(new Set(tempYearList)).sort().reverse()
   }
   const createUrl = (type: string, url: string) => {
     let typeFormatter = {
@@ -146,11 +150,17 @@ function App() {
 
   // Changes papers
   useEffect(() => {
-    let place = { exampapers: [{}], markingschemes: [{}] }
+    let place: {
+      exampapers: { details: string; url: string }[]
+      markingschemes: { details: string; url: string }[]
+    } = {
+      exampapers: [],
+      markingschemes: [],
+    }
     for (const num of data.subNamesToNums[subject]) {
       let tempList = data[exam]?.[num]
       if (tempList && Object.keys(tempList).includes(year))
-        place = tempList[year]
+        Object.assign(place, tempList[year])
     }
     let examPapers = place?.exampapers?.map((x) => ({
       ...x,
@@ -163,6 +173,17 @@ function App() {
     let finalPapers: any = (examPapers ? examPapers : []).concat(
       markingschemes ? markingschemes : []
     )
+    console.log(finalPapers)
+    const nLevelList = levelList.map((x) => ({
+      ...x,
+      disabled: !finalPapers.some((paper) => paper?.url?.includes(x.value)),
+    }))
+    setLevelList(nLevelList)
+    const nLevel = nLevelList.find((x: any) => !x.disabled)?.value
+    if (!nLevelList.some((x) => x.value === level && !x.disabled)) {
+      setLevel(nLevel ? nLevel : '')
+    }
+
     setPapers(
       finalPapers.filter(
         (x) =>
@@ -253,7 +274,7 @@ function App() {
         </Grid>
       </Container>
       {/* PAPERS */}
-      <Container sx={{ marginTop: 3 }}>
+      <Container sx={{ marginTop: 3, marginBottom: 5 }}>
         <Grid container spacing={5} justifyContent="center">
           {papers.map((paper, i) => (
             <Grid item key={i}>
@@ -267,7 +288,7 @@ function App() {
                   <Box
                     sx={{
                       background:
-                        paper.type == 'Exam Paper' ? '#2196f3' : '#f50057',
+                        paper.type === 'Exam Paper' ? '#2196f3' : '#f50057',
                       paddingX: 2,
                       paddingY: 1,
                       borderRadius: 1,
