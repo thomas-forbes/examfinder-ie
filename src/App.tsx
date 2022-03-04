@@ -81,7 +81,7 @@ const AutocompleteChoice = ({
           {...params}
           type={useNumber ? 'number' : 'text'}
           onChange={(e) =>
-            options.some((x) => x == e.target.value)
+            options.some((x) => x === e.target.value)
               ? setter(e.target.value)
               : null
           }
@@ -132,6 +132,14 @@ function App() {
     { value: 'CL', label: 'Common Level' },
   ])
   const [level, setLevel] = useState(levelList[0].value)
+  const [langList, setLangList] = useState([
+    {
+      value: 'EV',
+      label: 'English',
+      disabled: false,
+    },
+    { value: 'IV', label: 'Irish', disabled: false },
+  ])
   const [lang, setLang] = useState('EV')
 
   const [papers, setPapers]: [any, any] = useState([])
@@ -173,17 +181,26 @@ function App() {
     let finalPapers: any = (examPapers ? examPapers : []).concat(
       markingschemes ? markingschemes : []
     )
-    console.log(finalPapers)
     const nLevelList = levelList.map((x) => ({
       ...x,
       disabled: !finalPapers.some((paper) => paper?.url?.includes(x.value)),
     }))
     setLevelList(nLevelList)
     const nLevel = nLevelList.find((x: any) => !x.disabled)?.value
-    if (!nLevelList.some((x) => x.value === level && !x.disabled)) {
+    if (!nLevelList.some((x) => x.value === level && !x.disabled))
       setLevel(nLevel ? nLevel : '')
+
+    const nLangList = langList.map((x) => ({
+      ...x,
+      disabled: !finalPapers.some((paper) => paper?.url?.includes(x.value)),
+    }))
+    setLangList(nLangList)
+    const nLang = nLangList.find((x: any) => !x.disabled)?.value
+    if (!nLangList.some((x) => x.value === lang && !x.disabled)) {
+      setLang(nLang ? nLang : '')
     }
 
+    console.log(finalPapers)
     setPapers(
       finalPapers.filter(
         (x) =>
@@ -193,7 +210,7 @@ function App() {
     )
   }, [yearList, year, level, lang])
 
-  const prefersDarkMode = true // useMediaQuery('(prefers-color-scheme: dark)') // no light mode for u
+  const prefersDarkMode = true //useMediaQuery('(prefers-color-scheme: dark)') // no light mode for u
 
   const theme = React.useMemo(
     () =>
@@ -220,7 +237,7 @@ function App() {
               options={[
                 { value: 'lc', label: 'Leaving Cert' },
                 { value: 'jc', label: 'Junior Cert' },
-                { value: 'lb', label: 'Leaving Cert applied' },
+                { value: 'lb', label: 'Leaving Cert Applied' },
               ]}
             />
           </Grid>
@@ -265,10 +282,15 @@ function App() {
               color="primary"
               value={lang}
               exclusive
-              onChange={(e: any, s: string) => setLang(s)}
+              onChange={(e: any, s: string) => (s !== null ? setLang(s) : null)}
             >
-              <ToggleButton value="EV">English</ToggleButton>
-              <ToggleButton value="IV">Irish</ToggleButton>
+              {langList.map((lang) => (
+                <ToggleButton value={lang.value} disabled={lang?.disabled}>
+                  {lang.label}
+                </ToggleButton>
+              ))}
+              {/* <ToggleButton value="EV">English</ToggleButton>
+              <ToggleButton value="IV">Irish</ToggleButton> */}
             </ToggleButtonGroup>
           </Grid>
         </Grid>
