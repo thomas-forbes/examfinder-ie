@@ -136,35 +136,54 @@ export default function Choices({ papers, setPapers }) {
 
   useEffect(() => {
     let tempYearList = updateYearList()
+    tempYearList.splice(0, 0, 'All')
     setYearList(tempYearList)
     if (!tempYearList.includes(year)) setYear(tempYearList[0])
   }, [subject])
 
   // Changes papers
   useEffect(() => {
-    let place: {
-      exampapers: { details: string; url: string }[]
-      markingschemes: { details: string; url: string }[]
-    } = {
-      exampapers: [],
-      markingschemes: [],
-    }
+    let examPapers: any = []
+    let markingschemes: any = []
     for (const num of data.subNamesToNums[subject]) {
       let tempList = data[exam]?.[num]
-      if (tempList && Object.keys(tempList).includes(year))
-        Object.assign(place, tempList[year])
+      if (year === 'All') {
+        for (const nYear of yearList) {
+          let nExamPapers = tempList[nYear]?.exampapers?.map((x) => ({
+            ...x,
+            type: 'Exam Paper',
+            year: nYear,
+          }))
+          examPapers = examPapers.concat(nExamPapers ? nExamPapers : [])
+
+          let nMarkSchemes = tempList[nYear]?.markingschemes?.map((x) => ({
+            ...x,
+            type: 'Marking Scheme',
+            year: nYear,
+          }))
+          markingschemes = markingschemes.concat(
+            nMarkSchemes ? nMarkSchemes : []
+          )
+        }
+      }
+      if (tempList && Object.keys(tempList).includes(year)) {
+        // Object.assign(place, tempList[year])
+        examPapers = tempList[year]?.exampapers?.map((x) => ({
+          ...x,
+          type: 'Exam Paper',
+          year: year,
+        }))
+        markingschemes = tempList[year]?.markingschemes?.map((x) => ({
+          ...x,
+          type: 'Marking Scheme',
+          year: year,
+        }))
+      }
     }
-    let examPapers = place?.exampapers?.map((x) => ({
-      ...x,
-      type: 'Exam Paper',
-    }))
-    let markingschemes = place?.markingschemes?.map((x) => ({
-      ...x,
-      type: 'Marking Scheme',
-    }))
-    let finalPapers: any = (examPapers ? examPapers : []).concat(
-      markingschemes ? markingschemes : []
-    )
+    // console.log(place)
+    let finalPapers: any = (examPapers ? examPapers : [])
+      .concat(markingschemes ? markingschemes : [])
+      .sort((fe, se) => fe.year < se.year)
 
     // UPDATE AVAILABLE LEVELS
     const nLevelList = levelList.map((x) => ({
@@ -195,7 +214,7 @@ export default function Choices({ papers, setPapers }) {
             (x.url.includes(lang) || x.url.includes('BV')) &&
             x.url.includes(level)
         )
-        .map((paper) => ({ ...paper, year: year, subject: subject }))
+        .map((paper) => ({ ...paper, subject: subject }))
     )
   }, [yearList, year, level, lang])
 
@@ -260,7 +279,11 @@ export default function Choices({ papers, setPapers }) {
             onChange={(e: any, s: string) => (s !== null ? setLang(s) : null)}
           >
             {langList.map((lang) => (
-              <ToggleButton value={lang.value} disabled={lang?.disabled}>
+              <ToggleButton
+                value={lang.value}
+                key={lang.value}
+                disabled={lang?.disabled}
+              >
                 {lang.label}
               </ToggleButton>
             ))}
