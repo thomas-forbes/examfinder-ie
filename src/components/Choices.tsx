@@ -147,40 +147,22 @@ export default function Choices({ papers, setPapers }) {
     let markingschemes: any = []
     for (const num of data.subNamesToNums[subject]) {
       let tempList = data[exam]?.[num]
-      if (year === 'All') {
-        for (const nYear of yearList) {
-          let nExamPapers = tempList[nYear]?.exampapers?.map((x) => ({
-            ...x,
-            type: 'Exam Paper',
-            year: nYear,
-          }))
-          examPapers = examPapers.concat(nExamPapers ? nExamPapers : [])
-
-          let nMarkSchemes = tempList[nYear]?.markingschemes?.map((x) => ({
-            ...x,
-            type: 'Marking Scheme',
-            year: nYear,
-          }))
-          markingschemes = markingschemes.concat(
-            nMarkSchemes ? nMarkSchemes : []
-          )
-        }
-      }
-      if (tempList && Object.keys(tempList).includes(year)) {
-        // Object.assign(place, tempList[year])
-        examPapers = tempList[year]?.exampapers?.map((x) => ({
+      for (const nYear of year === 'All' ? yearList : [year]) {
+        let nExamPapers = tempList[nYear]?.exampapers?.map((x) => ({
           ...x,
           type: 'Exam Paper',
-          year: year,
+          year: nYear,
         }))
-        markingschemes = tempList[year]?.markingschemes?.map((x) => ({
+        examPapers = examPapers.concat(nExamPapers ? nExamPapers : [])
+
+        let nMarkSchemes = tempList[nYear]?.markingschemes?.map((x) => ({
           ...x,
           type: 'Marking Scheme',
-          year: year,
+          year: nYear,
         }))
+        markingschemes = markingschemes.concat(nMarkSchemes ? nMarkSchemes : [])
       }
     }
-    // console.log(place)
     let finalPapers: any = (examPapers ? examPapers : [])
       .concat(markingschemes ? markingschemes : [])
       .sort((fe, se) => fe.year < se.year)
