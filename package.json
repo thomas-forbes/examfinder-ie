@@ -14,6 +14,7 @@
     "@types/react": "^17.0.39",
     "@types/react-dom": "^17.0.11",
     "darkreader": "^4.9.44",
+    "fuse.js": "^6.5.3",
     "puppeteer": "^13.4.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

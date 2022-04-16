@@ -12,6 +12,7 @@ import {
   ToggleButtonGroup,
 } from '@mui/material'
 import data from '../data.json'
+import Fuse from 'fuse.js'
 
 const SelectChoice = ({
   label,
@@ -60,10 +61,12 @@ const AutocompleteChoice = ({
   useNumber?: boolean
   width: number
 }) => {
+  const fuse = new Fuse(options)
+  const [filteredOps, setFilteredOps] = useState(options)
   return (
     <Autocomplete
       disablePortal
-      options={options}
+      options={filteredOps}
       sx={{ width: width }}
       value={value}
       onChange={(e, s) => setter(s ? s : value)}
@@ -72,11 +75,12 @@ const AutocompleteChoice = ({
         <TextField
           {...params}
           type={useNumber ? 'number' : 'text'}
-          onChange={(e) =>
-            options.some((x) => x === e.target.value)
-              ? setter(e.target.value)
-              : null
-          }
+          onChange={(e) => {
+            let val = e.target.value
+            if (val) setFilteredOps(fuse.search(val).map((x) => x.item))
+            else setFilteredOps(options)
+            return options.some((x) => x === val) ? setter(val) : null
+          }}
           label={label}
         />
       )}
