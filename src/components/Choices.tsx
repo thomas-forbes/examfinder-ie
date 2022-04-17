@@ -106,6 +106,7 @@ export default function Choices({ papers, setPapers }) {
     }
     return Array.from(new Set(tempYearList)).sort().reverse()
   }
+
   const [exam, setExam] = useState('lc')
 
   const [subList, setSubList]: [string[], any] = useState(updateSubList())
