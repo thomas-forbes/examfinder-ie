@@ -198,7 +198,7 @@ export default function Choices({ papers, setPapers }) {
         .filter(
           (x) =>
             (x.url.includes(lang) || x.url.includes('BV')) &&
-            x.url.includes(level)
+            (x.url.includes(level) || x.url.includes('ZL'))
         )
         .map((paper) => ({ ...paper, subject: subject }))
     )

@@ -3,6 +3,8 @@ import {
   ThemeProvider,
   createTheme,
   CssBaseline,
+  Box,
+  Stack,
   // useMediaQuery,
 } from '@mui/material'
 // import DarkReader from 'darkreader'
@@ -27,9 +29,17 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Choices papers={papers} setPapers={setPapers} />
-      <PaperList papers={papers} />
-      <BottomBar />
+      <Stack
+        direction="column"
+        spacing={0}
+        justifyContent="flex-start"
+        sx={{ minHeight: '100vh' }}
+      >
+        <Choices papers={papers} setPapers={setPapers} />
+        <PaperList papers={papers} />
+        <Box sx={{ flexGrow: 1 }}></Box>
+        <BottomBar />
+      </Stack>
     </ThemeProvider>
   )
 }
