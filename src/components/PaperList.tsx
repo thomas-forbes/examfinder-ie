@@ -9,7 +9,7 @@ export default function PaperList({ papers }) {
     return `https://www.examinations.ie/archive/${typeFormatter[type]}/${year}/${url}`
   }
   return (
-    <Container sx={{ marginTop: 3, marginBottom: 10 }}>
+    <Container sx={{ marginY: 3 }}>
       <Grid container spacing={5} justifyContent="center">
         {papers.map((paper, i) => (
           <Grid item key={i}>
