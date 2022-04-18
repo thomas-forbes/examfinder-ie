@@ -1,4 +1,5 @@
 const fs = require('fs')
+const { levelList, langList } = require('../public/consts.json')
 const { exit } = require('process')
 
 // Added sub to num
@@ -41,17 +42,48 @@ fs.readFile('./data.json', (e, dataRaw) => {
 
       // Goes through all years of the subject
       for (const year of Object.keys(data[exam][num])) {
-        out[exam][subject][year] = []
+        out[exam][subject][year] = { data: [], metaData: {} }
 
         // Goes through type ie exam paper/marking schemes
+        let papers = []
         for (const [type, d] of Object.entries(data[exam][num][year])) {
-          out[exam][subject][year] = out[exam][subject][year].concat(
+          papers = papers.concat(
             d.map((x) => ({ ...x, year: year, type: typeConverter[type] }))
           )
-          console.log(out[exam][subject][year])
-          exit(0)
         }
+        out[exam][subject][year].data = papers
+
+        /* -----------------
+        LEVELS
+         ----------------- */
+        // Adds possible level list to meta data
+        out[exam][subject][year].metaData.levelList = levelList.map((x) => ({
+          ...x,
+          disabled: !papers.some((paper) => paper?.url?.includes(x.value)),
+        }))
+
+        // Finds the first not disabled level
+        out[exam][subject][year].metaData.level = out[exam][subject][
+          year
+        ].metaData.levelList.find((x) => !x.disabled)?.value
+
+        /* -----------------
+        LANGS
+         ----------------- */
+        // Adds possible langs list to meta data
+        out[exam][subject][year].metaData.langList = langList.map((x) => ({
+          ...x,
+          disabled: !papers.some((paper) => paper?.url?.includes(x.value)),
+        }))
+        // Finds the first not disabled lang
+        out[exam][subject][year].metaData.lang = out[exam][subject][
+          year
+        ].metaData.langList.find((x) => !x.disabled)?.value
       }
     }
+
+    fs.writeFile(`./${exam}.json`, JSON.stringify(out[exam]), (e) => {
+      if (e) console.error(e)
+    })
   }
 })

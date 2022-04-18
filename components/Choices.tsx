@@ -12,6 +12,7 @@ import {
   ToggleButtonGroup,
 } from '@mui/material'
 import data from '../public/data.json'
+import consts from '../public/consts.json'
 import Fuse from 'fuse.js'
 
 const SelectChoice = ({
@@ -115,22 +116,10 @@ export default function Choices({ papers, setPapers }) {
   const [yearList, setYearList]: [string[], any] = useState(updateYearList())
   const [year, setYear] = useState(yearList[0])
 
-  const [levelList, setLevelList] = useState([
-    { value: 'AL', label: 'Higher Level' },
-    { value: 'GL', label: 'Ordinary Level' },
-    { value: 'BL', label: 'Foundational Level' },
-    { value: 'CL', label: 'Common Level' },
-  ])
+  const [levelList, setLevelList] = useState(consts.levelList)
   const [level, setLevel] = useState(levelList[0].value)
 
-  const [langList, setLangList] = useState([
-    {
-      value: 'EV',
-      label: 'English',
-      disabled: false,
-    },
-    { value: 'IV', label: 'Irish', disabled: false },
-  ])
+  const [langList, setLangList] = useState(consts.langList)
   const [lang, setLang] = useState('EV')
 
   useEffect(() => {
@@ -189,9 +178,8 @@ export default function Choices({ papers, setPapers }) {
     }))
     setLangList(nLangList)
     const nLang = nLangList.find((x: any) => !x.disabled)?.value
-    if (!nLangList.some((x) => x.value === lang && !x.disabled)) {
+    if (!nLangList.some((x) => x.value === lang && !x.disabled))
       setLang(nLang ? nLang : '')
-    }
 
     console.log(finalPapers)
     setPapers(

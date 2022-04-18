@@ -24,7 +24,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Head>
-        <title>My page title</title>
+        <title>Exam Finder</title>
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
