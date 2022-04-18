@@ -11,7 +11,7 @@ import {
   ToggleButton,
   ToggleButtonGroup,
 } from '@mui/material'
-import data from '../data.json'
+import data from '../public/data.json'
 import Fuse from 'fuse.js'
 
 const SelectChoice = ({
@@ -106,6 +106,7 @@ export default function Choices({ papers, setPapers }) {
     }
     return Array.from(new Set(tempYearList)).sort().reverse()
   }
+
   const [exam, setExam] = useState('lc')
 
   const [subList, setSubList]: [string[], any] = useState(updateSubList())
