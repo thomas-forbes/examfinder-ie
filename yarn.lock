@@ -509,11 +509,6 @@ csstype@^3.0.10, csstype@^3.0.2:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.0.10.tgz#2ad3a7bed70f35b965707c092e5f30b327c290e5"
   integrity sha512-2u44ZG2OcNUO9HDp/Jl8C07x6pU/eTR3ncV91SiK3dhG9TWvRVsCoJw14Ckx5DgWkzGA3waZWO3d7pgqpUI/XA==
 
-darkreader@^4.9.44:
-  version "4.9.44"
-  resolved "https://registry.yarnpkg.com/darkreader/-/darkreader-4.9.44.tgz#6aa89fd95c569dd9d77259cd34ebd2c7282e0e60"
-  integrity sha512-Mrt5s5eMaFC24Tfi2nNsXpYIfzWK/RUzJxgk0Ysqokvk9lBCn/pkUTyQGYeQbU/U3aKZEYXXqsxZjNfiLoA6QQ==
-
 debug@4, debug@4.3.4, debug@^4.1.1:
   version "4.3.4"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.4.tgz#1319f6579357f2338d3337d2cdd4914bb5dcc865"

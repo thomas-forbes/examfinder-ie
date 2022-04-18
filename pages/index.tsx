@@ -1,34 +1,35 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import {
   ThemeProvider,
   createTheme,
   CssBaseline,
   Box,
   Stack,
-  // useMediaQuery,
 } from '@mui/material'
-// import DarkReader from 'darkreader'
+import Head from 'next/head'
 
 import BottomBar from '../components/BottomBar'
 import Choices from '../components/Choices'
 import PaperList from '../components/PaperList'
 
+const theme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+})
+
 export default function App() {
   const [papers, setPapers]: [any, any] = useState([])
-
-  const prefersDarkMode = true //useMediaQuery('(prefers-color-scheme: dark)') // no light mode for u
-  const theme = useMemo(
-    () =>
-      createTheme({
-        palette: {
-          mode: prefersDarkMode ? 'dark' : 'light',
-        },
-      }),
-    [prefersDarkMode]
-  )
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      <Head>
+        <title>My page title</title>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+        />
+      </Head>
       <Stack
         direction="column"
         spacing={0}
