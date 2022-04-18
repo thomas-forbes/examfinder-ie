@@ -10,9 +10,8 @@ import {
   Grid,
   ToggleButton,
   ToggleButtonGroup,
+  Typography,
 } from '@mui/material'
-import data from '../public/data.json'
-import consts from '../public/consts.json'
 import Fuse from 'fuse.js'
 
 const SelectChoice = ({
@@ -64,13 +63,19 @@ const AutocompleteChoice = ({
 }) => {
   const fuse = new Fuse(options)
   const [filteredOps, setFilteredOps] = useState(options)
+  useEffect(() => {
+    setFilteredOps(options)
+  }, [options])
   return (
     <Autocomplete
       disablePortal
       options={filteredOps}
       sx={{ width: width }}
       value={value}
-      onChange={(e, s) => setter(s ? s : value)}
+      onChange={(e, s) => {
+        setter(s ? s : value)
+        setFilteredOps(options)
+      }}
       autoHighlight={true}
       renderInput={(params) => (
         <TextField
@@ -78,7 +83,8 @@ const AutocompleteChoice = ({
           type={useNumber ? 'number' : 'text'}
           onChange={(e) => {
             let val = e.target.value
-            if (val) setFilteredOps(fuse.search(val).map((x) => x.item))
+            if (options.includes(val)) setFilteredOps(options)
+            else if (val) setFilteredOps(fuse.search(val).map((x) => x.item))
             else setFilteredOps(options)
             return options.some((x) => x === val) ? setter(val) : null
           }}
@@ -90,108 +96,84 @@ const AutocompleteChoice = ({
 }
 
 export default function Choices({ papers, setPapers }) {
-  const updateSubList = () => {
-    return Array.from(
-      new Set(
-        Object.keys(data[exam])
-          .map((x) => data.subNumsToNames[x])
-          .sort()
-      )
-    )
-  }
-  const updateYearList = () => {
-    let tempYearList: string[] = []
-    for (const num of data.subNamesToNums[subject]) {
-      let tempList = data[exam]?.[num]
-      tempYearList = tempYearList.concat(tempList ? Object.keys(tempList) : [])
-    }
-    return Array.from(new Set(tempYearList)).sort().reverse()
-  }
-
   const [exam, setExam] = useState('lc')
+  const [data, setData] = useState(require(`../public/data/${exam}.json`))
 
-  const [subList, setSubList]: [string[], any] = useState(updateSubList())
-  const [subject, setSubject]: [string, any] = useState(subList[0])
+  const [subList, setSubList] = useState([''])
+  const [subject, setSubject] = useState(subList[0])
 
-  const [yearList, setYearList]: [string[], any] = useState(updateYearList())
+  const [yearList, setYearList] = useState([''])
   const [year, setYear] = useState(yearList[0])
 
-  const [levelList, setLevelList] = useState(consts.levelList)
-  const [level, setLevel] = useState(levelList[0].value)
+  const [levelList, setLevelList] = useState([])
+  const [level, setLevel] = useState('')
 
-  const [langList, setLangList] = useState(consts.langList)
-  const [lang, setLang] = useState('EV')
+  const [langList, setLangList] = useState([])
+  const [lang, setLang] = useState('')
 
+  // Updates data
   useEffect(() => {
-    let tempSubList = updateSubList()
-    setSubList(tempSubList)
-    setSubject(tempSubList[0])
+    setData(require(`../public/data/${exam}`))
   }, [exam])
-
+  // Updates sublist
   useEffect(() => {
-    let tempYearList = updateYearList()
-    tempYearList.splice(0, 0, 'All')
-    setYearList(tempYearList)
-    if (!tempYearList.includes(year)) setYear(tempYearList[0])
+    setSubList(Object.keys(data).sort())
+  }, [data])
+  // Updates subject when exam changes
+  useEffect(() => {
+    setSubject(subList[0])
+  }, [subList])
+  // Updates yearList when subject changes
+  useEffect(() => {
+    if (data[subject]) {
+      setYearList(Object.keys(data[subject]).sort().reverse())
+
+      if (data?.[subject]?.[year]) {
+        setLangList(data[subject][year].metaData.langList)
+        setLevelList(data[subject][year].metaData.levelList)
+      }
+    }
   }, [subject])
+  // Updates year
+  useEffect(() => {
+    if (!yearList.some((x) => x == year)) setYear(yearList[0])
+  }, [yearList])
+  // Updates lang/level lists
+  useEffect(() => {
+    if (data?.[subject]?.[year]) {
+      setLangList(data[subject][year].metaData.langList)
+      setLevelList(data[subject][year].metaData.levelList)
+    }
+  }, [year])
+  // Updates lang
+  useEffect(() => {
+    if (data?.[subject]?.[year]) {
+      setLang(data[subject][year].metaData.lang)
+    }
+  }, [langList])
+  // Updates level
+  useEffect(() => {
+    if (data?.[subject]?.[year]) {
+      setLevel(data[subject][year].metaData.level)
+    }
+  }, [levelList])
 
   // Changes papers
   useEffect(() => {
-    let examPapers: any = []
-    let markingschemes: any = []
-    for (const num of data.subNamesToNums[subject]) {
-      let tempList = data[exam]?.[num]
-      for (const nYear of year === 'All' ? yearList : [year]) {
-        let nExamPapers = tempList[nYear]?.exampapers?.map((x) => ({
-          ...x,
-          type: 'Exam Paper',
-          year: nYear,
-        }))
-        examPapers = examPapers.concat(nExamPapers ? nExamPapers : [])
-
-        let nMarkSchemes = tempList[nYear]?.markingschemes?.map((x) => ({
-          ...x,
-          type: 'Marking Scheme',
-          year: nYear,
-        }))
-        markingschemes = markingschemes.concat(nMarkSchemes ? nMarkSchemes : [])
-      }
-    }
-    let finalPapers: any = (examPapers ? examPapers : [])
-      .concat(markingschemes ? markingschemes : [])
-      .sort((fe, se) => fe.year < se.year)
-
-    // UPDATE AVAILABLE LEVELS
-    const nLevelList = levelList.map((x) => ({
-      ...x,
-      disabled: !finalPapers.some((paper) => paper?.url?.includes(x.value)),
-    }))
-    setLevelList(nLevelList)
-    const nLevel = nLevelList.find((x: any) => !x.disabled)?.value
-    if (!nLevelList.some((x) => x.value === level && !x.disabled))
-      setLevel(nLevel ? nLevel : '')
-
-    // UPDATE AVAILABLE LANGS
-    const nLangList = langList.map((x) => ({
-      ...x,
-      disabled: !finalPapers.some((paper) => paper?.url?.includes(x.value)),
-    }))
-    setLangList(nLangList)
-    const nLang = nLangList.find((x: any) => !x.disabled)?.value
-    if (!nLangList.some((x) => x.value === lang && !x.disabled))
-      setLang(nLang ? nLang : '')
-
-    console.log(finalPapers)
-    setPapers(
-      finalPapers
-        .filter(
-          (x) =>
-            (x.url.includes(lang) || x.url.includes('BV')) &&
-            (x.url.includes(level) || x.url.includes('ZL'))
+    if (data?.[subject]?.[year]) {
+      setPapers(
+        data[subject][year].data.filter((x) =>
+          x.url.includes(lang) || x.url.includes('BV')
+            ? x.url.includes(level) || x.url.includes('ZL')
+            : false
         )
-        .map((paper) => ({ ...paper, subject: subject }))
-    )
-  }, [yearList, year, level, lang])
+      )
+    }
+  }, [lang, level, year, subject, exam])
+
+  useEffect(() => {
+    console.log(papers)
+  }, [papers])
 
   return (
     <Container sx={{ marginTop: 5 }}>

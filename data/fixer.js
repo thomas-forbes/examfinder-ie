@@ -15,7 +15,6 @@ const { exit } = require('process')
 //   data.subNamesToNums = subNamesToNums
 //   fs.writeFile('./data.json', JSON.stringify(data), (err) => {})
 // })
-
 fs.readFile('./data.json', (e, dataRaw) => {
   if (e) console.error(e)
 
@@ -31,7 +30,7 @@ fs.readFile('./data.json', (e, dataRaw) => {
     markingschemes: 'Marking Scheme',
   }
 
-  // Goes through all exam jc, lc, lb
+  // Goes through all exam jc, lc, lb and writes
   for (const exam of exams) {
     out[exam] = {}
 
@@ -48,7 +47,12 @@ fs.readFile('./data.json', (e, dataRaw) => {
         let papers = []
         for (const [type, d] of Object.entries(data[exam][num][year])) {
           papers = papers.concat(
-            d.map((x) => ({ ...x, year: year, type: typeConverter[type] }))
+            d.map((x) => ({
+              ...x,
+              year: year,
+              type: typeConverter[type],
+              subject: subject,
+            }))
           )
         }
         out[exam][subject][year].data = papers
@@ -81,9 +85,12 @@ fs.readFile('./data.json', (e, dataRaw) => {
         ].metaData.langList.find((x) => !x.disabled)?.value
       }
     }
-
-    fs.writeFile(`./${exam}.json`, JSON.stringify(out[exam]), (e) => {
-      if (e) console.error(e)
-    })
+    fs.writeFile(
+      `../public/data/${exam}.json`,
+      JSON.stringify(out[exam]),
+      (e) => {
+        if (e) console.error(e)
+      }
+    )
   }
 })
