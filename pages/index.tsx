@@ -9,9 +9,9 @@ import {
 } from '@mui/material'
 // import DarkReader from 'darkreader'
 
-import BottomBar from './components/BottomBar'
-import Choices from './components/Choices'
-import PaperList from './components/PaperList'
+import BottomBar from '../components/BottomBar'
+import Choices from '../components/Choices'
+import PaperList from '../components/PaperList'
 
 export default function App() {
   const [papers, setPapers]: [any, any] = useState([])
