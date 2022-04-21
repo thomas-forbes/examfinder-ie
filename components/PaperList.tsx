@@ -1,4 +1,4 @@
-import { Container, Typography, Grid, Paper, Box } from '@mui/material'
+import { Container, Typography, Grid, Paper, Box, Stack } from '@mui/material'
 
 export default function PaperList({ papers }) {
   const createUrl = (type: string, year: string, url: string) => {
@@ -9,8 +9,13 @@ export default function PaperList({ papers }) {
     return `https://www.examinations.ie/archive/${typeFormatter[type]}/${year}/${url}`
   }
   return (
-    <Container sx={{ marginY: 3 }}>
-      <Grid container spacing={5} justifyContent="center">
+    <Container sx={{ marginY: 3, width: '100%' }}>
+      <Grid
+        container
+        spacing={5}
+        justifyContent="center"
+        sx={{ width: '100%' }}
+      >
         {papers.map((paper, i) => (
           <Grid item key={i}>
             <a
@@ -34,21 +39,13 @@ export default function PaperList({ papers }) {
                   </Container>
                 </Box>
                 <Box sx={{ paddingX: 2, paddingY: 1 }}>
-                  <Grid
-                    container
-                    spacing={1}
-                    alignItems="center"
-                    justifyContent="space-between"
+                  <Typography variant="h6">{paper.subject}</Typography>
+                  <Typography
+                    variant="subtitle1"
+                    //sx={{ height: '3.5em' }}
                   >
-                    <Grid item>
-                      <Typography variant="h6">{paper.subject}</Typography>
-                    </Grid>
-                    <Grid item>
-                      <Typography variant="subtitle1">
-                        {paper.details}
-                      </Typography>
-                    </Grid>
-                  </Grid>
+                    {paper.details}
+                  </Typography>
                   <Typography variant="body1">{paper.year}</Typography>
                 </Box>
               </Paper>
