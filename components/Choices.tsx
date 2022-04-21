@@ -10,9 +10,9 @@ import {
   Grid,
   ToggleButton,
   ToggleButtonGroup,
-  Typography,
 } from '@mui/material'
 import Fuse from 'fuse.js'
+import data from '../public/data.json'
 
 const SelectChoice = ({
   label,
@@ -97,7 +97,6 @@ const AutocompleteChoice = ({
 
 export default function Choices({ papers, setPapers }) {
   const [exam, setExam] = useState('lc')
-  const [data, setData] = useState(require(`../public/data/${exam}.json`))
 
   const [subList, setSubList] = useState([''])
   const [subject, setSubject] = useState(subList[0])
@@ -105,75 +104,92 @@ export default function Choices({ papers, setPapers }) {
   const [yearList, setYearList] = useState([''])
   const [year, setYear] = useState(yearList[0])
 
-  const [levelList, setLevelList] = useState([])
+  const [allPapers, setAllPapers] = useState([])
+
+  const [levelList, setLevelList] = useState([
+    { value: 'AL', label: 'Higher Level', disabled: false },
+    { value: 'GL', label: 'Ordinary Level', disabled: false },
+    { value: 'BL', label: 'Foundational Level', disabled: false },
+    { value: 'CL', label: 'Common Level', disabled: false },
+  ])
   const [level, setLevel] = useState('')
 
-  const [langList, setLangList] = useState([])
+  const [langList, setLangList] = useState([
+    { value: 'EV', label: 'English', disabled: false },
+    { value: 'IV', label: 'Irish', disabled: false },
+  ])
   const [lang, setLang] = useState('')
 
-  // Updates data
+  // Update sublist
   useEffect(() => {
-    setData(require(`../public/data/${exam}`))
+    setSubList(Object.keys(data[exam]).sort())
   }, [exam])
-  // Updates sublist
-  useEffect(() => {
-    setSubList(Object.keys(data).sort())
-  }, [data])
   // Updates subject when exam changes
   useEffect(() => {
     setSubject(subList[0])
   }, [subList])
   // Updates yearList when subject changes
   useEffect(() => {
-    if (data[subject]) {
-      setYearList(Object.keys(data[subject]).sort().reverse())
-
-      if (data?.[subject]?.[year]) {
-        setLangList(data[subject][year].metaData.langList)
-        setLevelList(data[subject][year].metaData.levelList)
-      }
+    if (data?.[exam]?.[subject]) {
+      setYearList(Object.keys(data[exam][subject]).sort().reverse())
     }
   }, [subject])
   // Updates year
   useEffect(() => {
     if (!yearList.some((x) => x == year)) setYear(yearList[0])
   }, [yearList])
-  // Updates lang/level lists
+
+  // Sets allPapers
   useEffect(() => {
-    if (data?.[subject]?.[year]) {
-      setLangList(data[subject][year].metaData.langList)
-      setLevelList(data[subject][year].metaData.levelList)
-    }
-  }, [year])
-  // Updates lang
+    if (data?.[exam]?.[subject]?.[year])
+      setAllPapers(
+        data[exam][subject][year].map((x) => ({
+          ...x,
+          year: year,
+          subject: subject,
+        }))
+      )
+  }, [exam, subject, year])
+
+  // Updates level and lang lists
   useEffect(() => {
-    if (data?.[subject]?.[year]) {
-      setLang(data[subject][year].metaData.lang)
+    if (data?.[exam]?.[subject]?.[year]) {
+      setLevelList(
+        levelList.map((x) => ({
+          ...x,
+          disabled: !allPapers.some((paper) => paper?.url?.includes(x.value)),
+        }))
+      )
+      setLangList(
+        langList.map((x) => ({
+          ...x,
+          disabled: !allPapers.some((paper) => paper?.url?.includes(x.value)),
+        }))
+      )
     }
-  }, [langList])
-  // Updates level
+  }, [allPapers])
+  // Update level
   useEffect(() => {
-    if (data?.[subject]?.[year]) {
-      setLevel(data[subject][year].metaData.level)
-    }
+    setLevel(levelList.find((x) => !x.disabled)?.value)
   }, [levelList])
+  // Update lang
+  useEffect(() => {
+    if (!langList.some((x) => x.value == lang && !x.disabled))
+      setLang(langList.find((x) => !x.disabled)?.value)
+  }, [langList])
 
   // Changes papers
   useEffect(() => {
-    if (data?.[subject]?.[year]) {
+    if (data?.[exam]?.[subject]?.[year]) {
       setPapers(
-        data[subject][year].data.filter((x) =>
+        allPapers.filter((x) =>
           x.url.includes(lang) || x.url.includes('BV')
             ? x.url.includes(level) || x.url.includes('ZL')
             : false
         )
       )
     }
-  }, [lang, level, year, subject, exam])
-
-  useEffect(() => {
-    console.log(papers)
-  }, [papers])
+  }, [allPapers, level, lang])
 
   return (
     <Container sx={{ marginTop: 5 }}>
