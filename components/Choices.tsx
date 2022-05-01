@@ -174,15 +174,12 @@ export default function Choices({ papers, setPapers }) {
   }, [allPapers])
   // Update level
   useEffect(() => {
-    let topLevel = levelList.find((x) => !x.disabled)?.value
-    setLevel(topLevel ? topLevel : '')
+    setLevel(levelList.find((x) => !x.disabled)?.value || '')
   }, [levelList])
   // Update lang
   useEffect(() => {
-    if (!langList.some((x) => x.value == lang && !x.disabled)) {
-      let topLang = langList.find((x) => !x.disabled)?.value
-      setLang(topLang ? topLang : '')
-    }
+    if (!langList.some((x) => x.value == lang && !x.disabled))
+      setLang(langList.find((x) => !x.disabled)?.value || '')
   }, [langList])
 
   // Changes papers
