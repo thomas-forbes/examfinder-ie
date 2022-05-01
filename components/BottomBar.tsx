@@ -34,6 +34,7 @@ export default function BottomBar() {
             <a
               href="https://github.com/twitter/twemoji"
               style={{ color: 'gray' }}
+              target="_blank"
             >
               twemjoi
             </a>
