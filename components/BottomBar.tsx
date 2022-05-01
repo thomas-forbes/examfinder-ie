@@ -14,14 +14,14 @@ export default function BottomBar() {
             <Link
               target="_blank"
               href="https://www.buymeacoffee.com/thomasforbes"
-              // underline="hover"
+              rel="noreferrer"
             >
               <Typography variant="body2">Support me!</Typography>
             </Link>
             <Link
               href="https://tally.so/r/w76963"
               target="_blank"
-              // underline="hover"
+              rel="noreferrer"
             >
               <Typography variant="body2">Bugs/Features</Typography>
             </Link>
@@ -35,6 +35,7 @@ export default function BottomBar() {
               href="https://github.com/twitter/twemoji"
               style={{ color: 'gray' }}
               target="_blank"
+              rel="noreferrer"
             >
               twemjoi
             </a>

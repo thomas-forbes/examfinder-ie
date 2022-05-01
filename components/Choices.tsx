@@ -157,32 +157,39 @@ export default function Choices({ papers, setPapers }) {
       setLevelList(
         levelList.map((x) => ({
           ...x,
-          disabled: !allPapers.some((paper) => paper?.url?.includes(x.value)),
+          disabled: !allPapers.some((paper: any) =>
+            paper?.url?.includes(x.value)
+          ),
         }))
       )
       setLangList(
         langList.map((x) => ({
           ...x,
-          disabled: !allPapers.some((paper) => paper?.url?.includes(x.value)),
+          disabled: !allPapers.some((paper: any) =>
+            paper?.url?.includes(x.value)
+          ),
         }))
       )
     }
   }, [allPapers])
   // Update level
   useEffect(() => {
-    setLevel(levelList.find((x) => !x.disabled)?.value)
+    let topLevel = levelList.find((x) => !x.disabled)?.value
+    setLevel(topLevel ? topLevel : '')
   }, [levelList])
   // Update lang
   useEffect(() => {
-    if (!langList.some((x) => x.value == lang && !x.disabled))
-      setLang(langList.find((x) => !x.disabled)?.value)
+    if (!langList.some((x) => x.value == lang && !x.disabled)) {
+      let topLang = langList.find((x) => !x.disabled)?.value
+      setLang(topLang ? topLang : '')
+    }
   }, [langList])
 
   // Changes papers
   useEffect(() => {
     if (data?.[exam]?.[subject]?.[year]) {
       setPapers(
-        allPapers.filter((x) =>
+        allPapers.filter((x: any) =>
           x.url.includes(lang) || x.url.includes('BV')
             ? x.url.includes(level) || x.url.includes('ZL')
             : false
