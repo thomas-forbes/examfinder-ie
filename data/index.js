@@ -47,6 +47,7 @@ let data = {
   lb: {},
   subNumsToNames: {},
 }
+data = JSON.parse(fs.readFileSync('./data.json'))
 
 async function getAllPapers() {
   const browser = await puppeteer.launch()
@@ -94,7 +95,8 @@ async function getAllPapers() {
   const typeOps = await getOpts(sels.type)
   for (const type of typeOps) {
     await doSelect(sels.type, type, sels.year)
-    const yearOps = await getOpts(sels.year)
+    // const yearOps = await getOpts(sels.year)
+    const yearOps = ['2022']
     for (const year of yearOps) {
       await doSelect(sels.year, year, sels.exam)
       const examOps = await getOpts(sels.exam)
@@ -102,6 +104,9 @@ async function getAllPapers() {
         await doSelect(sels.exam, exam, sels.subject)
         const subjectOps = await getOptsAndText(sels.subject)
         for (const subject of subjectOps) {
+          if (data[exam][subject.value][year][type]) {
+            continue
+          }
           await doSelect(sels.subject, subject.value, 'tbody > input')
 
           const endings = await page.$$eval('tbody > input', (els) =>
@@ -126,7 +131,7 @@ async function getAllPapers() {
             if (err) console.error(err)
             else console.log(exam, subject, year)
           })
-          // await page.waitForTimeout(10000)
+          await page.waitForTimeout(1000)
         }
       }
     }
