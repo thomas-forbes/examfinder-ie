@@ -104,7 +104,7 @@ async function getAllPapers() {
         await doSelect(sels.exam, exam, sels.subject)
         const subjectOps = await getOptsAndText(sels.subject)
         for (const subject of subjectOps) {
-          if (data[exam][subject.value][year][type]) {
+          if (data?.[exam]?.[subject.value]?.[year]?.[type]) {
             continue
           }
           await doSelect(sels.subject, subject.value, 'tbody > input')
