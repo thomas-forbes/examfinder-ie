@@ -27,7 +27,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Head>
-        <title>State Exam Papers - Exam Finder</title>
+        <title>Exam Finder: State Exam Papers</title>
       </Head>
       <Stack
         direction="column"
