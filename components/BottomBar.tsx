@@ -1,4 +1,4 @@
-import { Box, Link, Typography, Stack } from '@mui/material'
+import { Box, Link, Stack, Typography } from '@mui/material'
 
 export default function BottomBar() {
   return (
@@ -13,33 +13,47 @@ export default function BottomBar() {
           >
             <Link
               target="_blank"
+              href="https://thomasforbes.com"
+              rel="noreferrer"
+            >
+              <Typography variant="h6">More about me...</Typography>
+            </Link>
+            <Link
+              target="_blank"
               href="https://www.buymeacoffee.com/thomasforbes"
               rel="noreferrer"
             >
-              <Typography variant="body2">Support me!</Typography>
+              <Typography variant="h6">Support me!</Typography>
             </Link>
+          </Stack>
+          <Stack direction="row" spacing={2} alignItems="center" mt={0.5}>
             <Link
               href="https://tally.so/r/w76963"
               target="_blank"
               rel="noreferrer"
             >
-              <Typography variant="body2">Bugs/Features</Typography>
+              <Typography
+                variant="body2"
+                sx={{ fontSize: '0.7rem', color: 'gray' }}
+              >
+                Bugs/Features
+              </Typography>
             </Link>
-          </Stack>
-          <Typography
-            variant="body2"
-            sx={{ fontSize: '0.6rem', color: 'gray', marginTop: 0.5 }}
-          >
-            Favicon from{' '}
-            <a
-              href="https://github.com/twitter/twemoji"
-              style={{ color: 'gray' }}
-              target="_blank"
-              rel="noreferrer"
+            <Typography
+              variant="body2"
+              sx={{ fontSize: '0.6rem', color: 'gray' }}
             >
-              twemjoi
-            </a>
-          </Typography>
+              Favicon from{' '}
+              <a
+                href="https://github.com/twitter/twemoji"
+                style={{ color: 'gray' }}
+                target="_blank"
+                rel="noreferrer"
+              >
+                twemjoi
+              </a>
+            </Typography>
+          </Stack>
         </Stack>
       </Box>
     </footer>
