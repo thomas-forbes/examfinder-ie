@@ -1,16 +1,16 @@
-import { useState } from 'react'
 import {
-  ThemeProvider,
+  Box,
   createTheme,
   CssBaseline,
-  Box,
-  Stack,
-  Container,
-  Typography,
   Paper,
+  Stack,
+  ThemeProvider,
+  Typography,
 } from '@mui/material'
 import Head from 'next/head'
+import { useState } from 'react'
 
+import splitbee from '@splitbee/web'
 import BottomBar from '../components/BottomBar'
 import Choices from '../components/Choices'
 import PaperList from '../components/PaperList'
@@ -46,6 +46,7 @@ export default function App() {
               display: 'inline-block',
             }}
             rel="noreferrer"
+            onClick={() => splitbee.track('Formula and Tables')}
           >
             <Paper elevation={5}>
               <Box

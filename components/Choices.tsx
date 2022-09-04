@@ -1,17 +1,17 @@
-import { useState, useEffect } from 'react'
 import {
-  Container,
-  TextField,
   Autocomplete,
-  Select,
-  MenuItem,
+  Container,
   FormControl,
-  InputLabel,
   Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
   ToggleButton,
   ToggleButtonGroup,
 } from '@mui/material'
 import Fuse from 'fuse.js'
+import { useEffect, useState } from 'react'
 import data from '../public/data.json'
 
 const SelectChoice = ({
@@ -145,8 +145,11 @@ export default function Choices({ papers, setPapers }) {
       setAllPapers(
         data[exam][subject][year].map((x) => ({
           ...x,
-          year: year,
-          subject: subject,
+          year,
+          subject,
+          level: levelList.find((y) => y.value == level)?.label || 'None',
+          lang,
+          exam,
         }))
       )
   }, [exam, subject, year])

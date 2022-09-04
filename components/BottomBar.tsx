@@ -1,4 +1,5 @@
 import { Box, Link, Stack, Typography } from '@mui/material'
+import splitbee from '@splitbee/web'
 
 export default function BottomBar() {
   return (
@@ -15,6 +16,7 @@ export default function BottomBar() {
               target="_blank"
               href="https://thomasforbes.com"
               rel="noreferrer"
+              onClick={() => splitbee.track('thomasforbes.com')}
             >
               <Typography variant="h6">More about me...</Typography>
             </Link>
@@ -22,6 +24,7 @@ export default function BottomBar() {
               target="_blank"
               href="https://www.buymeacoffee.com/thomasforbes"
               rel="noreferrer"
+              onClick={() => splitbee.track('buymeacoffee.com')}
             >
               <Typography variant="h6">Support me!</Typography>
             </Link>
@@ -31,6 +34,7 @@ export default function BottomBar() {
               href="https://tally.so/r/w76963"
               target="_blank"
               rel="noreferrer"
+              onClick={() => splitbee.track('feedback')}
             >
               <Typography
                 variant="body2"

@@ -1,4 +1,5 @@
-import { Container, Typography, Grid, Paper, Box, Stack } from '@mui/material'
+import { Box, Container, Grid, Paper, Typography } from '@mui/material'
+import splitbee from '@splitbee/web'
 
 export default function PaperList({ papers }) {
   const createUrl = (type: string, year: string, url: string) => {
@@ -18,6 +19,7 @@ export default function PaperList({ papers }) {
               target="_blank"
               style={{ textDecoration: 'none' }}
               rel="noreferrer"
+              onClick={() => splitbee.track('Paper', paper)}
             >
               <Paper elevation={3} sx={{ width: 300 }}>
                 <Box
