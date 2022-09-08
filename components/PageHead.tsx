@@ -20,15 +20,15 @@ export default function PageHead() {
 
       <meta name="twitter:creator" content="@FoldedCode" />
 
-      {/* {socialImageUrl ? (
-          <>
-            <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:image" content='https://www.examfinder.ie/social-card.jpg' />
-            <meta property="og:image" content='https://www.examfinder.ie/social-card.jpg'  />
-          </>
-        ) : (
-          <meta name="twitter:card" content="summary" />
-        )} */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta
+        name="twitter:image"
+        content="https://www.examfinder.ie/social-card.png"
+      />
+      <meta
+        property="og:image"
+        content="https://www.examfinder.ie/social-card.png"
+      />
     </Head>
   )
 }
