@@ -23,11 +23,11 @@ export default function PageHead() {
       <meta name="twitter:card" content="summary_large_image" />
       <meta
         name="twitter:image"
-        content="https://www.examfinder.ie/social-card.png"
+        content="https://www.examfinder.ie/social-image.png"
       />
       <meta
         property="og:image"
-        content="https://www.examfinder.ie/social-card.png"
+        content="https://www.examfinder.ie/social-image.png"
       />
     </Head>
   )
