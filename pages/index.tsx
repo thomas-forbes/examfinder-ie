@@ -2,17 +2,18 @@ import {
   Box,
   createTheme,
   CssBaseline,
+  Link,
   Paper,
   Stack,
   ThemeProvider,
   Typography,
 } from '@mui/material'
-import Head from 'next/head'
 import { useState } from 'react'
 
 import splitbee from '@splitbee/web'
 import BottomBar from '../components/BottomBar'
 import Choices from '../components/Choices'
+import PageHead from '../components/PageHead'
 import PaperList from '../components/PaperList'
 
 const theme = createTheme({
@@ -26,42 +27,55 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Head>
-        <title>Exam Finder: State Exam Papers</title>
-      </Head>
+      <PageHead />
       <Stack
         direction="column"
         spacing={3}
         justifyContent="flex-start"
         alignItems="center"
+        pt={2}
         sx={{ minHeight: '100vh' }}
       >
-        <Choices papers={papers} setPapers={setPapers} />
-        <Stack>
-          <a
-            href="https://www.examinations.ie/misc-doc/BI-EX-7266997.pdf"
-            target="_blank"
-            style={{
-              textDecoration: 'none',
-              display: 'inline-block',
-            }}
-            rel="noreferrer"
-            onClick={() => splitbee.track('Formula and Tables')}
-          >
-            <Paper elevation={5}>
-              <Box
-                sx={{
-                  background: '#f44336',
-                  paddingX: 2,
-                  paddingY: 1,
-                  borderRadius: 1,
-                }}
-              >
-                <Typography variant="h6">Formula and Tables Book</Typography>
-              </Box>
-            </Paper>
-          </a>
+        <Stack alignItems={'center'}>
+          <Typography component="h1" variant="h3" fontWeight="bold">
+            Easily Search Irish Past Papers
+          </Typography>
+          <Typography mt={1} color="#cbd5e0">
+            Built by a{' '}
+            <Link
+              href="https://thomasforbes.com/"
+              color="#cbd5e0"
+              target="_blank"
+              onClick={() => splitbee.track('thomasforbes.com top')}
+            >
+              student
+            </Link>{' '}
+            for everyone
+          </Typography>
         </Stack>
+        <Choices papers={papers} setPapers={setPapers} />
+        <a
+          href="https://www.examinations.ie/misc-doc/BI-EX-7266997.pdf"
+          target="_blank"
+          style={{
+            textDecoration: 'none',
+            display: 'inline-block',
+          }}
+          rel="noreferrer"
+          onClick={() => splitbee.track('Formula and Tables')}
+        >
+          <Paper
+            elevation={5}
+            sx={{
+              background: '#f44336',
+              paddingX: 2,
+              paddingY: 1,
+              borderRadius: 1,
+            }}
+          >
+            <Typography variant="h6">Formula and Tables Book</Typography>
+          </Paper>
+        </a>
         <PaperList papers={papers} />
         <Box sx={{ flexGrow: 1 }}></Box>
         <BottomBar />

@@ -1,4 +1,4 @@
-import { Html, Head, Main, NextScript } from 'next/document'
+import { Head, Html, Main, NextScript } from 'next/document'
 
 export default function Document() {
   return (
@@ -11,10 +11,6 @@ export default function Document() {
         <meta
           name="google-site-verification"
           content="L4xPzXl3QHE-oj5iSYbdWo-3KIkyWo5aEZ2xJ-i9H_A"
-        />
-        <meta
-          name="description"
-          content="Easily search all past papers from the examinations.ie material archive"
         />
       </Head>
       <body>
