@@ -34,13 +34,19 @@ export default function App() {
         justifyContent="flex-start"
         alignItems="center"
         pt={2}
+        mx={2}
         sx={{ minHeight: '100vh' }}
       >
         <Stack alignItems={'center'}>
-          <Typography component="h1" variant="h3" fontWeight="bold">
+          <Typography
+            component="h1"
+            variant="h3"
+            fontWeight="bold"
+            textAlign="center"
+          >
             Easily Search Irish Past Papers
           </Typography>
-          <Typography mt={1} color="#cbd5e0">
+          <Typography mt={1} color="#cbd5e0" textAlign="center">
             Built by a{' '}
             <Link
               href="https://thomasforbes.com/"
