@@ -15,7 +15,7 @@ export default function PageHead() {
       <meta name="twitter:title" content={title} />
 
       <meta property="og:type" content="website" />
-      <meta property="og:url" content="https://www.examfinder.ie/" />
+      <meta property="og:url" content="https://examfinder.ie/" />
       <meta property="twitter:domain" content="examfinder.ie" />
 
       <meta name="twitter:creator" content="@FoldedCode" />
@@ -23,11 +23,11 @@ export default function PageHead() {
       <meta name="twitter:card" content="summary_large_image" />
       <meta
         name="twitter:image"
-        content="https://www.examfinder.ie/social-image.png"
+        content="https://examfinder.ie/social-image.png"
       />
       <meta
         property="og:image"
-        content="https://www.examfinder.ie/social-image.png"
+        content="https://examfinder.ie/social-image.png"
       />
     </Head>
   )
