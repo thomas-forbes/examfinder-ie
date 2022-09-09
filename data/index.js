@@ -55,14 +55,14 @@ async function getAllPapers() {
 
   const getOpts = async (sel) => {
     return await page.$$eval(`${sel} > option`, (els) =>
-      els.map((v) => v.getAttribute('value')).filter((v) => v != '')
+      els.map((v) => v.getAttribute('value')).filter((v) => v != '' && v != '0')
     )
   }
   const getOptsAndText = async (sel) => {
     return await page.$$eval(`${sel} > option`, (els) =>
       els
         .map((v) => ({ value: v.getAttribute('value'), text: v.textContent }))
-        .filter((v) => v.value != '')
+        .filter((v) => v.value != '' && v.value != '0')
     )
   }
   await page.goto('https://www.examinations.ie/exammaterialarchive/')
@@ -92,18 +92,26 @@ async function getAllPapers() {
 
   // TYPE
   await page.waitForSelector(sels.type)
-  const typeOps = await getOpts(sels.type)
+  // const typeOps = await getOpts(sels.type)
+  const typeOps = ['markingschemes']
   for (const type of typeOps) {
+    console.log(type)
     await doSelect(sels.type, type, sels.year)
     // const yearOps = await getOpts(sels.year)
     const yearOps = ['2022']
+
     for (const year of yearOps) {
+      console.log(year)
       await doSelect(sels.year, year, sels.exam)
       const examOps = await getOpts(sels.exam)
+
       for (const exam of examOps) {
+        console.log(exam)
         await doSelect(sels.exam, exam, sels.subject)
         const subjectOps = await getOptsAndText(sels.subject)
+
         for (const subject of subjectOps) {
+          console.log(subject)
           if (data?.[exam]?.[subject.value]?.[year]?.[type]) {
             continue
           }
