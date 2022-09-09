@@ -15,7 +15,6 @@ export default function BottomBar() {
             <Link
               target="_blank"
               href="https://thomasforbes.com"
-              rel="noreferrer"
               onClick={() => splitbee.track('thomasforbes.com')}
             >
               <Typography variant="h6">More about me...</Typography>
@@ -23,7 +22,6 @@ export default function BottomBar() {
             <Link
               target="_blank"
               href="https://www.buymeacoffee.com/thomasforbes"
-              rel="noreferrer"
               onClick={() => splitbee.track('buymeacoffee.com')}
             >
               <Typography variant="h6">Support me!</Typography>
@@ -33,7 +31,6 @@ export default function BottomBar() {
             <Link
               href="https://tally.so/r/w76963"
               target="_blank"
-              rel="noreferrer"
               onClick={() => splitbee.track('feedback')}
             >
               <Typography
