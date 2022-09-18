@@ -9,37 +9,6 @@ const sels = {
   exam: '#MaterialArchive__noTable__sbv__ExaminationSelect',
   subject: '#MaterialArchive__noTable__sbv__SubjectSelect',
 }
-async function getPapers(markingScheme, year, subjectNum, exam) {
-  const browser = await puppeteer.launch()
-  const page = await browser.newPage()
-  await page.goto('https://www.examinations.ie/exammaterialarchive/')
-
-  await page.waitForSelector(sels.agree)
-  await page.click(sels.agree)
-
-  await page.waitForSelector(sels.type)
-  await page.select(sels.type, markingScheme ? 'markingschemes' : 'exampapers')
-
-  await page.waitForSelector(sels.year)
-  await page.select(sels.year, year)
-
-  await page.waitForSelector(sels.exam)
-  await page.select(sels.exam, exam)
-
-  await page.waitForSelector(sels.subject)
-  await page.select(sels.subject, subjectNum)
-
-  await page.waitForSelector('tbody > input')
-  const endings = await page.$$eval('tbody > input', (els) =>
-    els.map((el) => el.getAttribute('value'))
-  )
-
-  // await page.waitForNavigation()
-  // await page.setViewport({ width: 1000, height: 1000 })
-  // await page.screenshot({ path: 'test.png', fullPage: true })
-  await browser.close()
-  return await endings
-}
 
 let data = {
   lc: {},
@@ -90,31 +59,32 @@ async function getAllPapers() {
     // console.log('d')
   }
 
+  const SKIP_FILLED = false
   // TYPE
   await page.waitForSelector(sels.type)
-  // const typeOps = await getOpts(sels.type)
-  const typeOps = ['markingschemes']
+  const typeOps = await getOpts(sels.type)
   for (const type of typeOps) {
     console.log(type)
     await doSelect(sels.type, type, sels.year)
-    // const yearOps = await getOpts(sels.year)
-    const yearOps = ['2022']
+    const yearOps = await getOpts(sels.year)
 
+    // YEAR
     for (const year of yearOps) {
       console.log(year)
       await doSelect(sels.year, year, sels.exam)
       const examOps = await getOpts(sels.exam)
 
+      // EXAM
       for (const exam of examOps) {
         console.log(exam)
         await doSelect(sels.exam, exam, sels.subject)
         const subjectOps = await getOptsAndText(sels.subject)
 
+        // SUBJECT
         for (const subject of subjectOps) {
           console.log(subject)
-          if (data?.[exam]?.[subject.value]?.[year]?.[type]) {
+          if (data?.[exam]?.[subject.value]?.[year]?.[type] && SKIP_FILLED)
             continue
-          }
           await doSelect(sels.subject, subject.value, 'tbody > input')
 
           const endings = await page.$$eval('tbody > input', (els) =>
