@@ -69,7 +69,7 @@ const AutocompleteChoice = ({
   group?: boolean
   setFavSubs?: any
 }) => {
-  const fuse = new Fuse(options.map((v) => v.label))
+  const fuse = new Fuse(options, { keys: ['label'] })
   const [filteredOps, setFilteredOps] = useState(options)
   useEffect(() => {
     setFilteredOps(options)
@@ -89,9 +89,12 @@ const AutocompleteChoice = ({
       }}
       {...(group && {
         renderOption: (props, option) => {
-          // console.log(props)
           return (
-            <li {...props} onClick={() => {}} style={{ width: '100%' }}>
+            <li
+              {...props}
+              onClick={() => {}}
+              style={{ width: '100%', padding: 0, paddingRight: 10 }}
+            >
               <Stack
                 direction="row"
                 justifyContent="space-between"
@@ -102,6 +105,8 @@ const AutocompleteChoice = ({
                   onClick={props.onClick}
                   onTouchStart={props.onTouchStart}
                   data-option-index={props['data-option-index']}
+                  component="span"
+                  className="MuiAutocomplete-option"
                   sx={{ flexGrow: 1 }}
                 >
                   {option.label}
@@ -110,16 +115,17 @@ const AutocompleteChoice = ({
                   <Rating
                     max={1}
                     value={Number(option.group == 'Favourites')}
-                    sx={{ zIndex: 1000 }}
                     onClick={(e) => {
                       e.preventDefault()
                       if (option.group == 'All') {
                         setFavSubs((prev: string[]) => [...prev, option.label])
-                        // setFilteredOps(options)
+                        setter(option.label)
                       } else
                         setFavSubs((prev: string[]) =>
                           prev.filter((v) => v != option.label)
                         )
+
+                      setFilteredOps(options)
                     }}
                   />
                 )}
@@ -137,14 +143,15 @@ const AutocompleteChoice = ({
             let val = e.target.value
             if (options.map((x) => x.label).includes(val))
               setFilteredOps(options)
-            else if (val)
-              setFilteredOps(
-                fuse.search(val).map((x) => ({
-                  label: x.item,
-                  group: options.find((v) => v.label == x.item)?.group || 'All',
-                }))
-              )
-            else setFilteredOps(options)
+            else if (val) {
+              setFilteredOps([
+                value,
+                ...fuse
+                  .search(val)
+                  .map((x) => x.item)
+                  .filter((x) => x.label != value.label),
+              ])
+            } else setFilteredOps(options)
             return options.some((x) => x.label === val) ? setter(val) : null
           }}
           label={label}
