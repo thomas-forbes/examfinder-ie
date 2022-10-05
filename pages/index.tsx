@@ -8,9 +8,9 @@ import {
   ThemeProvider,
   Typography,
 } from '@mui/material'
+import splitbee from '@splitbee/web'
 import { useState } from 'react'
 
-import splitbee from '@splitbee/web'
 import BottomBar from '../components/BottomBar'
 import Choices from '../components/Choices'
 import PageHead from '../components/PageHead'

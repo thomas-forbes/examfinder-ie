@@ -1,17 +1,21 @@
 import {
   Autocomplete,
+  Box,
   Container,
   FormControl,
   Grid,
   InputLabel,
   MenuItem,
+  Rating,
   Select,
+  Stack,
   TextField,
   ToggleButton,
   ToggleButtonGroup,
 } from '@mui/material'
 import Fuse from 'fuse.js'
 import { useEffect, useState } from 'react'
+import { useCookie } from 'react-use'
 import data from '../public/data.json'
 
 const SelectChoice = ({
@@ -53,15 +57,19 @@ const AutocompleteChoice = ({
   label,
   useNumber,
   width,
+  group = false,
+  setFavSubs,
 }: {
-  options: string[]
-  value: string
+  options: { label: string; group: string }[]
+  value: { label: string; group: string }
   setter: any
   label: string
   useNumber?: boolean
   width: number
+  group?: boolean
+  setFavSubs?: any
 }) => {
-  const fuse = new Fuse(options)
+  const fuse = new Fuse(options.map((v) => v.label))
   const [filteredOps, setFilteredOps] = useState(options)
   useEffect(() => {
     setFilteredOps(options)
@@ -69,13 +77,57 @@ const AutocompleteChoice = ({
   return (
     <Autocomplete
       disablePortal
-      options={filteredOps}
+      options={filteredOps.sort((a, b) => b.group.localeCompare(a.group))}
+      {...(group && { groupBy: (option) => option.group })}
+      getOptionLabel={(option) => option.label}
       sx={{ width: width }}
       value={value}
+      isOptionEqualToValue={(option, value) => option.label === value.label}
       onChange={(e, s) => {
-        setter(s ? s : value)
+        setter(s ? s.label : value.label)
         setFilteredOps(options)
       }}
+      {...(group && {
+        renderOption: (props, option) => {
+          // console.log(props)
+          return (
+            <li {...props} onClick={() => {}} style={{ width: '100%' }}>
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+                sx={{ width: '100%' }}
+              >
+                <Box
+                  onClick={props.onClick}
+                  onTouchStart={props.onTouchStart}
+                  data-option-index={props['data-option-index']}
+                  sx={{ flexGrow: 1 }}
+                >
+                  {option.label}
+                </Box>
+                {group && (
+                  <Rating
+                    max={1}
+                    value={Number(option.group == 'Favourites')}
+                    sx={{ zIndex: 1000 }}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      if (option.group == 'All') {
+                        setFavSubs((prev: string[]) => [...prev, option.label])
+                        // setFilteredOps(options)
+                      } else
+                        setFavSubs((prev: string[]) =>
+                          prev.filter((v) => v != option.label)
+                        )
+                    }}
+                  />
+                )}
+              </Stack>
+            </li>
+          )
+        },
+      })}
       autoHighlight={true}
       renderInput={(params) => (
         <TextField
@@ -83,10 +135,17 @@ const AutocompleteChoice = ({
           type={useNumber ? 'number' : 'text'}
           onChange={(e) => {
             let val = e.target.value
-            if (options.includes(val)) setFilteredOps(options)
-            else if (val) setFilteredOps(fuse.search(val).map((x) => x.item))
+            if (options.map((x) => x.label).includes(val))
+              setFilteredOps(options)
+            else if (val)
+              setFilteredOps(
+                fuse.search(val).map((x) => ({
+                  label: x.item,
+                  group: options.find((v) => v.label == x.item)?.group || 'All',
+                }))
+              )
             else setFilteredOps(options)
-            return options.some((x) => x === val) ? setter(val) : null
+            return options.some((x) => x.label === val) ? setter(val) : null
           }}
           label={label}
         />
@@ -100,6 +159,11 @@ export default function Choices({ papers, setPapers }) {
 
   const [subList, setSubList] = useState([''])
   const [subject, setSubject] = useState(subList[0])
+
+  const [favSubsCookie, updateFavSubs] = useCookie('favSubs')
+  const [favSubs, setFavSubs]: [string[], any] = useState(
+    favSubsCookie ? JSON.parse(favSubsCookie).sort() : []
+  )
 
   const [yearList, setYearList] = useState([''])
   const [year, setYear] = useState(yearList[0])
@@ -124,10 +188,10 @@ export default function Choices({ papers, setPapers }) {
   useEffect(() => {
     setSubList(Object.keys(data[exam]).sort())
   }, [exam])
-  // Updates subject when exam changes
-  useEffect(() => {
-    setSubject(subList[0])
-  }, [subList])
+  // // Updates subject when exam changes
+  // useEffect(() => {
+  //   setSubject(subList[0])
+  // }, [subList])
   // Updates yearList when subject changes
   useEffect(() => {
     if (data?.[exam]?.[subject]) {
@@ -198,6 +262,13 @@ export default function Choices({ papers, setPapers }) {
     }
   }, [allPapers, level, lang])
 
+  useEffect(() => {
+    if (favSubs.length > 0) setSubject(favSubs[0])
+    else setSubject(subList[0])
+  }, [subList])
+  useEffect(() => {
+    updateFavSubs(JSON.stringify(favSubs))
+  }, [favSubs])
   return (
     <Container sx={{ marginTop: 5 }}>
       <Grid container spacing={4} justifyContent="center">
@@ -219,21 +290,29 @@ export default function Choices({ papers, setPapers }) {
         {/* SUBJECT */}
         <Grid item>
           <AutocompleteChoice
-            options={subList}
+            options={subList.map((x) => ({
+              label: x,
+              group: favSubs.includes(x) ? 'Favourites' : 'All',
+            }))}
             width={250}
             label="Subject"
-            value={subject}
+            value={{
+              label: subject,
+              group: favSubs.includes(subject) ? 'Favourites' : 'All',
+            }}
             setter={setSubject}
+            setFavSubs={setFavSubs}
+            group
           />
         </Grid>
 
         {/* YEAR */}
         <Grid item>
           <AutocompleteChoice
-            options={yearList}
+            options={yearList.map((x) => ({ label: x, group: '' }))}
             width={150}
             label="Year"
-            value={year}
+            value={{ label: year, group: '' }}
             setter={setYear}
             useNumber
           />
