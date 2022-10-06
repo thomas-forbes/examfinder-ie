@@ -13,6 +13,7 @@ import {
   ToggleButton,
   ToggleButtonGroup,
 } from '@mui/material'
+import splitbee from '@splitbee/web'
 import Fuse from 'fuse.js'
 import { useEffect, useState } from 'react'
 import { useCookie } from 'react-use'
@@ -120,10 +121,12 @@ const AutocompleteChoice = ({
                       if (option.group == 'All') {
                         setFavSubs((prev: string[]) => [...prev, option.label])
                         setter(option.label)
-                      } else
+                      } else {
                         setFavSubs((prev: string[]) =>
                           prev.filter((v) => v != option.label)
                         )
+                        splitbee.track('favourite', { subject: option.label })
+                      }
 
                       setFilteredOps(options)
                     }}
