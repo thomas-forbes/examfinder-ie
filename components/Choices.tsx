@@ -121,11 +121,11 @@ const AutocompleteChoice = ({
                       if (option.group == 'All') {
                         setFavSubs((prev: string[]) => [...prev, option.label])
                         setter(option.label)
+                        splitbee.track('favourite', { subject: option.label })
                       } else {
                         setFavSubs((prev: string[]) =>
                           prev.filter((v) => v != option.label)
                         )
-                        splitbee.track('favourite', { subject: option.label })
                       }
 
                       setFilteredOps(options)
