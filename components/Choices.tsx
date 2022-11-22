@@ -193,6 +193,11 @@ export default function Choices({ papers, setPapers }) {
     { value: 'IV', label: 'Irish', disabled: false },
   ])
   const [lang, setLang] = useState('')
+  const [prefLangCookie, updatePrefLangCookie] = useCookie('prefLang')
+  const [prefLang, setPrefLang] = useState(prefLangCookie || '')
+  useEffect(() => {
+    setPrefLang(prefLangCookie || '')
+  }, [prefLangCookie])
 
   // Update sublist
   useEffect(() => {
@@ -255,9 +260,15 @@ export default function Choices({ papers, setPapers }) {
   }, [levelList])
   // Update lang
   useEffect(() => {
-    if (!langList.some((x) => x.value == lang && !x.disabled))
-      setLang(langList.find((x) => !x.disabled)?.value || '')
+    let availLangs = langList.filter((x) => !x.disabled)
+    if (availLangs.some((x) => x.value == prefLang && !x.disabled))
+      setLang(prefLang)
+    else setLang(availLangs[0]?.value || '')
   }, [langList])
+
+  useEffect(() => {
+    if (prefLang == '') setPrefLang(lang)
+  }, [lang])
 
   // Changes papers
   useEffect(() => {
@@ -347,7 +358,13 @@ export default function Choices({ papers, setPapers }) {
             color="primary"
             value={lang}
             exclusive
-            onChange={(e: any, s: string) => (s !== null ? setLang(s) : null)}
+            onChange={(e: any, s: string) => {
+              if (s !== null) {
+                setLang(s)
+                // setPrefLang(s)
+                updatePrefLangCookie(s)
+              }
+            }}
           >
             {langList.map((lang) => (
               <ToggleButton
