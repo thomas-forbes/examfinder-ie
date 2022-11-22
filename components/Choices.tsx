@@ -277,7 +277,9 @@ export default function Choices({ papers, setPapers }) {
     else setSubject(subList[0])
   }, [subList])
   useEffect(() => {
-    updateFavSubs(JSON.stringify(favSubs))
+    updateFavSubs(JSON.stringify(favSubs), {
+      expires: new Date(Date.now() + 100 * 365 * 24 * 60 * 60 * 1000),
+    })
   }, [favSubs])
   return (
     <Container sx={{ marginTop: 5 }}>
