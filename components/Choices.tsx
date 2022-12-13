@@ -220,13 +220,14 @@ export default function Choices({ papers, setPapers }) {
 
   // Sets allPapers
   useEffect(() => {
+    console.log(level, levelList)
     if (data?.[exam]?.[subject]?.[year])
       setAllPapers(
         data[exam][subject][year].map((x) => ({
           ...x,
           year,
           subject,
-          level: levelList.find((y) => y.value == level)?.label || 'None',
+          level: levelList.find((y) => y.value == level)?.value || 'None',
           lang,
           exam,
         }))
@@ -256,7 +257,11 @@ export default function Choices({ papers, setPapers }) {
   }, [allPapers])
   // Update level
   useEffect(() => {
-    setLevel(levelList.find((x) => !x.disabled)?.value || '')
+    setLevel(
+      levelList.find((x) => x.value == level)?.value ||
+        levelList.find((x) => !x.disabled)?.value ||
+        ''
+    )
   }, [levelList])
   // Update lang
   useEffect(() => {
