@@ -17,7 +17,7 @@ import splitbee from '@splitbee/web'
 import Fuse from 'fuse.js'
 import { useEffect, useState } from 'react'
 import { useCookie } from 'react-use'
-import data from '../public/data.json'
+import data from '../../public/data.json'
 
 const SelectChoice = ({
   label,
