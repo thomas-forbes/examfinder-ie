@@ -238,12 +238,12 @@ export default function Choices({ papers, setPapers }) {
     }))
     setLevelList(tLevelList)
 
-    const level =
+    const tLevel =
       tLevelList.find((x) => x.value == level)?.value ||
       tLevelList.find((x) => !x.disabled)?.value ||
       ''
-    setLevel(level)
-    return level
+    setLevel(tLevel)
+    return tLevel
   }
   const updateLang = (exam: string, subject: string, year: string) => {
     const tLangList = langList.map((x) => ({
@@ -262,10 +262,10 @@ export default function Choices({ papers, setPapers }) {
     setLang(lang)
     return lang
   }
+
   useEffect(() => {
     updatePapers(exam, subject, year, level, lang)
   }, [])
-
   return (
     <Container sx={{ marginTop: 5 }}>
       <Grid container spacing={4} justifyContent="center">
