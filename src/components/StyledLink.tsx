@@ -21,7 +21,7 @@ export default function StyledLink({
       href={href}
       target={target}
       onClick={onClick}
-      className={twMerge('underline text-slate-400', className)}
+      className={twMerge('underline text-slate-400 duration-150', className)}
     >
       {children}
     </Link>
