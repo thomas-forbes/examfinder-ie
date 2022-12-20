@@ -17,18 +17,18 @@ import splitbee from '@splitbee/web'
 import Fuse from 'fuse.js'
 import { useEffect, useState } from 'react'
 import { useCookie } from 'react-use'
-import data from '../public/data.json'
+import data from '../../public/data.json'
 
 const SelectChoice = ({
   label,
   value,
-  setter,
+  onChange: onChange,
   options,
   width,
 }: {
   label: string
   value: string
-  setter: any
+  onChange: (s: string) => void
   options: any
   width: number
 }) => {
@@ -38,7 +38,7 @@ const SelectChoice = ({
       <Select
         value={value}
         label={label}
-        onChange={(e: any) => setter(e.target.value)}
+        onChange={(e: any) => onChange(e.target.value)}
         sx={{ width: width }}
       >
         {options.map((v: any) => (
@@ -54,21 +54,23 @@ const SelectChoice = ({
 const AutocompleteChoice = ({
   options,
   value,
-  setter,
+  onChange,
   label,
   useNumber,
   width,
   group = false,
-  setFavSubs,
+  favSubs,
+  updateFavSubs,
 }: {
   options: { label: string; group: string }[]
   value: { label: string; group: string }
-  setter: any
+  onChange: (s: string) => void
   label: string
   useNumber?: boolean
   width: number
   group?: boolean
-  setFavSubs?: any
+  favSubs?: string[]
+  updateFavSubs?: (s: string[]) => void
 }) => {
   const fuse = new Fuse(options, { keys: ['label'] })
   const [filteredOps, setFilteredOps] = useState(options)
@@ -85,7 +87,7 @@ const AutocompleteChoice = ({
       value={value}
       isOptionEqualToValue={(option, value) => option.label === value.label}
       onChange={(e, s) => {
-        setter(s ? s.label : value.label)
+        onChange(s ? s.label : value.label)
         setFilteredOps(options)
       }}
       {...(group && {
@@ -119,13 +121,17 @@ const AutocompleteChoice = ({
                     onClick={(e) => {
                       e.preventDefault()
                       if (option.group == 'All') {
-                        setFavSubs((prev: string[]) => [...prev, option.label])
-                        setter(option.label)
+                        updateFavSubs &&
+                          favSubs &&
+                          updateFavSubs([...favSubs, option.label])
+                        onChange(option.label)
                         splitbee.track('favourite', { subject: option.label })
                       } else {
-                        setFavSubs((prev: string[]) =>
-                          prev.filter((v) => v != option.label)
-                        )
+                        updateFavSubs &&
+                          favSubs &&
+                          updateFavSubs(
+                            favSubs.filter((x) => x != option.label)
+                          )
                       }
 
                       setFilteredOps(options)
@@ -155,7 +161,7 @@ const AutocompleteChoice = ({
                   .filter((x) => x.label != value.label),
               ])
             } else setFilteredOps(options)
-            return options.some((x) => x.label === val) ? setter(val) : null
+            return options.some((x) => x.label === val) ? onChange(val) : null
           }}
           label={label}
         />
@@ -167,18 +173,20 @@ const AutocompleteChoice = ({
 export default function Choices({ papers, setPapers }) {
   const [exam, setExam] = useState('lc')
 
-  const [subList, setSubList] = useState([''])
-  const [subject, setSubject] = useState(subList[0])
-
   const [favSubsCookie, updateFavSubs] = useCookie('favSubs')
   const [favSubs, setFavSubs]: [string[], any] = useState(
     favSubsCookie ? JSON.parse(favSubsCookie).sort() : []
   )
 
-  const [yearList, setYearList] = useState([''])
-  const [year, setYear] = useState(yearList[0])
+  const [subList, setSubList] = useState(Object.keys(data[exam]).sort())
+  const [subject, setSubject] = useState(
+    favSubs.length > 0 ? favSubs[0] : subList[0]
+  )
 
-  const [allPapers, setAllPapers] = useState([])
+  const [yearList, setYearList] = useState(
+    Object.keys(data[exam][subject]).sort().reverse()
+  )
+  const [year, setYear] = useState(yearList[0])
 
   const [levelList, setLevelList] = useState([
     { value: 'AL', label: 'Higher Level', disabled: false },
@@ -186,44 +194,26 @@ export default function Choices({ papers, setPapers }) {
     { value: 'BL', label: 'Foundational Level', disabled: false },
     { value: 'CL', label: 'Common Level', disabled: false },
   ])
-  const [level, setLevel] = useState('')
+  const [level, setLevel] = useState('AL')
 
   const [langList, setLangList] = useState([
     { value: 'EV', label: 'English', disabled: false },
     { value: 'IV', label: 'Irish', disabled: false },
   ])
-  const [lang, setLang] = useState('')
+  const [lang, setLang] = useState('EV')
   const [prefLangCookie, updatePrefLangCookie] = useCookie('prefLang')
   const [prefLang, setPrefLang] = useState(prefLangCookie || '')
-  useEffect(() => {
-    setPrefLang(prefLangCookie || '')
-  }, [prefLangCookie])
 
-  // Update sublist
-  useEffect(() => {
-    setSubList(Object.keys(data[exam]).sort())
-  }, [exam])
-  // // Updates subject when exam changes
-  // useEffect(() => {
-  //   setSubject(subList[0])
-  // }, [subList])
-  // Updates yearList when subject changes
-  useEffect(() => {
-    if (data?.[exam]?.[subject]) {
-      setYearList(Object.keys(data[exam][subject]).sort().reverse())
-    }
-  }, [subject])
-  // Updates year
-  useEffect(() => {
-    if (!yearList.some((x) => x == year)) setYear(yearList[0])
-  }, [yearList])
-
-  // Sets allPapers
-  useEffect(() => {
-    console.log(level, levelList)
-    if (data?.[exam]?.[subject]?.[year])
-      setAllPapers(
-        data[exam][subject][year].map((x) => ({
+  const updatePapers = (
+    exam: string,
+    subject: string,
+    year: string,
+    level: string,
+    lang: string
+  ) => {
+    setPapers(
+      data[exam][subject][year]
+        .map((x) => ({
           ...x,
           year,
           subject,
@@ -231,72 +221,51 @@ export default function Choices({ papers, setPapers }) {
           lang,
           exam,
         }))
-      )
-  }, [exam, subject, year])
-
-  // Updates level and lang lists
-  useEffect(() => {
-    if (data?.[exam]?.[subject]?.[year]) {
-      setLevelList(
-        levelList.map((x) => ({
-          ...x,
-          disabled: !allPapers.some((paper: any) =>
-            paper?.url?.includes(x.value)
-          ),
-        }))
-      )
-      setLangList(
-        langList.map((x) => ({
-          ...x,
-          disabled: !allPapers.some((paper: any) =>
-            paper?.url?.includes(x.value)
-          ),
-        }))
-      )
-    }
-  }, [allPapers])
-  // Update level
-  useEffect(() => {
-    setLevel(
-      levelList.find((x) => x.value == level)?.value ||
-        levelList.find((x) => !x.disabled)?.value ||
-        ''
-    )
-  }, [levelList])
-  // Update lang
-  useEffect(() => {
-    let availLangs = langList.filter((x) => !x.disabled)
-    if (availLangs.some((x) => x.value == prefLang && !x.disabled))
-      setLang(prefLang)
-    else setLang(availLangs[0]?.value || '')
-  }, [langList])
-
-  useEffect(() => {
-    if (prefLang == '') setPrefLang(lang)
-  }, [lang])
-
-  // Changes papers
-  useEffect(() => {
-    if (data?.[exam]?.[subject]?.[year]) {
-      setPapers(
-        allPapers.filter((x: any) =>
+        .filter((x) =>
           x.url.includes(lang) || x.url.includes('BV')
             ? x.url.includes(level) || x.url.includes('ZL')
             : false
         )
-      )
-    }
-  }, [allPapers, level, lang])
+    )
+  }
+
+  const updateLevel = (exam: string, subject: string, year: string) => {
+    const tLevelList = levelList.map((x) => ({
+      ...x,
+      disabled: !data[exam][subject][year].some((paper: any) =>
+        paper?.url?.includes(x.value)
+      ),
+    }))
+    setLevelList(tLevelList)
+
+    const tLevel =
+      tLevelList.find((x) => x.value == level)?.value ||
+      tLevelList.find((x) => !x.disabled)?.value ||
+      ''
+    setLevel(tLevel)
+    return tLevel
+  }
+  const updateLang = (exam: string, subject: string, year: string) => {
+    const tLangList = langList.map((x) => ({
+      ...x,
+      disabled: !data[exam][subject][year].some((paper: any) =>
+        paper?.url?.includes(x.value)
+      ),
+    }))
+    setLangList(tLangList)
+
+    let availLangs = tLangList.filter((x) => !x.disabled)
+    let lang = ''
+    if (availLangs.some((x) => x.value == prefLang && !x.disabled))
+      lang = prefLang
+    else lang = availLangs[0]?.value || ''
+    setLang(lang)
+    return lang
+  }
 
   useEffect(() => {
-    if (favSubs.length > 0) setSubject(favSubs[0])
-    else setSubject(subList[0])
-  }, [subList])
-  useEffect(() => {
-    updateFavSubs(JSON.stringify(favSubs), {
-      expires: new Date(Date.now() + 100 * 365 * 24 * 60 * 60 * 1000),
-    })
-  }, [favSubs])
+    updatePapers(exam, subject, year, level, lang)
+  }, [])
   return (
     <Container sx={{ marginTop: 5 }}>
       <Grid container spacing={4} justifyContent="center">
@@ -305,7 +274,18 @@ export default function Choices({ papers, setPapers }) {
           <SelectChoice
             label="Exam"
             value={exam}
-            setter={setExam}
+            onChange={(s) => {
+              setExam(s)
+              let tSubList = Object.keys(data[s]).sort()
+              setSubList(tSubList)
+              let tSubject = tSubList.includes(subject) ? subject : tSubList[0]
+              setSubject(tSubject)
+
+              const level = updateLevel(s, tSubject, year)
+              const lang = updateLang(s, tSubject, year)
+
+              updatePapers(s, tSubject, year, level, lang)
+            }}
             width={200}
             options={[
               { value: 'lc', label: 'Leaving Cert' },
@@ -328,8 +308,26 @@ export default function Choices({ papers, setPapers }) {
               label: subject,
               group: favSubs.includes(subject) ? 'Favourites' : 'All',
             }}
-            setter={setSubject}
-            setFavSubs={setFavSubs}
+            onChange={(s) => {
+              setSubject(s)
+              let tYearList = Object.keys(data[exam][s]).sort().reverse()
+              setYearList(tYearList)
+              let tYear = tYearList.includes(year) ? year : tYearList[0]
+              setYear(tYear)
+
+              const level = updateLevel(exam, s, tYear)
+              const lang = updateLang(exam, s, tYear)
+
+              updatePapers(exam, s, tYear, level, lang)
+            }}
+            favSubs={favSubs}
+            updateFavSubs={(s) => {
+              setFavSubs(s)
+              console.log('subs', s)
+              updateFavSubs(JSON.stringify(s), {
+                expires: new Date(Date.now() + 100 * 365 * 24 * 60 * 60 * 1000),
+              })
+            }}
             group
           />
         </Grid>
@@ -341,7 +339,14 @@ export default function Choices({ papers, setPapers }) {
             width={150}
             label="Year"
             value={{ label: year, group: '' }}
-            setter={setYear}
+            onChange={(s) => {
+              setYear(s)
+
+              const level = updateLevel(exam, subject, s)
+              const lang = updateLang(exam, subject, s)
+
+              updatePapers(exam, subject, s, level, lang)
+            }}
             useNumber
           />
         </Grid>
@@ -351,7 +356,11 @@ export default function Choices({ papers, setPapers }) {
           <SelectChoice
             label="Level"
             value={level}
-            setter={setLevel}
+            onChange={(s) => {
+              setLevel(s)
+
+              updatePapers(exam, subject, year, s, lang)
+            }}
             width={200}
             options={levelList}
           />
@@ -366,8 +375,10 @@ export default function Choices({ papers, setPapers }) {
             onChange={(e: any, s: string) => {
               if (s !== null) {
                 setLang(s)
-                // setPrefLang(s)
+                setPrefLang(s)
                 updatePrefLangCookie(s)
+
+                updatePapers(exam, subject, year, level, s)
               }
             }}
           >

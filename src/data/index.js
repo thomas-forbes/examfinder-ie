@@ -1,6 +1,5 @@
 const puppeteer = require('puppeteer')
 const fs = require('fs')
-const { exit } = require('process')
 
 const sels = {
   agree: '#MaterialArchive__noTable__cbv__AgreeCheck',
