@@ -186,17 +186,23 @@ export default function Choices({ papers, setPapers }) {
     { value: 'BL', label: 'Foundational Level', disabled: false },
     { value: 'CL', label: 'Common Level', disabled: false },
   ])
-  const [level, setLevel] = useState('')
+  const [level, setLevel] = useState('AL')
 
   const [langList, setLangList] = useState([
     { value: 'EV', label: 'English', disabled: false },
     { value: 'IV', label: 'Irish', disabled: false },
   ])
-  const [lang, setLang] = useState('')
+  const [lang, setLang] = useState('EV')
   const [prefLangCookie, updatePrefLangCookie] = useCookie('prefLang')
   const [prefLang, setPrefLang] = useState(prefLangCookie || '')
 
-  const updatePapers = () => {
+  const updatePapers = (
+    exam: string,
+    subject: string,
+    year: string,
+    level: string,
+    lang: string
+  ) => {
     setPapers(
       data[exam][subject][year]
         .map((x) => ({
@@ -214,69 +220,46 @@ export default function Choices({ papers, setPapers }) {
         )
     )
   }
+
+  const updateLevel = (exam: string, subject: string, year: string) => {
+    const tLevelList = levelList.map((x) => ({
+      ...x,
+      disabled: !data[exam][subject][year].some((paper: any) =>
+        paper?.url?.includes(x.value)
+      ),
+    }))
+    setLevelList(tLevelList)
+
+    const level =
+      tLevelList.find((x) => x.value == level)?.value ||
+      tLevelList.find((x) => !x.disabled)?.value ||
+      ''
+    setLevel(level)
+    return level
+  }
+  const updateLang = (exam: string, subject: string, year: string) => {
+    const tLangList = langList.map((x) => ({
+      ...x,
+      disabled: !data[exam][subject][year].some((paper: any) =>
+        paper?.url?.includes(x.value)
+      ),
+    }))
+    setLangList(tLangList)
+
+    let availLangs = tLangList.filter((x) => !x.disabled)
+    let lang = ''
+    if (availLangs.some((x) => x.value == prefLang && !x.disabled))
+      lang = prefLang
+    else lang = availLangs[0]?.value || ''
+    setLang(lang)
+    return lang
+  }
   useEffect(() => {
-    updatePapers()
+    updatePapers(exam, subject, year, level, lang)
   }, [])
   // useEffect(() => {
   //   setPrefLang(prefLangCookie || '')
   // }, [prefLangCookie])
-
-  // // Sets allPapers
-  // useEffect(() => {
-  //   console.log(level, levelList)
-  //   if (data?.[exam]?.[subject]?.[year])
-  //     setAllPapers(
-  //       data[exam][subject][year].map((x) => ({
-  //         ...x,
-  //         year,
-  //         subject,
-  //         level: levelList.find((y) => y.value == level)?.value || 'None',
-  //         lang,
-  //         exam,
-  //       }))
-  //     )
-  // }, [exam, subject, year])
-
-  // // Updates level and lang lists
-  // useEffect(() => {
-  //   if (data?.[exam]?.[subject]?.[year]) {
-  //     setLevelList(
-  //       levelList.map((x) => ({
-  //         ...x,
-  //         disabled: !allPapers.some((paper: any) =>
-  //           paper?.url?.includes(x.value)
-  //         ),
-  //       }))
-  //     )
-  //     setLangList(
-  //       langList.map((x) => ({
-  //         ...x,
-  //         disabled: !allPapers.some((paper: any) =>
-  //           paper?.url?.includes(x.value)
-  //         ),
-  //       }))
-  //     )
-  //   }
-  // }, [allPapers])
-  // // Update level
-  // useEffect(() => {
-  //   setLevel(
-  //     levelList.find((x) => x.value == level)?.value ||
-  //       levelList.find((x) => !x.disabled)?.value ||
-  //       ''
-  //   )
-  // }, [levelList])
-  // // Update lang
-  // useEffect(() => {
-  //   let availLangs = langList.filter((x) => !x.disabled)
-  //   if (availLangs.some((x) => x.value == prefLang && !x.disabled))
-  //     setLang(prefLang)
-  //   else setLang(availLangs[0]?.value || '')
-  // }, [langList])
-
-  // useEffect(() => {
-  //   if (prefLang == '') setPrefLang(lang)
-  // }, [lang])
 
   // // Changes papers
   // useEffect(() => {
@@ -312,10 +295,13 @@ export default function Choices({ papers, setPapers }) {
               setExam(s)
               let tSubList = Object.keys(data[s]).sort()
               setSubList(tSubList)
-              console.log(tSubList.includes(subject), tSubList, subject)
-              setSubject(tSubList.includes(subject) ? subject : tSubList[0])
+              let tSubject = tSubList.includes(subject) ? subject : tSubList[0]
+              setSubject(tSubject)
 
-              updatePapers()
+              const level = updateLevel(s, tSubject, year)
+              const lang = updateLang(s, tSubject, year)
+
+              updatePapers(s, tSubject, year, level, lang)
             }}
             width={200}
             options={[
@@ -341,11 +327,15 @@ export default function Choices({ papers, setPapers }) {
             }}
             onChange={(s) => {
               setSubject(s)
-              let tYearList = Object.keys(data[exam][subject]).sort().reverse()
+              let tYearList = Object.keys(data[exam][s]).sort().reverse()
               setYearList(tYearList)
-              if (!tYearList.some((x) => x == year)) setYear(tYearList[0])
+              let tYear = tYearList.includes(year) ? year : tYearList[0]
+              setYear(tYear)
 
-              updatePapers()
+              const level = updateLevel(exam, s, tYear)
+              const lang = updateLang(exam, s, tYear)
+
+              updatePapers(exam, s, tYear, level, lang)
             }}
             setFavSubs={setFavSubs}
             group
@@ -362,7 +352,10 @@ export default function Choices({ papers, setPapers }) {
             onChange={(s) => {
               setYear(s)
 
-              updatePapers()
+              const level = updateLevel(exam, subject, s)
+              const lang = updateLang(exam, subject, s)
+
+              updatePapers(exam, subject, s, level, lang)
             }}
             useNumber
           />
@@ -373,7 +366,11 @@ export default function Choices({ papers, setPapers }) {
           <SelectChoice
             label="Level"
             value={level}
-            onChange={setLevel}
+            onChange={(s) => {
+              setLevel(s)
+
+              updatePapers(exam, subject, year, s, lang)
+            }}
             width={200}
             options={levelList}
           />
@@ -388,8 +385,10 @@ export default function Choices({ papers, setPapers }) {
             onChange={(e: any, s: string) => {
               if (s !== null) {
                 setLang(s)
-                // setPrefLang(s)
+                setPrefLang(s)
                 updatePrefLangCookie(s)
+
+                updatePapers(exam, subject, year, level, s)
               }
             }}
           >
