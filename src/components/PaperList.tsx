@@ -1,5 +1,6 @@
-import { Box, Container, Grid, Paper, Typography } from '@mui/material'
+import { Container } from '@mui/material'
 import splitbee from '@splitbee/web'
+import Link from 'next/link'
 
 export default function PaperList({ papers }) {
   const createUrl = (type: string, year: string, url: string) => {
@@ -11,45 +12,36 @@ export default function PaperList({ papers }) {
   }
   return (
     <Container>
-      <Grid container spacing={5} justifyContent="center">
+      <div className="flex flex-row justify-center flex-wrap gap-8">
         {papers.map((paper, i) => (
-          <Grid item key={i}>
-            <a
-              href={createUrl(paper.type, paper.year, paper.url)}
-              target="_blank"
-              style={{ textDecoration: 'none' }}
-              rel="noreferrer"
-              onClick={() => splitbee.track('Paper', paper)}
-            >
-              <Paper elevation={3} sx={{ width: 300 }}>
-                <Box
-                  sx={{
-                    background:
-                      paper.type === 'Exam Paper' ? '#2196f3' : '#f50057',
-                    paddingX: 2,
-                    paddingY: 1,
-                    borderRadius: 1,
-                  }}
-                >
-                  <Container disableGutters>
-                    <Typography variant="h4">{paper.type}</Typography>
-                  </Container>
-                </Box>
-                <Box sx={{ paddingX: 2, paddingY: 1 }}>
-                  <Typography variant="h6">{paper.subject}</Typography>
-                  <Typography
-                    variant="subtitle1"
-                    //sx={{ height: '3.5em' }}
-                  >
-                    {paper.details}
-                  </Typography>
-                  <Typography variant="body1">{paper.year}</Typography>
-                </Box>
-              </Paper>
-            </a>
-          </Grid>
+          <Link
+            key={i}
+            href={createUrl(paper.type, paper.year, paper.url)}
+            target="_blank"
+            style={{ textDecoration: 'none' }}
+            rel="noreferrer"
+            onClick={() => splitbee.track('Paper', paper)}
+          >
+            <div className="shadow-xl rounded-md shadow-slate-900 w-72 bg-zinc-800 overflow-hidden hover:scale-105 duration-150">
+              {/* TYPE */}
+              <p
+                className={`text-2xl font-semibold py-2 px-4 ${
+                  paper.type === 'Exam Paper' ? 'bg-blue-500' : 'bg-red-500'
+                }`}
+              >
+                {paper.type}
+              </p>
+              <div className="px-4 pt-2 pb-3 space-y-1">
+                <p className="font-semibold text-2xl">{paper.subject}</p>
+                <p className="text-slate-300 text-sm truncate">
+                  {paper.details}
+                </p>
+                <p className="text-slate-300">{paper.year}</p>
+              </div>
+            </div>
+          </Link>
         ))}
-      </Grid>
+      </div>
     </Container>
   )
 }

@@ -50,7 +50,7 @@ export default function App() {
             rel="noreferrer"
             onClick={() => splitbee.track('Formula and Tables')}
           >
-            <div className="bg-red-500 shadow-xl rounded-md px-4 py-3 shadow-slate-900">
+            <div className="bg-orange-500 font-semibold shadow-xl rounded-md px-4 py-3 shadow-slate-900">
               <h3 className="text-xl text-white">Formula and Tables Book</h3>
             </div>
           </Link>
