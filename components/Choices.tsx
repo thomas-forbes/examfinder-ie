@@ -28,7 +28,7 @@ const SelectChoice = ({
 }: {
   label: string
   value: string
-  onChange: (s) => void
+  onChange: (s: string) => void
   options: any
   width: number
 }) => {
@@ -59,16 +59,18 @@ const AutocompleteChoice = ({
   useNumber,
   width,
   group = false,
-  setFavSubs,
+  favSubs,
+  updateFavSubs,
 }: {
   options: { label: string; group: string }[]
   value: { label: string; group: string }
-  onChange: (string) => void
+  onChange: (s: string) => void
   label: string
   useNumber?: boolean
   width: number
   group?: boolean
-  setFavSubs?: any
+  favSubs?: string[]
+  updateFavSubs?: (s: string[]) => void
 }) => {
   const fuse = new Fuse(options, { keys: ['label'] })
   const [filteredOps, setFilteredOps] = useState(options)
@@ -119,13 +121,17 @@ const AutocompleteChoice = ({
                     onClick={(e) => {
                       e.preventDefault()
                       if (option.group == 'All') {
-                        setFavSubs((prev: string[]) => [...prev, option.label])
+                        updateFavSubs &&
+                          favSubs &&
+                          updateFavSubs([...favSubs, option.label])
                         onChange(option.label)
                         splitbee.track('favourite', { subject: option.label })
                       } else {
-                        setFavSubs((prev: string[]) =>
-                          prev.filter((v) => v != option.label)
-                        )
+                        updateFavSubs &&
+                          favSubs &&
+                          updateFavSubs(
+                            favSubs.filter((x) => x != option.label)
+                          )
                       }
 
                       setFilteredOps(options)
@@ -167,12 +173,14 @@ const AutocompleteChoice = ({
 export default function Choices({ papers, setPapers }) {
   const [exam, setExam] = useState('lc')
 
-  const [subList, setSubList] = useState(Object.keys(data[exam]).sort())
-  const [subject, setSubject] = useState(subList[0])
-
   const [favSubsCookie, updateFavSubs] = useCookie('favSubs')
   const [favSubs, setFavSubs]: [string[], any] = useState(
     favSubsCookie ? JSON.parse(favSubsCookie).sort() : []
+  )
+
+  const [subList, setSubList] = useState(Object.keys(data[exam]).sort())
+  const [subject, setSubject] = useState(
+    favSubs.length > 0 ? favSubs[0] : subList[0]
   )
 
   const [yearList, setYearList] = useState(
@@ -257,32 +265,7 @@ export default function Choices({ papers, setPapers }) {
   useEffect(() => {
     updatePapers(exam, subject, year, level, lang)
   }, [])
-  // useEffect(() => {
-  //   setPrefLang(prefLangCookie || '')
-  // }, [prefLangCookie])
 
-  // // Changes papers
-  // useEffect(() => {
-  //   if (data?.[exam]?.[subject]?.[year]) {
-  //     setPapers(
-  //       allPapers.filter((x: any) =>
-  //         x.url.includes(lang) || x.url.includes('BV')
-  //           ? x.url.includes(level) || x.url.includes('ZL')
-  //           : false
-  //       )
-  //     )
-  //   }
-  // }, [allPapers, level, lang])
-
-  // useEffect(() => {
-  //   if (favSubs.length > 0) setSubject(favSubs[0])
-  //   else setSubject(subList[0])
-  // }, [subList])
-  // useEffect(() => {
-  //   updateFavSubs(JSON.stringify(favSubs), {
-  //     expires: new Date(Date.now() + 100 * 365 * 24 * 60 * 60 * 1000),
-  //   })
-  // }, [favSubs])
   return (
     <Container sx={{ marginTop: 5 }}>
       <Grid container spacing={4} justifyContent="center">
@@ -337,7 +320,14 @@ export default function Choices({ papers, setPapers }) {
 
               updatePapers(exam, s, tYear, level, lang)
             }}
-            setFavSubs={setFavSubs}
+            favSubs={favSubs}
+            updateFavSubs={(s) => {
+              setFavSubs(s)
+              console.log('subs', s)
+              updateFavSubs(JSON.stringify(s), {
+                expires: new Date(Date.now() + 100 * 365 * 24 * 60 * 60 * 1000),
+              })
+            }}
             group
           />
         </Grid>
