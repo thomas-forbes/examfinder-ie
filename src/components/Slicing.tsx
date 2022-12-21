@@ -80,7 +80,7 @@ export default function Slicing({ code }: props) {
           },
         },
       ].map(({ value, label, setter }) => (
-        <Question label={label}>
+        <Question label={label} key={label}>
           <input
             type="number"
             className="w-full rounded-md border border-zinc-900/10 bg-white px-2 py-1 shadow-md shadow-zinc-800/5 transition-colors duration-300 placeholder:text-zinc-400 focus:border-sky-600 focus:outline-none focus:ring-4 focus:ring-sky-600/10 dark:border-zinc-600 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500"

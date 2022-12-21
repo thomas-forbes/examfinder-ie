@@ -1,5 +1,5 @@
 import muhammara from 'muhammara'
-import { NextApiRequest, NextApiResponse } from 'next'
+import { type NextApiRequest, type NextApiResponse } from 'next'
 import { z } from 'zod'
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {

@@ -96,7 +96,7 @@ const AutocompleteChoice = ({
           return (
             <li
               {...props}
-              onClick={() => {}}
+              // onClick={() => {}}
               style={{ width: '100%', padding: 0, paddingRight: 10 }}
             >
               <Stack
@@ -150,7 +150,7 @@ const AutocompleteChoice = ({
           {...params}
           type={useNumber ? 'number' : 'text'}
           onChange={(e) => {
-            let val = e.target.value
+            const val = e.target.value
             if (options.map((x) => x.label).includes(val))
               setFilteredOps(options)
             else if (val) {
@@ -255,7 +255,7 @@ export default function Choices({ papers, setPapers }) {
     }))
     setLangList(tLangList)
 
-    let availLangs = tLangList.filter((x) => !x.disabled)
+    const availLangs = tLangList.filter((x) => !x.disabled)
     let lang = ''
     if (availLangs.some((x) => x.value == prefLang && !x.disabled))
       lang = prefLang
@@ -279,9 +279,9 @@ export default function Choices({ papers, setPapers }) {
               value={exam}
               onChange={(s) => {
                 setExam(s)
-                let tSubList = Object.keys(data[s]).sort()
+                const tSubList = Object.keys(data[s]).sort()
                 setSubList(tSubList)
-                let tSubject = tSubList.includes(subject)
+                const tSubject = tSubList.includes(subject)
                   ? subject
                   : (tSubList[0] as string)
                 setSubject(tSubject)
@@ -315,9 +315,9 @@ export default function Choices({ papers, setPapers }) {
               }}
               onChange={(s) => {
                 setSubject(s)
-                let tYearList = Object.keys(data[exam][s]).sort().reverse()
+                const tYearList = Object.keys(data[exam][s]).sort().reverse()
                 setYearList(tYearList)
-                let tYear = tYearList.includes(year)
+                const tYear = tYearList.includes(year)
                   ? year
                   : (tYearList[0] as string)
                 setYear(tYear)
