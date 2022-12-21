@@ -17,7 +17,8 @@ import splitbee from '@splitbee/web'
 import Fuse from 'fuse.js'
 import { useEffect, useState } from 'react'
 import { useCookie } from 'react-use'
-import data from '../../../public/data.json'
+import data from '../../public/data.json'
+import Slicing from './Slicing'
 
 const SelectChoice = ({
   label,
@@ -179,14 +180,14 @@ export default function Choices({ papers, setPapers }) {
   )
 
   const [subList, setSubList] = useState(Object.keys(data[exam]).sort())
-  const [subject, setSubject] = useState(
-    favSubs.length > 0 ? favSubs[0] : subList[0]
+  const [subject, setSubject] = useState<string>(
+    (favSubs.length > 0 ? favSubs[0] : subList[0]) as string
   )
 
   const [yearList, setYearList] = useState(
     Object.keys(data[exam][subject]).sort().reverse()
   )
-  const [year, setYear] = useState(yearList[0])
+  const [year, setYear] = useState<string>(yearList[0] as string)
 
   const [levelList, setLevelList] = useState([
     { value: 'AL', label: 'Higher Level', disabled: false },
@@ -267,135 +268,146 @@ export default function Choices({ papers, setPapers }) {
     updatePapers(exam, subject, year, level, lang)
   }, [])
   return (
-    <Container sx={{ marginTop: 5 }}>
-      <Grid container spacing={4} justifyContent="center">
-        {/* EXAM */}
-        <Grid item>
-          <SelectChoice
-            label="Exam"
-            value={exam}
-            onChange={(s) => {
-              setExam(s)
-              let tSubList = Object.keys(data[s]).sort()
-              setSubList(tSubList)
-              let tSubject = tSubList.includes(subject) ? subject : tSubList[0]
-              setSubject(tSubject)
+    <Container>
+      <div className="flex flex-col items-center space-y-6">
+        {/* CHOICES */}
+        <Grid container spacing={4} justifyContent="center">
+          {/* EXAM */}
+          <Grid item>
+            <SelectChoice
+              label="Exam"
+              value={exam}
+              onChange={(s) => {
+                setExam(s)
+                let tSubList = Object.keys(data[s]).sort()
+                setSubList(tSubList)
+                let tSubject = tSubList.includes(subject)
+                  ? subject
+                  : (tSubList[0] as string)
+                setSubject(tSubject)
 
-              const level = updateLevel(s, tSubject, year)
-              const lang = updateLang(s, tSubject, year)
+                const level = updateLevel(s, tSubject, year)
+                const lang = updateLang(s, tSubject, year)
 
-              updatePapers(s, tSubject, year, level, lang)
-            }}
-            width={200}
-            options={[
-              { value: 'lc', label: 'Leaving Cert' },
-              { value: 'jc', label: 'Junior Cert' },
-              { value: 'lb', label: 'Leaving Cert Applied' },
-            ]}
-          />
-        </Grid>
+                updatePapers(s, tSubject, year, level, lang)
+              }}
+              width={200}
+              options={[
+                { value: 'lc', label: 'Leaving Cert' },
+                { value: 'jc', label: 'Junior Cert' },
+                { value: 'lb', label: 'Leaving Cert Applied' },
+              ]}
+            />
+          </Grid>
 
-        {/* SUBJECT */}
-        <Grid item>
-          <AutocompleteChoice
-            options={subList.map((x) => ({
-              label: x,
-              group: favSubs.includes(x) ? 'Favourites' : 'All',
-            }))}
-            width={250}
-            label="Subject"
-            value={{
-              label: subject,
-              group: favSubs.includes(subject) ? 'Favourites' : 'All',
-            }}
-            onChange={(s) => {
-              setSubject(s)
-              let tYearList = Object.keys(data[exam][s]).sort().reverse()
-              setYearList(tYearList)
-              let tYear = tYearList.includes(year) ? year : tYearList[0]
-              setYear(tYear)
+          {/* SUBJECT */}
+          <Grid item>
+            <AutocompleteChoice
+              options={subList.map((x) => ({
+                label: x,
+                group: favSubs.includes(x) ? 'Favourites' : 'All',
+              }))}
+              width={250}
+              label="Subject"
+              value={{
+                label: subject,
+                group: favSubs.includes(subject) ? 'Favourites' : 'All',
+              }}
+              onChange={(s) => {
+                setSubject(s)
+                let tYearList = Object.keys(data[exam][s]).sort().reverse()
+                setYearList(tYearList)
+                let tYear = tYearList.includes(year)
+                  ? year
+                  : (tYearList[0] as string)
+                setYear(tYear)
 
-              const level = updateLevel(exam, s, tYear)
-              const lang = updateLang(exam, s, tYear)
+                const level = updateLevel(exam, s, tYear)
+                const lang = updateLang(exam, s, tYear)
 
-              updatePapers(exam, s, tYear, level, lang)
-            }}
-            favSubs={favSubs}
-            updateFavSubs={(s) => {
-              setFavSubs(s)
-              console.log('subs', s)
-              updateFavSubs(JSON.stringify(s), {
-                expires: new Date(Date.now() + 100 * 365 * 24 * 60 * 60 * 1000),
-              })
-            }}
-            group
-          />
-        </Grid>
+                updatePapers(exam, s, tYear, level, lang)
+              }}
+              favSubs={favSubs}
+              updateFavSubs={(s) => {
+                setFavSubs(s)
+                console.log('subs', s)
+                updateFavSubs(JSON.stringify(s), {
+                  expires: new Date(
+                    Date.now() + 100 * 365 * 24 * 60 * 60 * 1000
+                  ),
+                })
+              }}
+              group
+            />
+          </Grid>
 
-        {/* YEAR */}
-        <Grid item>
-          <AutocompleteChoice
-            options={yearList.map((x) => ({ label: x, group: '' }))}
-            width={150}
-            label="Year"
-            value={{ label: year, group: '' }}
-            onChange={(s) => {
-              setYear(s)
+          {/* YEAR */}
+          <Grid item>
+            <AutocompleteChoice
+              options={yearList.map((x) => ({ label: x, group: '' }))}
+              width={150}
+              label="Year"
+              value={{ label: year, group: '' }}
+              onChange={(s) => {
+                setYear(s)
 
-              const level = updateLevel(exam, subject, s)
-              const lang = updateLang(exam, subject, s)
+                const level = updateLevel(exam, subject, s)
+                const lang = updateLang(exam, subject, s)
 
-              updatePapers(exam, subject, s, level, lang)
-            }}
-            useNumber
-          />
-        </Grid>
+                updatePapers(exam, subject, s, level, lang)
+              }}
+              useNumber
+            />
+          </Grid>
 
-        {/* LEVEL */}
-        <Grid item>
-          <SelectChoice
-            label="Level"
-            value={level}
-            onChange={(s) => {
-              setLevel(s)
+          {/* LEVEL */}
+          <Grid item>
+            <SelectChoice
+              label="Level"
+              value={level}
+              onChange={(s) => {
+                setLevel(s)
 
-              updatePapers(exam, subject, year, s, lang)
-            }}
-            width={200}
-            options={levelList}
-          />
-        </Grid>
+                updatePapers(exam, subject, year, s, lang)
+              }}
+              width={200}
+              options={levelList}
+            />
+          </Grid>
 
-        {/* LANGUAGE */}
-        <Grid item>
-          <ToggleButtonGroup
-            color="primary"
-            value={lang}
-            exclusive
-            onChange={(e: any, s: string) => {
-              if (s !== null) {
-                setLang(s)
-                setPrefLang(s)
-                updatePrefLangCookie(s)
+          {/* LANGUAGE */}
+          <Grid item>
+            <ToggleButtonGroup
+              color="primary"
+              value={lang}
+              exclusive
+              onChange={(e: any, s: string) => {
+                if (s !== null) {
+                  setLang(s)
+                  setPrefLang(s)
+                  updatePrefLangCookie(s)
 
-                updatePapers(exam, subject, year, level, s)
-              }
-            }}
-          >
-            {langList.map((lang) => (
-              <ToggleButton
-                value={lang.value}
-                key={lang.value}
-                disabled={lang?.disabled}
-              >
-                {lang.label}
-              </ToggleButton>
-            ))}
-            {/* <ToggleButton value="EV">English</ToggleButton>
+                  updatePapers(exam, subject, year, level, s)
+                }
+              }}
+            >
+              {langList.map((lang) => (
+                <ToggleButton
+                  value={lang.value}
+                  key={lang.value}
+                  disabled={lang?.disabled}
+                >
+                  {lang.label}
+                </ToggleButton>
+              ))}
+              {/* <ToggleButton value="EV">English</ToggleButton>
               <ToggleButton value="IV">Irish</ToggleButton> */}
-          </ToggleButtonGroup>
+            </ToggleButtonGroup>
+          </Grid>
         </Grid>
-      </Grid>
+        {/* SLICING */}
+        <Slicing code={papers[0]?.url} />
+      </div>
     </Container>
   )
 }

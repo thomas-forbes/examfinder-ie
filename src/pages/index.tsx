@@ -8,7 +8,6 @@ import Choices from '../components/Choices'
 import PageHead from '../components/PageHead'
 import PaperList from '../components/PaperList'
 import StyledLink from '../components/StyledLink'
-import { trpc } from '../utils/trpc'
 
 const theme = createTheme({
   palette: {
@@ -17,8 +16,6 @@ const theme = createTheme({
 })
 
 export default function App() {
-  const hello = trpc.example.hello.useQuery({ text: 'fuck' })
-
   const [papers, setPapers] = useState<any>([])
   return (
     <>

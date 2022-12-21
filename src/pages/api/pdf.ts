@@ -1,10 +1,24 @@
 import muhammara from 'muhammara'
 import { NextApiRequest, NextApiResponse } from 'next'
+import { z } from 'zod'
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  res.writeHead(200, { 'Content-Type': 'application/pdf' })
+  if (req.method !== 'POST') res.status(405).end()
+  const { years, pages, type, code } = z
+    .object({
+      years: z.array(z.number()),
+      pages: z.array(z.number()),
+      type: z.string(),
+      code: z.string(),
+    })
+    .parse(JSON.parse(req.body))
 
-  const { urls, page } = req.body
+  console.log(years, pages, type, code)
+  const urls = years.map(
+    (y) => `https://www.examinations.ie/archive/${type}/${y}/${code}`
+  )
+
+  res.writeHead(200, { 'Content-Type': 'application/pdf' })
 
   const streams = await Promise.all(
     urls.map(
@@ -17,9 +31,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const pdfWriter = muhammara.createWriter(
     new muhammara.PDFStreamForResponse(res)
   )
-  streams.forEach((stream) =>
-    pdfWriter.createPDFCopyingContext(stream).appendPDFPageFromPDF(page)
-  )
+  streams.forEach((stream) => {
+    const copier = pdfWriter.createPDFCopyingContext(stream)
+    pages.forEach((page) => copier.appendPDFPageFromPDF(page))
+  })
   pdfWriter.end()
 
   res.end()
