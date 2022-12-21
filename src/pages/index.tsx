@@ -51,7 +51,7 @@ export default function App() {
             rel="noreferrer"
             onClick={() => splitbee.track('Formula and Tables')}
           >
-            <div className="bg-orange-500 font-semibold shadow-xl rounded-lg px-4 py-3 shadow-slate-900 hover:scale-105 duration-150">
+            <div className="bg-orange-500 font-semibold shadow-xl rounded-lg px-4 py-3 shadow-stone-900 hover:scale-105 duration-150">
               <h3 className="text-xl text-white">Formula and Tables Book</h3>
             </div>
           </Link>

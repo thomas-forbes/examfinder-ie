@@ -22,7 +22,7 @@ export default function PaperList({ papers }) {
             rel="noreferrer"
             onClick={() => splitbee.track('Paper', paper)}
           >
-            <div className="shadow-xl rounded-lg shadow-slate-900 w-72 bg-zinc-800 overflow-hidden hover:scale-105 duration-150">
+            <div className="shadow-xl rounded-lg shadow-stone-900 w-72 bg-zinc-800 overflow-hidden hover:scale-105 duration-150">
               {/* TYPE */}
               <p
                 className={`text-2xl font-semibold py-2 px-4 ${
