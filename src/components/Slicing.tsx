@@ -1,5 +1,6 @@
 import { Listbox } from '@headlessui/react'
 import { useState } from 'react'
+import { HiSelector } from 'react-icons/hi'
 import { urlPaperType } from '../utils/consts'
 import Spinner from './Spinner'
 
@@ -40,10 +41,10 @@ export default function Slicing({ code }: props) {
       </summary>
       {/* TYPE */}
       <Question label="Type">
-        <div className="space-y-2 text-center">
+        <div className="space-y-2">
           <Listbox value={type} onChange={setType}>
-            <Listbox.Button className="w-full rounded-md bg-zinc-600 py-1 px-2">
-              {type}
+            <Listbox.Button className="flex w-full flex-row items-center justify-between rounded-md bg-zinc-600 py-1 px-2">
+              <span>{type}</span> <HiSelector />
             </Listbox.Button>
             <Listbox.Options className="w-full overflow-hidden rounded-md bg-zinc-700">
               {['Exam Paper', 'Marking Scheme'].map((x, i) => (
@@ -62,8 +63,22 @@ export default function Slicing({ code }: props) {
       {[
         { value: startYear, label: 'Start Year', setter: setStartYear },
         { value: endYear, label: 'End Year', setter: setEndYear },
-        { value: startPage, label: 'Start Page', setter: setStartPage },
-        { value: endPage, label: 'End Page', setter: setEndPage },
+        {
+          value: startPage,
+          label: 'Start Page',
+          setter: (s) => {
+            setStartPage(s)
+            if (s > endPage) setEndPage(s)
+          },
+        },
+        {
+          value: endPage,
+          label: 'End Page',
+          setter: (s) => {
+            setEndPage(s)
+            if (s < startPage) setStartPage(s)
+          },
+        },
       ].map(({ value, label, setter }) => (
         <Question label={label}>
           <input
