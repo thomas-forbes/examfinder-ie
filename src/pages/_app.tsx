@@ -1,13 +1,11 @@
-import splitbee from '@splitbee/web'
-import { useEffect } from 'react'
+import { type AppType } from 'next/app'
+
+import { trpc } from '../utils/trpc'
+
 import '../styles/globals.css'
 
-export default function MyApp({ Component, pageProps }) {
-  useEffect(() => {
-    splitbee.init({
-      scriptUrl: '/bee.js',
-      apiUrl: '/_hive',
-    })
-  }, [])
+const MyApp: AppType = ({ Component, pageProps }) => {
   return <Component {...pageProps} />
 }
+
+export default trpc.withTRPC(MyApp)

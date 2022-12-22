@@ -16,16 +16,16 @@ const theme = createTheme({
 })
 
 export default function App() {
-  const [papers, setPapers]: [any, any] = useState([])
+  const [papers, setPapers] = useState<any>([])
   return (
     <>
       <PageHead />
       <ThemeProvider theme={theme}>
         {/* MAIN COL */}
-        <div className="flex flex-col items-center p-4 pt-6 min-h-screen space-y-6">
+        <div className="flex min-h-screen flex-col items-center space-y-6 p-4 pt-6">
           {/* TEXT */}
-          <div className="flex flex-col items-center text-center space-y-4">
-            <h1 className="font-bold text-5xl">
+          <div className="flex flex-col items-center space-y-4 text-center">
+            <h1 className="text-5xl font-bold">
               Easily Search Irish Past Papers
             </h1>
             <p className="text-slate-300">
@@ -51,7 +51,7 @@ export default function App() {
             rel="noreferrer"
             onClick={() => splitbee.track('Formula and Tables')}
           >
-            <div className="bg-orange-500 font-semibold shadow-xl rounded-lg px-4 py-3 shadow-slate-900 hover:scale-105 duration-150">
+            <div className="rounded-lg bg-orange-500 px-4 py-3 font-semibold shadow-xl shadow-stone-900 duration-150 hover:scale-105">
               <h3 className="text-xl text-white">Formula and Tables Book</h3>
             </div>
           </Link>

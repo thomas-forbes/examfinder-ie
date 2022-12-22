@@ -1,18 +1,15 @@
 import { Container } from '@mui/material'
 import splitbee from '@splitbee/web'
 import Link from 'next/link'
+import { urlPaperType } from '../utils/consts'
 
 export default function PaperList({ papers }) {
   const createUrl = (type: string, year: string, url: string) => {
-    let typeFormatter = {
-      'Exam Paper': 'exampapers',
-      'Marking Scheme': 'markingschemes',
-    }
-    return `https://www.examinations.ie/archive/${typeFormatter[type]}/${year}/${url}`
+    return `https://www.examinations.ie/archive/${urlPaperType[type]}/${year}/${url}`
   }
   return (
     <Container>
-      <div className="flex flex-row justify-center flex-wrap gap-8">
+      <div className="flex flex-row flex-wrap justify-center gap-8">
         {papers.map((paper, i) => (
           <Link
             key={i}
@@ -22,18 +19,18 @@ export default function PaperList({ papers }) {
             rel="noreferrer"
             onClick={() => splitbee.track('Paper', paper)}
           >
-            <div className="shadow-xl rounded-lg shadow-slate-900 w-72 bg-zinc-800 overflow-hidden hover:scale-105 duration-150">
+            <div className="w-72 overflow-hidden rounded-lg bg-zinc-800 shadow-xl shadow-stone-900 duration-150 hover:scale-105">
               {/* TYPE */}
               <p
-                className={`text-2xl font-semibold py-2 px-4 ${
+                className={`py-2 px-4 text-2xl font-semibold ${
                   paper.type === 'Exam Paper' ? 'bg-blue-500' : 'bg-red-500'
                 }`}
               >
                 {paper.type}
               </p>
-              <div className="px-4 pt-2 pb-3 space-y-1">
-                <p className="font-semibold text-2xl">{paper.subject}</p>
-                <p className="text-slate-300 text-sm truncate">
+              <div className="space-y-1 px-4 pt-2 pb-3">
+                <p className="text-2xl font-semibold">{paper.subject}</p>
+                <p className="truncate text-sm text-slate-300">
                   {paper.details}
                 </p>
                 <p className="text-slate-300">{paper.year}</p>
