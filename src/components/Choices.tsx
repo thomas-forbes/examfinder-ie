@@ -406,7 +406,18 @@ export default function Choices({ papers, setPapers }) {
           </Grid>
         </Grid>
         {/* SLICING */}
-        <Slicing code={papers[0]?.url} />
+        {papers.length > 0 && (
+          <Slicing
+            yearList={yearList.map((y) => parseInt(y))}
+            types={papers
+              .filter((p) => p.url.includes('.pdf'))
+              .map((p) => ({
+                type: p.type,
+                code: p.url,
+                details: p.details,
+              }))}
+          />
+        )}
       </div>
     </Container>
   )

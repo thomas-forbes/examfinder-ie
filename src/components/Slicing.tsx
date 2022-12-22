@@ -1,11 +1,18 @@
 import { Listbox } from '@headlessui/react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { HiSelector } from 'react-icons/hi'
 import { urlPaperType } from '../utils/consts'
 import Spinner from './Spinner'
 
-interface props {
+interface Type {
   code: string
+  type: 'Exam Paper' | 'Marking Scheme'
+  details: string
+}
+
+interface props {
+  types: Type[]
+  yearList: number[]
 }
 
 const Question = ({
@@ -16,13 +23,15 @@ const Question = ({
   children: React.ReactNode
 }) => (
   <div className="flex flex-row items-center space-x-2">
-    <label className="flex-1 truncate text-slate-300">{label}</label>
-    <div className="flex-[2] ">{children}</div>
+    <label className="flex-1 truncate text-sm text-slate-400 sm:text-base">
+      {label}
+    </label>
+    <div className="flex-[3]">{children}</div>
   </div>
 )
 
-export default function Slicing({ code }: props) {
-  const [type, setType] = useState('Exam Paper')
+export default function Slicing({ types, yearList }: props) {
+  const [type, setType] = useState<Type>(types[0]!)
 
   const [startYear, setStartYear] = useState(2022)
   const [endYear, setEndYear] = useState(2022)
@@ -33,33 +42,45 @@ export default function Slicing({ code }: props) {
   const [downloadState, setDownloadState] = useState<
     'idle' | 'error' | 'loading'
   >('idle')
+
+  useEffect(() => {
+    setType(types[0]!)
+  }, [types])
   return (
     <details className="w-80 space-y-4 rounded-md bg-zinc-800 py-3 px-4 sm:w-96">
       {/* TITLE */}
       <summary className="cursor-pointer text-center text-2xl font-bold">
         Slice Papers
       </summary>
+      {/* EXPLAIN */}
+      <p className="text-center text-slate-200">
+        Get a range of pages from a range of years
+      </p>
       {/* TYPE */}
-      <Question label="Type">
+      <Question label="Paper">
         <div className="space-y-2">
           <Listbox value={type} onChange={setType}>
             <Listbox.Button className="flex w-full flex-row items-center justify-between rounded-md bg-zinc-600 py-1 px-2">
-              <span>{type}</span> <HiSelector />
+              <span>
+                {type?.type == 'Marking Scheme' ? type.type : type?.details}
+              </span>{' '}
+              <HiSelector />
             </Listbox.Button>
             <Listbox.Options className="w-full overflow-hidden rounded-md bg-zinc-700">
-              {['Exam Paper', 'Marking Scheme'].map((x, i) => (
+              {types.map((x, i) => (
                 <Listbox.Option
                   key={'label-' + i}
                   value={x}
-                  className="cursor-pointer select-none py-1 px-2 hover:bg-zinc-600 ui-selected:bg-zinc-600"
+                  className="cursor-pointer select-none truncate py-1 px-2 hover:bg-zinc-600 ui-selected:bg-zinc-600"
                 >
-                  {x}
+                  {x?.type == 'Marking Scheme' ? x.type : x?.details}
                 </Listbox.Option>
               ))}
             </Listbox.Options>
           </Listbox>
         </div>
       </Question>
+      {/* YEARS / PAGES */}
       {[
         { value: startYear, label: 'Start Year', setter: setStartYear },
         { value: endYear, label: 'End Year', setter: setEndYear },
@@ -85,7 +106,23 @@ export default function Slicing({ code }: props) {
             type="number"
             className="w-full rounded-md border border-zinc-900/10 bg-white px-2 py-1 shadow-md shadow-zinc-800/5 transition-colors duration-300 placeholder:text-zinc-400 focus:border-sky-600 focus:outline-none focus:ring-4 focus:ring-sky-600/10 dark:border-zinc-600 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500"
             value={value}
-            min={1}
+            min={label.includes('Page') ? 1 : Math.min(...yearList)}
+            max={label.includes('Page') ? undefined : Math.max(...yearList)}
+            onBlur={(e) => {
+              if (
+                parseInt(e.target.value) <
+                (label.includes('Page') ? 1 : Math.min(...yearList))
+              ) {
+                setter(label.includes('Page') ? 1 : Math.min(...yearList))
+              } else if (
+                parseInt(e.target.value) >
+                (label.includes('Page') ? Infinity : Math.max(...yearList))
+              ) {
+                setter(
+                  label.includes('Page') ? Infinity : Math.max(...yearList)
+                )
+              }
+            }}
             onChange={(e) => setter(parseInt(e.target.value))}
           />
         </Question>
@@ -109,8 +146,8 @@ export default function Slicing({ code }: props) {
                   { length: endPage - 1 - (startPage - 1) + 1 },
                   (_, i) => startPage - 1 + i
                 ),
-                type: urlPaperType[type],
-                code,
+                type: urlPaperType[type.type],
+                code: type.code,
               }),
             })
           ).blob()
