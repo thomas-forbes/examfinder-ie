@@ -409,6 +409,7 @@ export default function Choices({ papers, setPapers }) {
         {papers.length > 0 && (
           <Slicing
             yearList={yearList.map((y) => parseInt(y))}
+            subject={subject}
             types={papers
               .filter((p) => p.url.includes('.pdf'))
               .map((p) => ({

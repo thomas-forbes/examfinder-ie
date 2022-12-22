@@ -13,6 +13,7 @@ interface Type {
 interface props {
   types: Type[]
   yearList: number[]
+  subject: string
 }
 
 const Question = ({
@@ -30,7 +31,7 @@ const Question = ({
   </div>
 )
 
-export default function Slicing({ types, yearList }: props) {
+export default function Slicing({ types, yearList, subject }: props) {
   const [type, setType] = useState<Type>(types[0]!)
 
   const [startYear, setStartYear] = useState(2022)
@@ -133,32 +134,38 @@ export default function Slicing({ types, yearList }: props) {
         disabled={downloadState == 'loading'}
         onClick={async () => {
           setDownloadState('loading')
-          const blob = await (
-            await fetch('/api/pdf', {
-              method: 'POST',
-              body: JSON.stringify({
-                // all years between first and last year
-                years: Array.from(
-                  { length: Math.abs(endYear - startYear) + 1 },
-                  (_, i) => (startYear < endYear ? startYear + i : endYear + i)
-                ),
-                pages: Array.from(
-                  { length: endPage - 1 - (startPage - 1) + 1 },
-                  (_, i) => startPage - 1 + i
-                ),
-                type: urlPaperType[type.type],
-                code: type.code,
-              }),
-            })
-          ).blob()
+          const res = await fetch('/api/pdf', {
+            method: 'POST',
+            body: JSON.stringify({
+              // all years between first and last year
+              years: Array.from(
+                { length: Math.abs(endYear - startYear) + 1 },
+                (_, i) => (startYear < endYear ? startYear + i : endYear + i)
+              ),
+              pages: Array.from(
+                { length: endPage - 1 - (startPage - 1) + 1 },
+                (_, i) => startPage - 1 + i
+              ),
+              type: urlPaperType[type.type],
+              code: type.code,
+            }),
+          })
+          if (res.status != 200) return setDownloadState('error')
+          const blob = await res.blob()
+
           const url = window.URL.createObjectURL(blob)
           const a = document.createElement('a')
           document.body.appendChild(a)
           a.style.display = 'none'
           a.href = url
-          // `${subject}-${firstYear}-${lastYear[:2]}`
-          a.download = `examfinder.pdf`
+          a.download = `${subject}_${
+            startYear.toString() +
+            (startYear != endYear ? `-${endYear.toString().slice(-2)}` : '')
+          }_P${
+            startPage.toString() + (startPage != endPage ? `-${endPage}` : '')
+          }.pdf`
           a.click()
+
           setDownloadState('idle')
         }}
       >
