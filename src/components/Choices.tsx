@@ -222,10 +222,15 @@ export default function Choices({ papers, setPapers }) {
           lang,
           exam,
         }))
-        .filter((x) =>
-          x.url.includes(lang) || x.url.includes('BV')
-            ? x.url.includes(level) || x.url.includes('ZL')
-            : false
+        .filter(
+          (x) =>
+            x.url.includes(lang) || x.url.includes('BV')
+              ? x.url.includes(level) || x.url.includes('ZL')
+              : false
+          // sort Exam Papers then Marking Schemes
+        )
+        .sort((a, b) =>
+          a.type == 'Exam Paper' && b.type == 'Marking Scheme' ? -1 : 1
         )
     )
   }
@@ -330,11 +335,11 @@ export default function Choices({ papers, setPapers }) {
               favSubs={favSubs}
               updateFavSubs={(s) => {
                 setFavSubs(s)
-                console.log('subs', s)
                 updateFavSubs(JSON.stringify(s), {
                   expires: new Date(
                     Date.now() + 100 * 365 * 24 * 60 * 60 * 1000
                   ),
+                  sameSite: 'strict',
                 })
               }}
               group
@@ -385,7 +390,7 @@ export default function Choices({ papers, setPapers }) {
                 if (s !== null) {
                   setLang(s)
                   setPrefLang(s)
-                  updatePrefLangCookie(s)
+                  updatePrefLangCookie(s, { sameSite: 'strict' })
 
                   updatePapers(exam, subject, year, level, s)
                 }
