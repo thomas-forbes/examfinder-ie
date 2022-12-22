@@ -13988,7 +13988,19 @@
           { "details": "Higher Level (EV)", "url": "LC027ALP000EV.pdf" },
           { "details": "Higher Level (IV)", "url": "LC027ALP000IV.pdf" },
           { "details": "Ordinary Level (EV)", "url": "LC027GLP000EV.pdf" },
-          { "details": "Ordinary Level (IV)", "url": "LC027GLP000IV.pdf" }
+          { "details": "Ordinary Level (IV)", "url": "LC027GLP000IV.pdf" },
+          {
+            "details": "Practical Test Day 2 / Common Level (BV)",
+            "url": "LC027CLP035BV.pdf"
+          },
+          {
+            "details": "Practical Test Day 1 / Common Level (BV)",
+            "url": "LC027CLP034BV.pdf"
+          },
+          {
+            "details": "Practical Test Day 3 / Common Level (BV)",
+            "url": "LC027CLP036BV.pdf"
+          }
         ],
         "markingschemes": [
           { "details": "Higher Level (EV)", "url": "LC027ALP000EV.pdf" },
@@ -14025,7 +14037,19 @@
           { "details": "Higher Level (EV)", "url": "LC027ALP000EV.pdf" },
           { "details": "Higher Level (IV)", "url": "LC027ALP000IV.pdf" },
           { "details": "Ordinary Level (EV)", "url": "LC027GLP000EV.pdf" },
-          { "details": "Ordinary Level (IV)", "url": "LC027GLP000IV.pdf" }
+          { "details": "Ordinary Level (IV)", "url": "LC027GLP000IV.pdf" },
+          {
+            "details": "Practical Test Day 1 / Common Level (BV)",
+            "url": "LC027CLP034BV.pdf"
+          },
+          {
+            "details": "Practical Test Day 2 / Common Level (BV)",
+            "url": "LC027CLP035BV.pdf"
+          },
+          {
+            "details": "Practical Test Day 3 / Common Level (BV)",
+            "url": "LC027CLP036BV.pdf"
+          }
         ],
         "markingschemes": [
           { "details": "Higher Level (EV)", "url": "LC027ALP000EV.pdf" },
@@ -19509,6 +19533,22 @@
           {
             "details": "Paper Two: Sound File (IV)",
             "url": "LC067ZLP217IV.mp3"
+          },
+          {
+            "details": "Aural Memory Rhythm / Higher Level (EV)",
+            "url": "LC067ALP024EV.mp3"
+          },
+          {
+            "details": "Aural Memory Melody / Ordinary Level (EV)",
+            "url": "LC067GLP025EV.mp3"
+          },
+          {
+            "details": "Aural Memory Melody / Higher Level (EV)",
+            "url": "LC067ALP025EV.mp3"
+          },
+          {
+            "details": "Aural Memory Rhythm / Ordinary Level (EV)",
+            "url": "LC067GLP024EV.mp3"
           }
         ],
         "markingschemes": [
@@ -19563,7 +19603,24 @@
           { "details": "Sound File 1 (EV)", "url": "LC067ZLP045EV.mp3" },
           { "details": "Sound File 1 (IV)", "url": "LC067ZLP045iv.mp3" },
           { "details": "Sound File 2 (EV)", "url": "LC067ZLP046EV.mp3" },
-          { "details": "Sound File 2 (IV)", "url": "LC067ZLP046IV.mp3" }
+          { "details": "Sound File 2 (IV)", "url": "LC067ZLP046IV.mp3" },
+          {
+            "details": "Aural Memory Rhythm / Higher Level (EV)",
+            "url": "LC067ALP024EV.mp3"
+          },
+          {
+            "details": "Aural Memory Melody / Higher Level (EV)",
+            "url": "LC067ALP025EV.mp3"
+          },
+          {
+            "details": "Aural Memory Rhythm / Ordinary Level (EV)",
+            "url": "LC067GLP024EV.mp3"
+          },
+          {
+            "details": "Aural Memory Melody / Ordinary Level (EV)",
+            "url": "LC067GLP025EV.mp3"
+          },
+          { "details": "Sound File 1 (IV)", "url": "LC067ZLP045IV.mp3" }
         ],
         "markingschemes": [
           { "details": "Higher Level (EV)", "url": "LC067ALP000EV.pdf" },
@@ -21402,7 +21459,15 @@
       "2022": {
         "exampapers": [
           { "details": "Common Level (EV)", "url": "LC462CLP000EV.pdf" },
-          { "details": "Common Level (IV)", "url": "LC462CLP000IV.pdf" }
+          { "details": "Common Level (IV)", "url": "LC462CLP000IV.pdf" },
+          {
+            "details": "Audio Visual DVD / Common Level (EV)",
+            "url": "LC462CLP031EV.mov"
+          },
+          {
+            "details": "Audio Visual DVD / Common Level (IV)",
+            "url": "LC462CLP031IV.mov"
+          }
         ],
         "markingschemes": [
           { "details": "Common Level (EV)", "url": "LC462CLP000EV.pdf" },
@@ -23984,6 +24049,10 @@
           { "details": "Higher Level (IV)", "url": "JC001ALP000IV.pdf" },
           { "details": "Ordinary Level (IV)", "url": "JC001GLP000IV.pdf" },
           { "details": "Sound File (IV)", "url": "JC001ZLP017IV.mp3" }
+        ],
+        "markingschemes": [
+          { "details": "Higher Level (IV)", "url": "JC001ALP000IV.pdf" },
+          { "details": "Ordinary Level (IV)", "url": "JC001GLP000IV.pdf" }
         ]
       }
     },
@@ -24550,6 +24619,10 @@
       },
       "2022": {
         "exampapers": [
+          { "details": "Higher Level (EV)", "url": "JC002ALP000EV.pdf" },
+          { "details": "Ordinary Level (EV)", "url": "JC002GLP000EV.pdf" }
+        ],
+        "markingschemes": [
           { "details": "Higher Level (EV)", "url": "JC002ALP000EV.pdf" },
           { "details": "Ordinary Level (EV)", "url": "JC002GLP000EV.pdf" }
         ]
@@ -25735,6 +25808,12 @@
           { "details": "Higher Level (IV)", "url": "JC003ALP000IV.pdf" },
           { "details": "Ordinary Level (EV)", "url": "JC003GLP000EV.pdf" },
           { "details": "Ordinary Level (IV)", "url": "JC003GLP000IV.pdf" }
+        ],
+        "markingschemes": [
+          { "details": "Higher Level (IV)", "url": "JC003ALP000IV.pdf" },
+          { "details": "Ordinary Level (IV)", "url": "JC003GLP000IV.pdf" },
+          { "details": "Higher Level (EV)", "url": "JC003ALP000EV.pdf" },
+          { "details": "Ordinary Level (EV)", "url": "JC003GLP000EV.pdf" }
         ]
       }
     },
@@ -26342,6 +26421,10 @@
         "exampapers": [
           { "details": "Common Level (EV)", "url": "JC004CLP000EV.pdf" },
           { "details": "Common Level (IV)", "url": "JC004CLP000IV.pdf" }
+        ],
+        "markingschemes": [
+          { "details": "Common Level (IV)", "url": "JC004CLP000IV.pdf" },
+          { "details": "Common Level (EV)", "url": "JC004CLP000EV.pdf" }
         ]
       }
     },
@@ -27174,6 +27257,10 @@
             "details": "Source Paper / Common Level (EV)",
             "url": "JC005CLPC00EV.pdf"
           }
+        ],
+        "markingschemes": [
+          { "details": "Common Level (IV)", "url": "JC005CLP000IV.pdf" },
+          { "details": "Common Level (EV)", "url": "JC005CLP000EV.pdf" }
         ]
       }
     },
@@ -28739,6 +28826,10 @@
           },
           { "details": "Common Level (EV)", "url": "JC010CLP000EV.pdf" },
           { "details": "Common Level (IV)", "url": "JC010CLP000IV.pdf" }
+        ],
+        "markingschemes": [
+          { "details": "Common Level (IV)", "url": "JC010CLP000IV.pdf" },
+          { "details": "Common Level (EV)", "url": "JC010CLP000EV.pdf" }
         ]
       }
     },
@@ -29076,6 +29167,10 @@
             "details": "Sound File / Common Level (BV)",
             "url": "JC011CLP017BV.mp3"
           }
+        ],
+        "markingschemes": [
+          { "details": "Common Level (IV)", "url": "JC011CLP000IV.pdf" },
+          { "details": "Common Level (EV)", "url": "JC011CLP000EV.pdf" }
         ]
       }
     },
@@ -29430,6 +29525,10 @@
             "details": "Sound File / Common Level (BV)",
             "url": "JC012CLP017BV.mp3"
           }
+        ],
+        "markingschemes": [
+          { "details": "Common Level (IV)", "url": "JC012CLP000IV.pdf" },
+          { "details": "Common Level (EV)", "url": "JC012CLP000EV.pdf" }
         ]
       }
     },
@@ -29782,6 +29881,18 @@
             "details": "Sound File / Common Level (BV)",
             "url": "JC013CLP017BV.mp3"
           }
+        ],
+        "markingschemes": [
+          { "details": "Common Level (IV)", "url": "JC013CLP000IV.pdf" },
+          { "details": "Common Level (EV)", "url": "JC013CLP000EV.pdf" }
+        ]
+      }
+    },
+    "14": {
+      "2022": {
+        "markingschemes": [
+          { "details": "Common Level (IV)", "url": "JC014CLP000IV.pdf" },
+          { "details": "Common Level (EV)", "url": "JC014CLP000EV.pdf" }
         ]
       }
     },
@@ -29790,6 +29901,10 @@
         "exampapers": [
           { "details": "Common Level (EV)", "url": "JC027CLP000EV.pdf" },
           { "details": "Common Level (IV)", "url": "JC027CLP000IV.pdf" }
+        ],
+        "markingschemes": [
+          { "details": "Common Level (IV)", "url": "JC027CLP000IV.pdf" },
+          { "details": "Common Level (EV)", "url": "JC027CLP000EV.pdf" }
         ]
       }
     },
@@ -31549,6 +31664,10 @@
         "exampapers": [
           { "details": "Common Level (EV)", "url": "JC042CLP000EV.pdf" },
           { "details": "Common Level (IV)", "url": "JC042CLP000IV.pdf" }
+        ],
+        "markingschemes": [
+          { "details": "Common Level (IV)", "url": "JC042CLP000IV.pdf" },
+          { "details": "Common Level (EV)", "url": "JC042CLP000EV.pdf" }
         ]
       }
     },
@@ -32352,7 +32471,13 @@
           {
             "details": "Sound File 2 / Common Level (IV)",
             "url": "JC046CLP046IV.mp3"
-          }
+          },
+          { "details": "Aural Memory Rhythm (EV)", "url": "JC046ZLP024EV.mp3" },
+          { "details": "Aural Memory Melody (EV)", "url": "JC046ZLP025EV.mp3" }
+        ],
+        "markingschemes": [
+          { "details": "Common Level (IV)", "url": "JC046CLP000IV.pdf" },
+          { "details": "Common Level (EV)", "url": "JC046CLP000EV.pdf" }
         ]
       }
     },
@@ -34120,6 +34245,10 @@
         "exampapers": [
           { "details": "Common Level (EV)", "url": "JC052CLP000EV.pdf" },
           { "details": "Common Level (IV)", "url": "JC052CLP000IV.pdf" }
+        ],
+        "markingschemes": [
+          { "details": "Common Level (IV)", "url": "JC052CLP000IV.pdf" },
+          { "details": "Common Level (EV)", "url": "JC052CLP000EV.pdf" }
         ]
       }
     },
@@ -34707,6 +34836,10 @@
         "exampapers": [
           { "details": "Common Level (EV)", "url": "JC057CLP000EV.pdf" },
           { "details": "Common Level (IV)", "url": "JC057CLP000IV.pdf" }
+        ],
+        "markingschemes": [
+          { "details": "Common Level (IV)", "url": "JC057CLP000IV.pdf" },
+          { "details": "Common Level (EV)", "url": "JC057CLP000EV.pdf" }
         ]
       }
     },
@@ -35591,6 +35724,10 @@
           { "details": "Higher Level (IV)", "url": "JC083ALP000IV.pdf" },
           { "details": "Ordinary Level (IV)", "url": "JC083GLP000IV.pdf" },
           { "details": "Sound File (IV)", "url": "JC083ZLP017IV.mp3" }
+        ],
+        "markingschemes": [
+          { "details": "Higher Level (IV)", "url": "JC083ALP000IV.pdf" },
+          { "details": "Ordinary Level (IV)", "url": "JC083GLP000IV.pdf" }
         ]
       }
     },
@@ -35599,6 +35736,10 @@
         "exampapers": [
           { "details": "Common Level (EV)", "url": "JC106CLP000EV.pdf" },
           { "details": "Common Level (IV)", "url": "JC106CLP000IV.pdf" }
+        ],
+        "markingschemes": [
+          { "details": "Common Level (IV)", "url": "JC106CLP000IV.pdf" },
+          { "details": "Common Level (EV)", "url": "JC106CLP000EV.pdf" }
         ]
       }
     },
@@ -35607,6 +35748,10 @@
         "exampapers": [
           { "details": "Common Level (EV)", "url": "JC125CLP000EV.pdf" },
           { "details": "Common Level (IV)", "url": "JC125CLP000IV.pdf" }
+        ],
+        "markingschemes": [
+          { "details": "Common Level (IV)", "url": "JC125CLP000IV.pdf" },
+          { "details": "Common Level (EV)", "url": "JC125CLP000EV.pdf" }
         ]
       }
     },
@@ -35615,12 +35760,20 @@
         "exampapers": [
           { "details": "Common Level (IV)", "url": "JC126CLP000IV.pdf" },
           { "details": "Common Level (EV)", "url": "JC126CLP000EV.pdf" }
+        ],
+        "markingschemes": [
+          { "details": "Common Level (IV)", "url": "JC126CLP000IV.pdf" },
+          { "details": "Common Level (EV)", "url": "JC126CLP000EV.pdf" }
         ]
       }
     },
     "137": {
       "2022": {
         "exampapers": [
+          { "details": "Common Level (IV)", "url": "JC137CLP000IV.pdf" },
+          { "details": "Common Level (EV)", "url": "JC137CLP000EV.pdf" }
+        ],
+        "markingschemes": [
           { "details": "Common Level (IV)", "url": "JC137CLP000IV.pdf" },
           { "details": "Common Level (EV)", "url": "JC137CLP000EV.pdf" }
         ]
@@ -36251,6 +36404,10 @@
         "exampapers": [
           { "details": "Common Level (EV)", "url": "JC220CLP000EV.pdf" },
           { "details": "Common Level (IV)", "url": "JC220CLP000IV.pdf" }
+        ],
+        "markingschemes": [
+          { "details": "Common Level (IV)", "url": "JC220CLP000IV.pdf" },
+          { "details": "Common Level (EV)", "url": "JC220CLP000EV.pdf" }
         ]
       }
     },
@@ -36314,6 +36471,9 @@
       },
       "2022": {
         "exampapers": [
+          { "details": "Common Level (EV)", "url": "JC565CLP000EV.pdf" }
+        ],
+        "markingschemes": [
           { "details": "Common Level (EV)", "url": "JC565CLP000EV.pdf" }
         ]
       }

@@ -1,4 +1,5 @@
 import { Listbox } from '@headlessui/react'
+import splitbee from '@splitbee/web'
 import { useEffect, useState } from 'react'
 import { HiSelector } from 'react-icons/hi'
 import { urlPaperType } from '../utils/consts'
@@ -134,6 +135,14 @@ export default function Slicing({ types, yearList, subject }: props) {
         disabled={downloadState == 'loading'}
         onClick={async () => {
           setDownloadState('loading')
+          splitbee.track('Slice', {
+            startYear,
+            endYear,
+            startPage,
+            endPage,
+            type: type.type,
+            subject,
+          })
           const res = await fetch('/api/pdf', {
             method: 'POST',
             body: JSON.stringify({

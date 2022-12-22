@@ -108,7 +108,7 @@ async function getAllPapers() {
             if (err) console.error(err)
             else console.log(exam, subject, year)
           })
-          await page.waitForTimeout(1000)
+          await new Promise((r) => setTimeout(r, 1000))
         }
       }
     }
