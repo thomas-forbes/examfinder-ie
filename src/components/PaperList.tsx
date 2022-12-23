@@ -12,12 +12,13 @@ export default function PaperList({ papers }) {
       <div className="flex flex-row flex-wrap justify-center gap-8">
         {papers.map((paper, i) => (
           <Link
-            key={i}
+            key={i + paper.url}
             href={createUrl(paper.type, paper.year, paper.url)}
             target="_blank"
             style={{ textDecoration: 'none' }}
             rel="noreferrer"
             onClick={() => splitbee.track('Paper', paper)}
+            className="paperFade"
           >
             <div className="w-72 overflow-hidden rounded-lg bg-zinc-800 shadow-xl shadow-stone-900 duration-150 hover:scale-105">
               {/* TYPE */}

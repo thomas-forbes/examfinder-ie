@@ -5,3 +5,15 @@
 html {
   @apply bg-zinc-900 text-white;
 }
+.paperFade {
+  animation: fadeIn 600ms;
+}
+
+@keyframes fadeIn {
+  0% {
+    @apply scale-75 opacity-0;
+  }
+  100% {
+    @apply scale-100 opacity-100;
+  }
+}
