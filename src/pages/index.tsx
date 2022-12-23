@@ -33,7 +33,7 @@ export default function App() {
               <StyledLink
                 href="https://thomasforbes.com/"
                 target="_blank"
-                onClick={() => splitbee.track('thomasforbes.com top')}
+                onClick={() => splitbee.track('thomasforbes.com')}
                 className="hover:text-slate-300"
               >
                 student
