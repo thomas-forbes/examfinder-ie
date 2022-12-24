@@ -21,14 +21,22 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     res.writeHead(200, { 'Content-Type': 'application/pdf' })
 
-    const streams = await Promise.all(
-      urls.map(
-        async (url) =>
-          new muhammara.PDFRStreamForBuffer(
-            Buffer.from(await (await fetch(url)).arrayBuffer())
+    const streams = (
+      await Promise.allSettled(
+        urls.map(async (url) => {
+          const res = await fetch(url)
+          if (!res.ok) throw new Error()
+          return new muhammara.PDFRStreamForBuffer(
+            Buffer.from(await res.arrayBuffer())
           )
+        })
       )
     )
+      .filter((r) => r.status === 'fulfilled')
+      .map(
+        (r) =>
+          (r as PromiseFulfilledResult<muhammara.PDFRStreamForBuffer>).value
+      )
 
     const pdfWriter = muhammara.createWriter(
       new muhammara.PDFStreamForResponse(res)
