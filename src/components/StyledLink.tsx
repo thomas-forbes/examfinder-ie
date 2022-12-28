@@ -3,9 +3,9 @@ import { twMerge } from 'tailwind-merge'
 
 interface props {
   href: string
-  target: string
-  onClick: () => void
   children: string
+  target?: string
+  onClick?: () => void
   className?: string
 }
 
@@ -21,7 +21,10 @@ export default function StyledLink({
       href={href}
       target={target}
       onClick={onClick}
-      className={twMerge('text-slate-400 underline duration-150', className)}
+      className={twMerge(
+        'text-slate-400 duration-150 hover:underline',
+        className
+      )}
     >
       {children}
     </Link>

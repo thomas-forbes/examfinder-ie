@@ -5,6 +5,7 @@ export default function BottomBar() {
   return (
     <>
       <footer className="flex w-full flex-row items-center justify-center space-x-2">
+        {/* SUPPORT */}
         <StyledLink
           href="https://www.buymeacoffee.com/thomasforbes"
           target="_blank"
@@ -14,6 +15,17 @@ export default function BottomBar() {
           Support me!
         </StyledLink>
         <p>&bull;</p>
+        {/* SAMPLE PAPERS */}
+        <StyledLink
+          target="_blank"
+          onClick={() => splitbee.track('buymeacoffee.com')}
+          href="https://www.examinations.ie/?l=en&mc=ex&sc=sp"
+          className="text-lg font-semibold text-orange-400 hover:text-orange-300"
+        >
+          Sample Papers
+        </StyledLink>
+        <p>&bull;</p>
+        {/* BUGS */}
         <StyledLink
           href="https://tally.so/r/w76963"
           target="_blank"
