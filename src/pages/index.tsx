@@ -3,8 +3,8 @@ import splitbee from '@splitbee/web'
 import Link from 'next/link'
 import { useState } from 'react'
 
-import BottomBar from '../components/BottomBar'
 import Choices from '../components/Choices'
+import Footer from '../components/Footer'
 import PageHead from '../components/PageHead'
 import PaperList from '../components/PaperList'
 import StyledLink from '../components/StyledLink'
@@ -60,7 +60,7 @@ export default function App() {
           {/* DIVIDER */}
           <div className="flex-grow" />
           {/* FOOTER */}
-          <BottomBar />
+          <Footer />
         </div>
       </ThemeProvider>
     </>

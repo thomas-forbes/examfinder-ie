@@ -1,10 +1,10 @@
 import splitbee from '@splitbee/web'
 import StyledLink from './StyledLink'
 
-export default function BottomBar() {
+export default function Footer() {
   return (
     <>
-      <footer className="flex w-full flex-row items-center justify-center space-x-2">
+      <footer className="flex w-full flex-row flex-wrap items-center justify-center space-x-2 text-center">
         {/* SUPPORT */}
         <StyledLink
           href="https://www.buymeacoffee.com/thomasforbes"
