@@ -245,7 +245,7 @@ export default function Choices({ papers, setPapers }) {
     setLevelList(tLevelList)
 
     const tLevel =
-      tLevelList.find((x) => x.value == level)?.value ||
+      tLevelList.find((x) => x.value == level && !x.disabled)?.value ||
       tLevelList.find((x) => !x.disabled)?.value ||
       ''
     setLevel(tLevel)
