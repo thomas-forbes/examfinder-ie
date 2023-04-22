@@ -1,24 +1,24 @@
 import {
-  Autocomplete,
   Box,
-  Container,
   FormControl,
-  Grid,
   InputLabel,
   MenuItem,
+  Autocomplete as MuiAutocomplete,
+  Select as MuiSelect,
   Rating,
-  Select,
   Stack,
   TextField,
-  ToggleButton,
-  ToggleButtonGroup,
 } from '@mui/material'
+import { StarIcon as StarIconOutline } from '@heroicons/react/24/outline'
 import splitbee from '@splitbee/web'
 import Fuse from 'fuse.js'
 import { useEffect, useState } from 'react'
 import { useCookie } from 'react-use'
 import data from '../../public/data.json'
+import Autocomplete from './Autocomplete'
+import Select from './Select'
 import Slicing from './Slicing'
+import { StarIcon } from '@heroicons/react/24/solid'
 
 const SelectChoice = ({
   label,
@@ -36,7 +36,7 @@ const SelectChoice = ({
   return (
     <FormControl>
       <InputLabel>{label}</InputLabel>
-      <Select
+      <MuiSelect
         value={value}
         label={label}
         onChange={(e: any) => onChange(e.target.value)}
@@ -47,7 +47,7 @@ const SelectChoice = ({
             {v.label}
           </MenuItem>
         ))}
-      </Select>
+      </MuiSelect>
     </FormControl>
   )
 }
@@ -79,7 +79,7 @@ const AutocompleteChoice = ({
     setFilteredOps(options)
   }, [options])
   return (
-    <Autocomplete
+    <MuiAutocomplete
       disablePortal
       options={filteredOps.sort((a, b) => b.group.localeCompare(a.group))}
       {...(group && { groupBy: (option) => option.group })}
@@ -172,6 +172,11 @@ const AutocompleteChoice = ({
 }
 
 export default function Choices({ papers, setPapers }) {
+  const exams = [
+    { value: 'lc', label: 'Leaving Cert' },
+    { value: 'jc', label: 'Junior Cert' },
+    { value: 'lb', label: 'Leaving Cert Applied' },
+  ]
   const [exam, setExam] = useState('lc')
 
   const [favSubsCookie, updateFavSubs] = useCookie('favSubs')
@@ -270,161 +275,165 @@ export default function Choices({ papers, setPapers }) {
   }
 
   useEffect(() => {
+    updateLevel(exam, subject, year)
+    updateLang(exam, subject, year)
     updatePapers(exam, subject, year, level, lang)
   }, [])
   return (
-    <Container>
-      <div className="flex flex-col items-center space-y-6">
-        {/* CHOICES */}
-        <Grid container spacing={4} justifyContent="center">
-          {/* EXAM */}
-          <Grid item>
-            <SelectChoice
-              label="Exam"
-              value={exam}
-              onChange={(s) => {
-                setExam(s)
-                const tSubList = Object.keys(data[s]).sort()
-                setSubList(tSubList)
-                const tSubject = tSubList.includes(subject)
-                  ? subject
-                  : (tSubList[0] as string)
-                setSubject(tSubject)
+    <div className="flex flex-col items-center space-y-6">
+      {/* CHOICES */}
+      <div className="flex flex-row flex-wrap items-center justify-center gap-8">
+        {/* EXAM */}
+        <div className="w-52">
+          <Select
+            value={exam}
+            onChange={(s) => {
+              console.log(s)
+              setExam(s)
+              const tSubList = Object.keys(data[s]).sort()
+              setSubList(tSubList)
+              const tSubject = tSubList.includes(subject)
+                ? subject
+                : (tSubList[0] as string)
+              setSubject(tSubject)
 
-                const level = updateLevel(s, tSubject, year)
-                const lang = updateLang(s, tSubject, year)
+              const tYearList = Object.keys(data[s][tSubject]).sort().reverse()
+              setYearList(tYearList)
+              const tYear = tYearList.includes(year)
+                ? year
+                : (tYearList[0] as string)
+              setYear(tYear)
 
-                updatePapers(s, tSubject, year, level, lang)
-              }}
-              width={200}
-              options={[
-                { value: 'lc', label: 'Leaving Cert' },
-                { value: 'jc', label: 'Junior Cert' },
-                { value: 'lb', label: 'Leaving Cert Applied' },
-              ]}
-            />
-          </Grid>
+              const level = updateLevel(s, tSubject, tYear)
+              const lang = updateLang(s, tSubject, tYear)
 
-          {/* SUBJECT */}
-          <Grid item>
-            <AutocompleteChoice
-              options={subList.map((x) => ({
-                label: x,
-                group: favSubs.includes(x) ? 'Favourites' : 'All',
-              }))}
-              width={250}
-              label="Subject"
-              value={{
-                label: subject,
-                group: favSubs.includes(subject) ? 'Favourites' : 'All',
-              }}
-              onChange={(s) => {
-                setSubject(s)
-                const tYearList = Object.keys(data[exam][s]).sort().reverse()
-                setYearList(tYearList)
-                const tYear = tYearList.includes(year)
-                  ? year
-                  : (tYearList[0] as string)
-                setYear(tYear)
-
-                const level = updateLevel(exam, s, tYear)
-                const lang = updateLang(exam, s, tYear)
-
-                updatePapers(exam, s, tYear, level, lang)
-              }}
-              favSubs={favSubs}
-              updateFavSubs={(s) => {
-                setFavSubs(s)
-                updateFavSubs(JSON.stringify(s), {
-                  expires: new Date(
-                    Date.now() + 100 * 365 * 24 * 60 * 60 * 1000
-                  ),
-                  sameSite: 'strict',
-                })
-              }}
-              group
-            />
-          </Grid>
-
-          {/* YEAR */}
-          <Grid item>
-            <AutocompleteChoice
-              options={yearList.map((x) => ({ label: x, group: '' }))}
-              width={150}
-              label="Year"
-              value={{ label: year, group: '' }}
-              onChange={(s) => {
-                setYear(s)
-
-                const level = updateLevel(exam, subject, s)
-                const lang = updateLang(exam, subject, s)
-
-                updatePapers(exam, subject, s, level, lang)
-              }}
-              useNumber
-            />
-          </Grid>
-
-          {/* LEVEL */}
-          <Grid item>
-            <SelectChoice
-              label="Level"
-              value={level}
-              onChange={(s) => {
-                setLevel(s)
-
-                updatePapers(exam, subject, year, s, lang)
-              }}
-              width={200}
-              options={levelList}
-            />
-          </Grid>
-
-          {/* LANGUAGE */}
-          <Grid item>
-            <ToggleButtonGroup
-              color="primary"
-              value={lang}
-              exclusive
-              onChange={(e: any, s: string) => {
-                if (s !== null) {
-                  setLang(s)
-                  setPrefLang(s)
-                  updatePrefLangCookie(s, { sameSite: 'strict' })
-
-                  updatePapers(exam, subject, year, level, s)
-                }
-              }}
-            >
-              {langList.map((lang) => (
-                <ToggleButton
-                  value={lang.value}
-                  key={lang.value}
-                  disabled={lang?.disabled}
-                >
-                  {lang.label}
-                </ToggleButton>
-              ))}
-              {/* <ToggleButton value="EV">English</ToggleButton>
-              <ToggleButton value="IV">Irish</ToggleButton> */}
-            </ToggleButtonGroup>
-          </Grid>
-        </Grid>
-        {/* SLICING */}
-        {papers.length > 0 && (
-          <Slicing
-            yearList={yearList.map((y) => parseInt(y))}
-            subject={subject}
-            types={papers
-              .filter((p) => p.url.includes('.pdf'))
-              .map((p) => ({
-                type: p.type,
-                code: p.url,
-                details: p.details,
-              }))}
+              updatePapers(s, tSubject, tYear, level, lang)
+            }}
+            options={exams}
+            title={exams.find((e) => e.value == exam)!.label}
           />
-        )}
+        </div>
+
+        {/* SUBJECT */}
+        <div className="w-64">
+          <Autocomplete
+            value={subject}
+            onChange={(s) => {
+              setSubject(s)
+              const tYearList = Object.keys(data[exam][s]).sort().reverse()
+              setYearList(tYearList)
+              const tYear = tYearList.includes(year)
+                ? year
+                : (tYearList[0] as string)
+              setYear(tYear)
+
+              const level = updateLevel(exam, s, tYear)
+              const lang = updateLang(exam, s, tYear)
+
+              updatePapers(exam, s, tYear, level, lang)
+            }}
+            options={subList.sort((a, b) => {
+              if (favSubs.includes(a) && !favSubs.includes(b)) return -1
+              if (!favSubs.includes(a) && favSubs.includes(b)) return 1
+              return 0
+            })}
+            renderOption={(option) => (
+              <div className="flex flex-row items-center gap-2">
+                <div className="h-4 w-4">
+                  <button
+                    className="z-10 text-lg duration-300 hover:scale-110"
+                    onClick={() => {
+                      let tFavSubs = favSubs
+                      if (favSubs.includes(option)) {
+                        tFavSubs = favSubs.filter((x) => x != option)
+                      } else {
+                        tFavSubs = [...favSubs, option]
+                      }
+                      setFavSubs(tFavSubs)
+                      updateFavSubs(JSON.stringify(tFavSubs), {
+                        expires: new Date(
+                          Date.now() + 100 * 365 * 24 * 60 * 60 * 1000
+                        ),
+                        sameSite: 'strict',
+                      })
+                    }}
+                  >
+                    {favSubs.includes(option) ? (
+                      <StarIcon className="h-full w-full text-yellow-400" />
+                    ) : (
+                      <StarIconOutline className="h-full w-full text-gray-400" />
+                    )}
+                  </button>
+                </div>
+                <div>{option}</div>
+              </div>
+            )}
+          />
+        </div>
+
+        {/* YEAR */}
+        <div className="w-32">
+          <Autocomplete
+            value={year}
+            onChange={(s) => {
+              setYear(s)
+
+              const level = updateLevel(exam, subject, s)
+              const lang = updateLang(exam, subject, s)
+
+              updatePapers(exam, subject, s, level, lang)
+            }}
+            options={yearList}
+          />
+        </div>
+
+        {/* LEVEL */}
+        <div className="w-44">
+          <Select
+            value={level}
+            onChange={(s) => {
+              setLevel(s)
+
+              updatePapers(exam, subject, year, s, lang)
+            }}
+            options={levelList}
+            title={levelList.find((e) => e.value == level)!.label}
+          />
+        </div>
+
+        {/* LANGUAGE */}
+        <div className="flex h-12 flex-row items-stretch divide-x divide-zinc-200/20 overflow-hidden rounded-md border border-zinc-200/20 ">
+          {langList.map((l) => (
+            <button
+              className={`px-4 py-3 text-center font-bold duration-300 disabled:bg-zinc-900 disabled:opacity-50 ${
+                l.value == lang ? 'bg-zinc-800' : 'bg-zinc-900'
+              }`}
+              onClick={() => {
+                setLang(l.value)
+                setPrefLang(l.value)
+                updatePrefLangCookie(l.value, { sameSite: 'strict' })
+
+                updatePapers(exam, subject, year, level, l.value)
+              }}
+              disabled={l?.disabled}
+            >
+              {l.label}
+            </button>
+          ))}
+        </div>
       </div>
-    </Container>
+      {/* SLICING */}
+      <Slicing
+        yearList={yearList.map((y) => parseInt(y))}
+        subject={subject}
+        types={papers
+          .filter((p) => p.url.includes('.pdf'))
+          .map((p) => ({
+            type: p.type,
+            code: p.url,
+            details: p.details,
+          }))}
+      />
+    </div>
   )
 }

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { HiSelector } from 'react-icons/hi'
 import { urlPaperType } from '../utils/consts'
 import Spinner from './Spinner'
+import Select from './Select'
 
 interface Type {
   code: string
@@ -25,7 +26,7 @@ const Question = ({
   children: React.ReactNode
 }) => (
   <div className="flex flex-row items-center space-x-2">
-    <label className="flex-1 truncate text-sm text-slate-400 sm:text-base">
+    <label className="flex-1 truncate text-sm text-zinc-400 sm:text-base">
       {label}
     </label>
     <div className="flex-[3]">{children}</div>
@@ -49,31 +50,31 @@ export default function Slicing({ types, yearList, subject }: props) {
     setType(types[0]!)
   }, [types])
   return (
-    <details className="w-80 space-y-4 rounded-md bg-zinc-800 py-3 px-4 sm:w-96">
+    <details className="w-80 space-y-4 rounded-md bg-zinc-900 py-3 px-4 sm:w-96">
       {/* TITLE */}
       <summary className="cursor-pointer text-center text-2xl font-bold">
         Slice Papers
       </summary>
       {/* EXPLAIN */}
-      <p className="text-center text-slate-200">
+      <p className="text-center text-zinc-200">
         Get a range of pages from a range of years
       </p>
       {/* TYPE */}
       <Question label="Paper">
         <div className="space-y-2">
           <Listbox value={type} onChange={setType}>
-            <Listbox.Button className="flex w-full flex-row items-center justify-between rounded-md bg-zinc-600 py-1 px-2">
+            <Listbox.Button className="flex w-full flex-row items-center justify-between rounded-md border border-zinc-200/10 bg-zinc-800 py-1 px-2">
               <span>
                 {type?.type == 'Marking Scheme' ? type.type : type?.details}
               </span>{' '}
               <HiSelector />
             </Listbox.Button>
-            <Listbox.Options className="w-full overflow-hidden rounded-md bg-zinc-700">
+            <Listbox.Options className="w-full overflow-hidden rounded-md border border-zinc-200/10 bg-zinc-800">
               {types.map((x, i) => (
                 <Listbox.Option
                   key={'label-' + i}
                   value={x}
-                  className="cursor-pointer select-none truncate py-1 px-2 hover:bg-zinc-600 ui-selected:bg-zinc-600"
+                  className="cursor-pointer select-none truncate py-1 px-2 text-zinc-400 hover:bg-zinc-700 ui-selected:bg-zinc-700 ui-selected:text-white"
                 >
                   {x?.type == 'Marking Scheme' ? x.type : x?.details}
                 </Listbox.Option>
@@ -106,7 +107,7 @@ export default function Slicing({ types, yearList, subject }: props) {
         <Question label={label} key={label}>
           <input
             type="number"
-            className="w-full rounded-md border border-zinc-900/10 border-zinc-600 bg-zinc-700/[0.15] px-2 py-1 text-zinc-200 shadow-md shadow-zinc-800/5 transition-colors duration-300 placeholder:text-zinc-500 focus:border-sky-600 focus:outline-none focus:ring-4 focus:ring-sky-600/10"
+            className="w-full rounded-md border border-zinc-200/10 bg-zinc-800 px-2 py-1 text-zinc-200 shadow-md shadow-zinc-800/5 transition-colors duration-300 placeholder:text-zinc-500 focus:border-sky-600 focus:outline-none focus:ring-4 focus:ring-sky-600/10"
             value={value}
             min={label.includes('Page') ? 1 : Math.min(...yearList)}
             max={label.includes('Page') ? undefined : Math.max(...yearList)}

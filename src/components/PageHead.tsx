@@ -1,7 +1,7 @@
 import Head from 'next/head'
 export default function PageHead() {
   const description =
-    'Easily search all Irish state past papers from the examinations.ie material archive and revise all your subjects with ease'
+    'A better search platform for all Irish state past papers. The best Irish Past Paper finder.'
   const title = 'Exam Finder: Irish Past Papers'
   return (
     <Head>
@@ -18,7 +18,7 @@ export default function PageHead() {
       <meta property="og:url" content="https://examfinder.ie/" />
       <meta property="twitter:domain" content="examfinder.ie" />
 
-      <meta name="twitter:creator" content="@FoldedCode" />
+      <meta name="twitter:creator" content="@thomasforbesy" />
 
       <meta name="twitter:card" content="summary_large_image" />
       <meta

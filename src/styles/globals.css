@@ -3,17 +3,18 @@
 @tailwind utilities;
 
 html {
-  @apply bg-zinc-900 text-white;
+  @apply bg-zinc-950 text-white;
 }
 .paperFade {
-  animation: fadeIn 600ms;
+  /* animation: fadeIn 600ms; */
+  animation: 600ms ease-in-out fadeIn;
 }
 
 @keyframes fadeIn {
   0% {
-    @apply scale-75 opacity-0;
+    @apply opacity-0;
   }
   100% {
-    @apply scale-100 opacity-100;
+    @apply opacity-100;
   }
 }
