@@ -38,6 +38,7 @@ export default function Footer() {
           <p>&bull;</p>
           <StyledLink
             href="https://github.com/thomas-forbes/examfinder"
+            target="_blank"
             className="text-lg font-semibold text-slate-100 hover:text-slate-300"
           >
             GitHub

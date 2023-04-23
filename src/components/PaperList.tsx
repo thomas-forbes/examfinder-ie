@@ -22,16 +22,16 @@ export default function PaperList({ papers }) {
           onClick={() => splitbee.track('Paper', paper)}
           className="paperFade"
         >
-          <div className="shadow-slate-950 w-72 overflow-hidden rounded-lg bg-zinc-900 shadow-xl duration-300 hover:scale-105">
+          <div className="w-72 overflow-hidden rounded-xl bg-zinc-900 shadow-lg duration-300 hover:scale-105 hover:shadow-2xl">
             {/* TYPE */}
             <p
-              className={`py-2 px-4 text-2xl font-semibold ${
+              className={`px-4 py-2 text-2xl font-semibold ${
                 paper.type === 'Exam Paper' ? 'bg-blue-500' : 'bg-red-500'
               }`}
             >
               {paper.type}
             </p>
-            <div className="space-y-1 px-4 pt-2 pb-3">
+            <div className="space-y-1 px-4 pb-3 pt-2">
               <p className="text-2xl font-semibold">{paper.subject}</p>
               <p className="truncate text-sm text-zinc-400">{paper.details}</p>
               <p className="font-mono text-zinc-400">{paper.year}</p>
