@@ -1,7 +1,7 @@
 import Head from 'next/head'
 export default function PageHead() {
   const description =
-    'A better search platform for all Irish state past papers. The best Irish Past Paper finder.'
+    'The best exam material archive of Irish past papers and marking schemes'
   const title = 'Exam Finder: Irish Past Papers'
   return (
     <Head>
