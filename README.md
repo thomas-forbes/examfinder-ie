@@ -1,28 +1,37 @@
-# Create T3 App
+# examfinder.ie
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+I built this website as a better alternative to [betterpastpapers](http://betterpastpapers.com/) (now defunct) and [examinations.ie](https://www.examinations.ie/exammaterialarchive/) (hell).
 
-## What's next? How do I make an app with this?
+It allows students and teachers to easily view and search Irish past papers.
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+# Slicing
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+It may not be obvious what this feature does but simply it allows you to slice together specified pages of exam papers from different years. This is useful if you want to study a specific topic that appears on certain pages.
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+# Development
 
-## Learn More
+This project was built with [create-t3-app](https://github.com/t3-oss/create-t3-app) for a solid foundation. It only really uses next.js and tailwind.
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+I initially built before I knew about the divine gift of typescript so most of the code isn't built in the typescript way. It works so 🤷.
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+## Running
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+- `pnpm i`
+- `pnpm dev`
 
-## How do I deploy this?
+# Data
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+The data is scraped from the examinations.ie website using puppeteer. The code is a bit spaghetti but I can't be bothered to make it good since it works.
+
+## Updating
+
+- Make sure you're on an Irish IP (they throw cloudflare on you otherwise)
+- `cd data`
+- `node index.js`
+  - Wait a long ass time or hardcode `yearsOps` to `[CURRENT_YEAR]`
+- `node fixer.js`
+- Done
+
+# Contributing
+
+Feel free to open an issue or pr. The data needs to updated whenever the SEC releases papers and I may forget.

@@ -1,7 +1,7 @@
 import { Listbox } from '@headlessui/react'
+import { ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import splitbee from '@splitbee/web'
 import { useEffect, useState } from 'react'
-import { HiSelector } from 'react-icons/hi'
 import { urlPaperType } from '../utils/consts'
 import Spinner from './Spinner'
 
@@ -66,7 +66,10 @@ export default function Slicing({ types, yearList, subject }: props) {
               <span>
                 {type?.type == 'Marking Scheme' ? type.type : type?.details}
               </span>{' '}
-              <HiSelector />
+              <ChevronUpDownIcon
+                className="h-5 w-5 text-gray-400"
+                aria-hidden="true"
+              />
             </Listbox.Button>
             <Listbox.Options className="w-full overflow-hidden rounded-md border border-zinc-200/10 bg-zinc-800">
               {types.map((x, i) => (

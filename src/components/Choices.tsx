@@ -1,24 +1,11 @@
-import {
-  Box,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Autocomplete as MuiAutocomplete,
-  Select as MuiSelect,
-  Rating,
-  Stack,
-  TextField,
-} from '@mui/material'
 import { StarIcon as StarIconOutline } from '@heroicons/react/24/outline'
-import splitbee from '@splitbee/web'
-import Fuse from 'fuse.js'
+import { StarIcon } from '@heroicons/react/24/solid'
 import { useEffect, useState } from 'react'
 import { useCookie } from 'react-use'
 import data from '../../public/data.json'
 import Autocomplete from './Autocomplete'
 import Select from './Select'
 import Slicing from './Slicing'
-import { StarIcon } from '@heroicons/react/24/solid'
 
 export default function Choices({ papers, setPapers }) {
   const exams = [
