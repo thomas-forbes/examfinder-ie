@@ -2,7 +2,7 @@ import muhammara from 'muhammara'
 import { type NextApiRequest, type NextApiResponse } from 'next'
 import { z } from 'zod'
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async function pdf(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') res.status(405).end()
   try {
     const { years, pages, type, code } = z

@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react'
 import { HiSelector } from 'react-icons/hi'
 import { urlPaperType } from '../utils/consts'
 import Spinner from './Spinner'
-import Select from './Select'
 
 interface Type {
   code: string
@@ -50,7 +49,7 @@ export default function Slicing({ types, yearList, subject }: props) {
     setType(types[0]!)
   }, [types])
   return (
-    <details className="w-80 space-y-4 rounded-md bg-zinc-900 py-3 px-4 sm:w-96">
+    <details className="w-80 space-y-4 rounded-md bg-zinc-900 px-4 py-3 sm:w-96">
       {/* TITLE */}
       <summary className="cursor-pointer text-center text-2xl font-bold">
         Slice Papers
@@ -63,7 +62,7 @@ export default function Slicing({ types, yearList, subject }: props) {
       <Question label="Paper">
         <div className="space-y-2">
           <Listbox value={type} onChange={setType}>
-            <Listbox.Button className="flex w-full flex-row items-center justify-between rounded-md border border-zinc-200/10 bg-zinc-800 py-1 px-2">
+            <Listbox.Button className="flex w-full flex-row items-center justify-between rounded-md border border-zinc-200/10 bg-zinc-800 px-2 py-1">
               <span>
                 {type?.type == 'Marking Scheme' ? type.type : type?.details}
               </span>{' '}
@@ -74,7 +73,7 @@ export default function Slicing({ types, yearList, subject }: props) {
                 <Listbox.Option
                   key={'label-' + i}
                   value={x}
-                  className="cursor-pointer select-none truncate py-1 px-2 text-zinc-400 hover:bg-zinc-700 ui-selected:bg-zinc-700 ui-selected:text-white"
+                  className="cursor-pointer select-none truncate px-2 py-1 text-zinc-400 hover:bg-zinc-700 ui-selected:bg-zinc-700 ui-selected:text-white"
                 >
                   {x?.type == 'Marking Scheme' ? x.type : x?.details}
                 </Listbox.Option>
@@ -132,7 +131,7 @@ export default function Slicing({ types, yearList, subject }: props) {
       ))}
       {/* DOWNLOAD */}
       <button
-        className="flex h-10 w-full items-center justify-center rounded-md bg-sky-500 py-2 px-4 text-lg font-semibold text-sky-100 outline-offset-2 transition active:transition-none enabled:hover:bg-sky-400 enabled:active:bg-sky-500 enabled:active:text-sky-100/80 disabled:cursor-not-allowed disabled:opacity-60 dark:bg-sky-600 enabled:dark:hover:bg-sky-500 enabled:dark:active:bg-sky-600 enabled:dark:active:text-sky-100/70"
+        className="flex h-10 w-full items-center justify-center rounded-md bg-sky-500 px-4 py-2 text-lg font-semibold text-sky-100 outline-offset-2 transition active:transition-none enabled:hover:bg-sky-400 enabled:active:bg-sky-500 enabled:active:text-sky-100/80 disabled:cursor-not-allowed disabled:opacity-60 dark:bg-sky-600 enabled:dark:hover:bg-sky-500 enabled:dark:active:bg-sky-600 enabled:dark:active:text-sky-100/70"
         disabled={downloadState == 'loading'}
         onClick={async () => {
           setDownloadState('loading')

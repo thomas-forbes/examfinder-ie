@@ -20,157 +20,6 @@ import Select from './Select'
 import Slicing from './Slicing'
 import { StarIcon } from '@heroicons/react/24/solid'
 
-const SelectChoice = ({
-  label,
-  value,
-  onChange: onChange,
-  options,
-  width,
-}: {
-  label: string
-  value: string
-  onChange: (s: string) => void
-  options: any
-  width: number
-}) => {
-  return (
-    <FormControl>
-      <InputLabel>{label}</InputLabel>
-      <MuiSelect
-        value={value}
-        label={label}
-        onChange={(e: any) => onChange(e.target.value)}
-        sx={{ width: width }}
-      >
-        {options.map((v: any) => (
-          <MenuItem value={v.value} key={v.value} disabled={v.disabled}>
-            {v.label}
-          </MenuItem>
-        ))}
-      </MuiSelect>
-    </FormControl>
-  )
-}
-
-const AutocompleteChoice = ({
-  options,
-  value,
-  onChange,
-  label,
-  useNumber,
-  width,
-  group = false,
-  favSubs,
-  updateFavSubs,
-}: {
-  options: { label: string; group: string }[]
-  value: { label: string; group: string }
-  onChange: (s: string) => void
-  label: string
-  useNumber?: boolean
-  width: number
-  group?: boolean
-  favSubs?: string[]
-  updateFavSubs?: (s: string[]) => void
-}) => {
-  const fuse = new Fuse(options, { keys: ['label'] })
-  const [filteredOps, setFilteredOps] = useState(options)
-  useEffect(() => {
-    setFilteredOps(options)
-  }, [options])
-  return (
-    <MuiAutocomplete
-      disablePortal
-      options={filteredOps.sort((a, b) => b.group.localeCompare(a.group))}
-      {...(group && { groupBy: (option) => option.group })}
-      getOptionLabel={(option) => option.label}
-      sx={{ width: width }}
-      value={value}
-      isOptionEqualToValue={(option, value) => option.label === value.label}
-      onChange={(e, s) => {
-        onChange(s ? s.label : value.label)
-        setFilteredOps(options)
-      }}
-      {...(group && {
-        renderOption: (props, option) => {
-          return (
-            <li
-              {...props}
-              // onClick={() => {}}
-              style={{ width: '100%', padding: 0, paddingRight: 10 }}
-            >
-              <Stack
-                direction="row"
-                justifyContent="space-between"
-                alignItems="center"
-                sx={{ width: '100%' }}
-              >
-                <Box
-                  onClick={props.onClick}
-                  onTouchStart={props.onTouchStart}
-                  data-option-index={props['data-option-index']}
-                  component="span"
-                  className="MuiAutocomplete-option"
-                  sx={{ flexGrow: 1 }}
-                >
-                  {option.label}
-                </Box>
-                {group && (
-                  <Rating
-                    max={1}
-                    value={Number(option.group == 'Favourites')}
-                    onClick={(e) => {
-                      e.preventDefault()
-                      if (option.group == 'All') {
-                        updateFavSubs &&
-                          favSubs &&
-                          updateFavSubs([...favSubs, option.label])
-                        onChange(option.label)
-                        splitbee.track('favourite', { subject: option.label })
-                      } else {
-                        updateFavSubs &&
-                          favSubs &&
-                          updateFavSubs(
-                            favSubs.filter((x) => x != option.label)
-                          )
-                      }
-
-                      setFilteredOps(options)
-                    }}
-                  />
-                )}
-              </Stack>
-            </li>
-          )
-        },
-      })}
-      autoHighlight={true}
-      renderInput={(params) => (
-        <TextField
-          {...params}
-          type={useNumber ? 'number' : 'text'}
-          onChange={(e) => {
-            const val = e.target.value
-            if (options.map((x) => x.label).includes(val))
-              setFilteredOps(options)
-            else if (val) {
-              setFilteredOps([
-                value,
-                ...fuse
-                  .search(val)
-                  .map((x) => x.item)
-                  .filter((x) => x.label != value.label),
-              ])
-            } else setFilteredOps(options)
-            return options.some((x) => x.label === val) ? onChange(val) : null
-          }}
-          label={label}
-        />
-      )}
-    />
-  )
-}
-
 export default function Choices({ papers, setPapers }) {
   const exams = [
     { value: 'lc', label: 'Leaving Cert' },
@@ -180,7 +29,7 @@ export default function Choices({ papers, setPapers }) {
   const [exam, setExam] = useState('lc')
 
   const [favSubsCookie, updateFavSubs] = useCookie('favSubs')
-  const [favSubs, setFavSubs]: [string[], any] = useState(
+  const [favSubs, setFavSubs] = useState<string[]>(
     favSubsCookie ? JSON.parse(favSubsCookie).sort() : []
   )
 
@@ -405,6 +254,7 @@ export default function Choices({ papers, setPapers }) {
         <div className="flex h-12 flex-row items-stretch divide-x divide-zinc-200/20 overflow-hidden rounded-md border border-zinc-200/20 ">
           {langList.map((l) => (
             <button
+              key={l.value}
               className={`px-4 py-3 text-center font-bold duration-300 disabled:bg-zinc-900 disabled:opacity-50 ${
                 l.value == lang ? 'bg-zinc-800' : 'bg-zinc-900'
               }`}
