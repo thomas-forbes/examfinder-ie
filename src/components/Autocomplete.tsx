@@ -1,6 +1,6 @@
 import { Combobox, Transition } from '@headlessui/react'
 import { ChevronUpDownIcon } from '@heroicons/react/20/solid'
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 
 interface props {
   value: string
@@ -16,6 +16,10 @@ export default function Autocomplete({
   renderOption,
 }: props) {
   const [query, setQuery] = useState(value)
+
+  useEffect(() => {
+    setQuery(value)
+  }, [value])
   return (
     <>
       <Combobox value={value} onChange={onChange}>
@@ -40,7 +44,7 @@ export default function Autocomplete({
             leaveTo="opacity-0"
             afterLeave={() => setQuery('')}
           >
-            <Combobox.Options className="absolute mt-2 max-h-60 w-full overflow-auto rounded-md border border-zinc-200/20 bg-zinc-900 text-base shadow-lg duration-300 focus:outline-none sm:text-sm">
+            <Combobox.Options className="absolute z-10 mt-2 max-h-60 w-full overflow-auto rounded-md border border-zinc-200/20 bg-zinc-900 text-base shadow-lg duration-300 focus:outline-none sm:text-sm">
               {(query.trim() && query !== value
                 ? options.filter((opt) => {
                     return opt.toLowerCase().includes(query.toLowerCase())
@@ -50,7 +54,7 @@ export default function Autocomplete({
                 <Combobox.Option
                   key={opt + idx}
                   value={opt}
-                  className={`relative cursor-pointer select-none py-2 px-4 text-zinc-400 duration-300 hover:bg-zinc-800 ui-selected:bg-zinc-700 ui-selected:text-white`}
+                  className={`relative cursor-pointer select-none px-4 py-2 text-zinc-400 duration-300 hover:bg-zinc-800 ui-selected:bg-zinc-700 ui-selected:text-white`}
                 >
                   {renderOption ? renderOption(opt) : opt}
                 </Combobox.Option>

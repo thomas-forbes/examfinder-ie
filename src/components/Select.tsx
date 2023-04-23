@@ -29,7 +29,7 @@ export default function Select({ value, onChange, title, options }: props) {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Listbox.Options className="absolute mt-2 max-h-60 w-full overflow-auto rounded-md border border-zinc-200/10 bg-zinc-900 text-base shadow-lg duration-300 focus:outline-none sm:text-sm">
+            <Listbox.Options className="absolute z-10 mt-2 max-h-60 w-full overflow-auto rounded-md border border-zinc-200/10 bg-zinc-900 text-base shadow-lg duration-300 focus:outline-none sm:text-sm">
               {options.map((opt, idx) => (
                 <Listbox.Option
                   key={idx}
