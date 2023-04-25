@@ -6,8 +6,8 @@ html {
   @apply bg-zinc-950 text-white;
 }
 .paperFade {
-  /* animation: fadeIn 600ms; */
-  animation: 600ms ease-in-out fadeIn;
+  animation: fadeIn 800ms;
+  /* animation: 600ms fadeIn; */
 }
 
 @keyframes fadeIn {

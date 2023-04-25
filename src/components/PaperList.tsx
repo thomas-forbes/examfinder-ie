@@ -12,9 +12,9 @@ export default function PaperList({ papers }) {
   }, [papers])
   return (
     <div className="flex flex-row flex-wrap justify-center gap-8">
-      {papers.map((paper, i) => (
+      {papers.map((paper, i: number) => (
         <Link
-          key={i + paper.url}
+          key={i + paper.year + paper.url}
           href={createUrl(paper.type, paper.year, paper.url)}
           target="_blank"
           style={{ textDecoration: 'none' }}

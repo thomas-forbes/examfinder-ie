@@ -31,7 +31,7 @@ export default function Footer() {
             href="https://tally.so/r/w76963"
             target="_blank"
             onClick={() => splitbee.track('feedback')}
-            className="text-lg font-semibold text-red-500 hover:text-rose-500"
+            className="text-lg font-semibold text-red-400 hover:text-red-500"
           >
             Bugs/Features
           </StyledLink>
