@@ -45,8 +45,7 @@ export default async function pdf(req: NextApiRequest, res: NextApiResponse) {
     streams.forEach((stream) => {
       const pdfReader = muhammara.createReader(stream)
       const pageCount = pdfReader.getPagesCount()
-      // @ts-ignore
-      const copier = pdfWriter.createPDFCopyingContext(pdfReader)
+      const copier = pdfWriter.createPDFCopyingContext(pdfReader as any)
       pages
         .filter((page) => page < pageCount)
         .forEach((page) => copier.appendPDFPageFromPDF(page))
