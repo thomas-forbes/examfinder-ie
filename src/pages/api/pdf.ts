@@ -43,8 +43,13 @@ export default async function pdf(req: NextApiRequest, res: NextApiResponse) {
     )
 
     streams.forEach((stream) => {
-      const copier = pdfWriter.createPDFCopyingContext(stream)
-      pages.forEach((page) => copier.appendPDFPageFromPDF(page))
+      const pdfReader = muhammara.createReader(stream)
+      const pageCount = pdfReader.getPagesCount()
+      // @ts-ignore
+      const copier = pdfWriter.createPDFCopyingContext(pdfReader)
+      pages
+        .filter((page) => page < pageCount)
+        .forEach((page) => copier.appendPDFPageFromPDF(page))
     })
 
     // const pm = new muhammara.PDFPageModifier(pdfWriter, 0)
