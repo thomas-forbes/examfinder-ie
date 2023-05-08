@@ -48,17 +48,28 @@ export default function App() {
         {/* CHOICES */}
         <Choices papers={papers} setPapers={setPapers} />
         {/* FORMULA + TABLES */}
-        <Link
-          href="https://www.examinations.ie/misc-doc/BI-EX-7266997.pdf"
-          target="_blank"
-          className="no-underline"
-          rel="noreferrer"
-          onClick={() => splitbee.track('Formula and Tables')}
-        >
-          <div className="rounded-lg bg-orange-500 px-4 py-3 font-semibold shadow-xl shadow-stone-900 duration-300 hover:scale-105">
-            <h3 className="text-xl text-white">Formula and Tables Book</h3>
-          </div>
-        </Link>
+        <div className="flex flex-row justify-center gap-8">
+          <Link
+            href="https://www.examinations.ie/misc-doc/BI-EX-7266997.pdf"
+            target="_blank"
+            className="w-72 no-underline"
+            rel="noreferrer"
+            onClick={() => splitbee.track('Formula and Tables')}
+          >
+            <div className="rounded-lg bg-orange-500 px-4 py-3 font-semibold shadow-xl shadow-stone-900 duration-300 hover:scale-105">
+              <h3 className="text-center text-xl text-white">
+                Formula and Tables Book
+              </h3>
+            </div>
+          </Link>
+          <Link href="/points" className="w-72 no-underline">
+            <div className="rounded-lg bg-violet-500 px-4 py-3 font-semibold shadow-xl shadow-stone-900 duration-300 hover:scale-105">
+              <h3 className="text-center text-xl text-white">
+                Points Calculator
+              </h3>
+            </div>
+          </Link>
+        </div>
         {/* PAPERS */}
         <PaperList papers={papers} />
         {/* DIVIDER */}
