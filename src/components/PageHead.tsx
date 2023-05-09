@@ -1,8 +1,14 @@
 import Head from 'next/head'
-export default function PageHead() {
-  const description =
-    'The best exam material archive of Irish past papers and marking schemes'
-  const title = 'Exam Finder: Irish Past Papers'
+
+interface props {
+  title?: string
+  description?: string
+}
+
+export default function PageHead({
+  title = 'Exam Finder: Irish Past Papers',
+  description = 'The best exam material archive of Irish past papers and marking schemes',
+}: props) {
   const image = 'https://examfinder.ie/social-image.png?v=2'
   return (
     <Head>

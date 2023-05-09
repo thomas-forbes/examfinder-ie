@@ -48,7 +48,7 @@ export default function App() {
         {/* CHOICES */}
         <Choices papers={papers} setPapers={setPapers} />
         {/* FORMULA + TABLES */}
-        <div className="flex flex-row justify-center gap-8">
+        <div className="flex flex-row flex-wrap justify-center gap-8">
           <Link
             href="https://www.examinations.ie/misc-doc/BI-EX-7266997.pdf"
             target="_blank"

@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import PageHead from '../components/PageHead'
 import StyledLink from '../components/StyledLink'
+import Footer from '../components/Footer'
 
 interface Subject {
   subject: string
@@ -24,6 +25,8 @@ const calcPoints = (sub: Subject) => {
 export default function Points() {
   const [subjects, setSubjects] = useState<Subject[]>([
     { subject: 'Maths', level: 'H', grade: 1 },
+    { subject: '', level: 'H', grade: 1 },
+    { subject: '', level: 'H', grade: 1 },
     { subject: '', level: 'H', grade: 1 },
     { subject: '', level: 'H', grade: 1 },
     { subject: '', level: 'H', grade: 1 },
@@ -51,7 +54,7 @@ export default function Points() {
   useEffect(() => console.log(subjects), [subjects])
   return (
     <>
-      <PageHead />
+      <PageHead title="Examfinder: Leaving Cert Points Calculator" />
       <div className="flex min-h-screen flex-col items-center space-y-6 p-4 pt-6">
         {/* TEXT */}
         <div className="flex flex-col items-center space-y-4 text-center">
@@ -96,12 +99,13 @@ export default function Points() {
                 )}
               </tr>
             </thead>
-            <tbody className="overflow-hidden rounded-xl text-sm sm:text-base">
+            <tbody className="overflow-hidden rounded-xl text-base sm:text-base">
               {subjects.map((sub, subIdx) => (
                 <tr
                   key={subIdx}
-                  className={`odd:bg-zinc-800/70 even:bg-zinc-800 [&>td]:border [&>td]:border-zinc-700 [&>td]:px-2 [&>td]:py-1 [&>td]:sm:px-3 [&>td]:sm:py-2`}
+                  className={`odd:bg-zinc-800/70 even:bg-zinc-800 [&>td]:border [&>td]:border-zinc-700 [&>td]:px-2 [&>td]:py-1 [&>td]:xs:px-3 [&>td]:xs:py-2`}
                 >
+                  {/* NO. */}
                   <td
                     className={`hidde !border-none sm:table-cell ${
                       colours[sub.grade + (sub.level == 'O' ? 3 : -1)]
@@ -109,9 +113,10 @@ export default function Points() {
                   >
                     {subIdx + 1}.
                   </td>
+                  {/* NAME */}
                   <td>
                     <input
-                      className="w-12 min-w-0 appearance-none border-zinc-500 bg-transparent outline-none duration-300 placeholder:text-zinc-500 focus:border-blue-500 enabled:border-b-2 sm:w-auto"
+                      className="w-14 min-w-0 appearance-none rounded-none border-zinc-500 bg-transparent text-xs !text-white outline-none duration-300 placeholder:text-zinc-500 focus:border-blue-500 enabled:border-b-2 xs:text-base sm:w-auto"
                       placeholder="Subject"
                       value={sub.subject}
                       disabled={subIdx === 0}
@@ -126,7 +131,8 @@ export default function Points() {
                       }
                     />
                   </td>
-                  <td>
+                  {/* LEVEL */}
+                  <td className="text-center">
                     <select
                       className="bg-transparent outline-none"
                       value={sub.level}
@@ -146,7 +152,8 @@ export default function Points() {
                       <option value="O">O</option>
                     </select>
                   </td>
-                  <td>
+                  {/* GRADE */}
+                  <td className="text-center">
                     <select
                       className="bg-transparent outline-none"
                       value={sub.grade}
@@ -181,16 +188,23 @@ export default function Points() {
                       ))}
                     </select>
                   </td>
-                  <td>{calcPoints(sub)}</td>
+                  {/* POINTS */}
+                  <td className="text-center">{calcPoints(sub)}</td>
                 </tr>
               ))}
             </tbody>
           </table>
           <p className="w-72 rounded-lg bg-orange-500 px-4 py-3 text-center text-2xl font-semibold">
             Total:{' '}
-            <u>{subjects.reduce((acc, sub) => acc + calcPoints(sub), 0)}</u>
+            <u>
+              {subjects
+                .slice(0, 6)
+                .reduce((acc, sub) => acc + calcPoints(sub), 0)}
+            </u>
           </p>
         </div>
+        <div className="flex-grow"></div>
+        <Footer />
       </div>
     </>
   )
