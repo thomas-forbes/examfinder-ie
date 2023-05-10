@@ -148,8 +148,11 @@ export default function Points() {
                         )
                       }
                     >
-                      <option value="H">H</option>
-                      <option value="O">O</option>
+                      {['H', 'O'].map((item) => (
+                        <option key={item} value={item} className="bg-zinc-700">
+                          {item}
+                        </option>
+                      ))}
                     </select>
                   </td>
                   {/* GRADE */}
@@ -181,7 +184,11 @@ export default function Points() {
                       }
                     >
                       {grades.map((value) => (
-                        <option value={value} key={value}>
+                        <option
+                          value={value}
+                          key={value}
+                          className="bg-zinc-700"
+                        >
                           {sub.level}
                           {value}
                         </option>
