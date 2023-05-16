@@ -9,6 +9,7 @@ interface Subject {
   subject: string
   level: 'H' | 'O'
   grade: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
+  maths?: boolean
 }
 
 const calcPoints = (sub: Subject) => {
@@ -18,13 +19,13 @@ const calcPoints = (sub: Subject) => {
   }
   return (
     (points[sub.level]?.[sub.grade - 1] ?? 0) +
-    (sub.subject == 'Maths' && sub.level == 'H' && sub.grade <= 6 ? 25 : 0)
+    (sub.maths && sub.level == 'H' && sub.grade <= 6 ? 25 : 0)
   )
 }
 
 export default function Points() {
   const [subjects, setSubjects] = useState<Subject[]>([
-    { subject: 'Maths', level: 'H', grade: 1 },
+    { subject: 'Maths', level: 'H', grade: 1, maths: true },
     { subject: '', level: 'H', grade: 1 },
     { subject: '', level: 'H', grade: 1 },
     { subject: '', level: 'H', grade: 1 },
@@ -119,7 +120,7 @@ export default function Points() {
                       className="w-14 min-w-0 appearance-none rounded-none border-zinc-500 bg-transparent text-xs !text-white outline-none duration-300 placeholder:text-zinc-500 focus:border-blue-500 enabled:border-b-2 xs:text-base sm:w-auto"
                       placeholder="Subject"
                       value={sub.subject}
-                      disabled={subIdx === 0}
+                      disabled={sub.maths}
                       onChange={(e) =>
                         setSubjects(
                           subjects.map((s, i) =>
