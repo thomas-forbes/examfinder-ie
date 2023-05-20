@@ -235,7 +235,7 @@ export default function Choices({ papers, setPapers }) {
               updatePapers(exam, subject, year, s, lang)
             }}
             options={levelList}
-            title={levelList.find((e) => e.value == level)!.label}
+            title={levelList.find((e) => e.value == level)?.label ?? 'No level'}
           />
         </div>
 
