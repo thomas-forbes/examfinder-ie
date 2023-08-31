@@ -35,7 +35,7 @@ export default function Autocomplete({
         <div className="relative mt-1">
           <Combobox.Button className="relative h-12 w-full cursor-pointer overflow-hidden rounded-md border border-zinc-200/20 text-left shadow-md sm:text-sm">
             <Combobox.Input
-              className="h-full w-full rounded-md border-none bg-zinc-900 py-2 pl-3 pr-10 text-lg font-bold focus:ring-0 focus-visible:outline-none sm:text-base"
+              className="h-full w-full rounded-md border-none bg-zinc-900 py-2 pl-3 pr-10 text-lg font-bold text-white focus:ring-0 focus-visible:outline-none sm:text-base"
               onChange={(event) => setQuery(event.target.value)}
               displayValue={() => value}
               onClick={() => inputRef.current?.select()}

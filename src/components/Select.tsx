@@ -14,7 +14,7 @@ export default function Select({ value, onChange, title, options }: props) {
     <>
       <Listbox value={value} onChange={onChange}>
         <div className="relative mt-1">
-          <Listbox.Button className="relative h-12 w-full cursor-pointer rounded-lg border border-zinc-200/10 bg-zinc-900 py-2 pl-3 pr-10 text-left text-lg shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-opacity-75 sm:text-base">
+          <Listbox.Button className="relative h-12 w-full cursor-pointer rounded-lg border border-zinc-200/10 bg-zinc-900 py-2 pl-3 pr-10 text-left text-lg text-white shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-opacity-75 sm:text-base">
             <span className="block truncate font-bold">{title}</span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
               <ChevronUpDownIcon
