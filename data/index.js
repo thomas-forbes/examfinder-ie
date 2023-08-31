@@ -65,7 +65,7 @@ async function getAllPapers() {
   for (const type of typeOps) {
     console.log(type)
     await doSelect(sels.type, type, sels.year)
-    const yearOps = await getOpts(sels.year)
+    const yearOps = ['2023']
 
     // YEAR
     for (const year of yearOps) {
