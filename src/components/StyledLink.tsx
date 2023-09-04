@@ -22,7 +22,7 @@ export default function StyledLink({
       target={target}
       onClick={onClick}
       className={twMerge(
-        'text-slate-400 decoration-2 underline-offset-2 duration-300 hover:underline hover:underline-offset-4',
+        'text-slate-400 decoration-1 underline-offset-1 duration-200 hover:underline hover:underline-offset-2',
         className
       )}
     >
