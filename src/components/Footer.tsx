@@ -33,7 +33,7 @@ export default function Footer() {
             href="https://www.examinations.ie/?l=en&mc=ex&sc=he"
             className="text-lg font-semibold text-violet-400 hover:text-violet-500"
           >
-            Coursework Info
+            Projects & Coursework
           </StyledLink>
           <p>&bull;</p>
           {/* BUGS */}
