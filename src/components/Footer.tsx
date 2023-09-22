@@ -26,6 +26,16 @@ export default function Footer() {
             Sample Papers
           </StyledLink>
           <p>&bull;</p>
+          {/* COURSEWORK INFO */}
+          <StyledLink
+            target="_blank"
+            onClick={() => splitbee.track('buymeacoffee.com')}
+            href="https://www.examinations.ie/?l=en&mc=ex&sc=he"
+            className="text-lg font-semibold text-violet-400 hover:text-violet-500"
+          >
+            Projects & Coursework
+          </StyledLink>
+          <p>&bull;</p>
           {/* BUGS */}
           <StyledLink
             href="https://tally.so/r/w76963"
