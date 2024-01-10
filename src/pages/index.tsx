@@ -7,6 +7,8 @@ import Footer from '../components/Footer'
 import PageHead from '../components/PageHead'
 import PaperList from '../components/PaperList'
 import StyledLink from '../components/StyledLink'
+import Image from 'next/image'
+import AdSpace from '../components/AdSpace'
 
 export default function App() {
   const [papers, setPapers] = useState<
@@ -76,6 +78,12 @@ export default function App() {
         <div className="flex-grow" />
         {/* FOOTER */}
         <Footer />
+
+        <div className="hidden md:block">
+          <div className="group fixed bottom-0 left-0 cursor-pointer overflow-hidden text-white translate-y-6 hover:translate-y-0 transition-all duration-300">
+            <AdSpace isMobile={false}/>
+          </div>
+        </div>
       </div>
     </>
   )
