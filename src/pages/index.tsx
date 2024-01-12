@@ -2,6 +2,7 @@ import splitbee from '@splitbee/web'
 import Link from 'next/link'
 import { useState } from 'react'
 
+import AdSpace from '../components/AdSpace'
 import Choices from '../components/Choices'
 import Footer from '../components/Footer'
 import PageHead from '../components/PageHead'
@@ -76,6 +77,12 @@ export default function App() {
         <div className="flex-grow" />
         {/* FOOTER */}
         <Footer />
+
+        <div className="hidden lg:block">
+          <div className="group fixed bottom-0 left-0 translate-y-6 cursor-pointer overflow-hidden p-2 text-white transition-all duration-300 hover:translate-y-0">
+            <AdSpace isMobile={false} />
+          </div>
+        </div>
       </div>
     </>
   )

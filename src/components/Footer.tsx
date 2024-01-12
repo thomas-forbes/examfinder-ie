@@ -1,4 +1,5 @@
 import splitbee from '@splitbee/web'
+import AdSpace from './AdSpace'
 import StyledLink from './StyledLink'
 
 export default function Footer() {
@@ -53,6 +54,10 @@ export default function Footer() {
           >
             GitHub
           </StyledLink>
+        </div>
+        <div className="flex pt-2 lg:hidden">
+          {/* <p>&bull;</p> */}
+          <AdSpace isMobile={true} />
         </div>
       </footer>
     </>
