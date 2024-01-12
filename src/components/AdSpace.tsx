@@ -9,7 +9,7 @@ export default function AdSpace(props: AdSpaceProps) {
   return (
     <>
       <Link
-        href="https://rewise.ie/"
+        href="https://www.rewise.ie/referral/ef"
         className={
           props.isMobile
             ? 'border-b-2 border-transparent hover:border-b-2 hover:border-white'
