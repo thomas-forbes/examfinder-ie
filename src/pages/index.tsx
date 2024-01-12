@@ -2,13 +2,12 @@ import splitbee from '@splitbee/web'
 import Link from 'next/link'
 import { useState } from 'react'
 
+import AdSpace from '../components/AdSpace'
 import Choices from '../components/Choices'
 import Footer from '../components/Footer'
 import PageHead from '../components/PageHead'
 import PaperList from '../components/PaperList'
 import StyledLink from '../components/StyledLink'
-import Image from 'next/image'
-import AdSpace from '../components/AdSpace'
 
 export default function App() {
   const [papers, setPapers] = useState<
@@ -79,9 +78,9 @@ export default function App() {
         {/* FOOTER */}
         <Footer />
 
-        <div className="hidden md:block">
-          <div className="group fixed bottom-0 left-0 cursor-pointer overflow-hidden text-white translate-y-6 hover:translate-y-0 transition-all duration-300">
-            <AdSpace isMobile={false}/>
+        <div className="hidden lg:block">
+          <div className="group fixed bottom-0 left-0 translate-y-6 cursor-pointer overflow-hidden p-2 text-white transition-all duration-300 hover:translate-y-0">
+            <AdSpace isMobile={false} />
           </div>
         </div>
       </div>
