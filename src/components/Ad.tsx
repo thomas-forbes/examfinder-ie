@@ -22,7 +22,7 @@ export default function Ad() {
               alt="Alt"
               className="mr-[-4px]"
             />
-            <span className="text-sm">ewise</span>
+            <span className="text-sm">ewiseLearn</span>
           </div>
         </div>
       </div>
