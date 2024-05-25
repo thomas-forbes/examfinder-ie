@@ -1,6 +1,10 @@
 const puppeteer = require('puppeteer')
 const fs = require('fs')
 
+const SKIP_FILLED = false
+const ONLY_CURRENT_YEAR = false
+const TIMEOUT = 500
+
 const sels = {
   agree: '#MaterialArchive__noTable__cbv__AgreeCheck',
   type: '#MaterialArchive__noTable__sbv__ViewType',
@@ -58,14 +62,21 @@ async function getAllPapers() {
     // console.log('d')
   }
 
-  const SKIP_FILLED = false
   // TYPE
   await page.waitForSelector(sels.type)
   const typeOps = await getOpts(sels.type)
   for (const type of typeOps) {
     console.log(type)
     await doSelect(sels.type, type, sels.year)
-    const yearOps = ['2023']
+    const allYearOps = await getOpts(sels.year)
+    const currentYear = new Date().getFullYear().toString()
+
+    // if (!type.includes('deferred')) continue
+    const yearOps = ONLY_CURRENT_YEAR
+      ? allYearOps.includes(currentYear)
+        ? [currentYear]
+        : []
+      : allYearOps
 
     // YEAR
     for (const year of yearOps) {
@@ -108,7 +119,7 @@ async function getAllPapers() {
             if (err) console.error(err)
             else console.log(exam, subject, year)
           })
-          await new Promise((r) => setTimeout(r, 1000))
+          await new Promise((r) => setTimeout(r, TIMEOUT))
         }
       }
     }

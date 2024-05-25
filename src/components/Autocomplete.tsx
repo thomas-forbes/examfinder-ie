@@ -64,9 +64,7 @@ export default function Autocomplete({
                   <Combobox.Option
                     key={opt + idx}
                     value={opt}
-                    className={`relative cursor-pointer select-none px-4 py-2 text-zinc-400 duration-300 hover:bg-zinc-800 ui-selected:bg-zinc-700 ui-selected:text-white ${
-                      idx == 0 ? 'bg-zinc-800' : ''
-                    }`}
+                    className={`relative cursor-pointer select-none px-4 py-2 text-zinc-400 duration-300 hover:bg-zinc-800 data-[focus]:bg-zinc-800 ui-selected:bg-zinc-700 ui-selected:text-white`}
                   >
                     {renderOption ? renderOption(opt) : opt}
                   </Combobox.Option>

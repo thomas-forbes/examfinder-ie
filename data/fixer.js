@@ -26,6 +26,8 @@ fs.readFile('./data.json', (e, dataRaw) => {
   const typeConverter = {
     exampapers: 'Exam Paper',
     markingschemes: 'Marking Scheme',
+    deferredexams: 'Deferred Exam Paper',
+    deferredmarkingschemes: 'Deferred Marking Scheme',
   }
 
   // Goes through all exam jc, lc, lb and writes
