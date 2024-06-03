@@ -13,6 +13,17 @@ function typeToColor(type: string) {
   }
 }
 
+const sortPapers = (a: any, b: any) => {
+  if (a.type.includes('Deferred') && !b.type.includes('Deferred')) return 1
+  if (!a.type.includes('Deferred') && b.type.includes('Deferred')) return -1
+  if (a.type.includes('Marking') && !b.type.includes('Marking')) return 1
+  if (!a.type.includes('Marking') && b.type.includes('Marking')) return -1
+
+  if (a.details < b.details) return -1
+  if (a.details > b.details) return 1
+  return 0
+}
+
 export default function PaperList({ papers }) {
   const createUrl = (type: string, year: string, url: string) => {
     return `https://www.examinations.ie/archive/${urlPaperType[type]}/${year}/${url}`
@@ -22,7 +33,7 @@ export default function PaperList({ papers }) {
   }, [papers])
   return (
     <div className="flex flex-row flex-wrap justify-center gap-8">
-      {papers.map((paper, i: number) => (
+      {papers.sort(sortPapers).map((paper, i: number) => (
         <Link
           key={i + paper.year + paper.url}
           href={createUrl(paper.type, paper.year, paper.url)}

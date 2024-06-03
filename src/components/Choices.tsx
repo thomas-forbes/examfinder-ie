@@ -157,6 +157,7 @@ export default function Choices({ papers, setPapers }) {
           <Autocomplete
             value={subject}
             onChange={(s) => {
+              if (!s) return
               setSubject(s)
               const tYearList = Object.keys(data[exam][s]).sort().reverse()
               setYearList(tYearList)
@@ -214,6 +215,7 @@ export default function Choices({ papers, setPapers }) {
           <Autocomplete
             value={year}
             onChange={(s) => {
+              if (!s) return
               setYear(s)
 
               const level = updateLevel(exam, subject, s)
