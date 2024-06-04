@@ -14,15 +14,16 @@ const GRADES = [1, 2, 3, 4, 5, 6, 7, 8] as const
 type Subject = {
   subject: string
   uuid: string
+  disabled?: boolean
 } & (
   | {
       level: 'H' | 'O'
-      grade: typeof GRADES[number]
+      grade: (typeof GRADES)[number]
       special?: 'maths'
     }
   | {
       special: 'LCVP'
-      grade: typeof LCVP_GRADES[number]
+      grade: (typeof LCVP_GRADES)[number]
     }
 )
 
@@ -31,6 +32,8 @@ const calcPoints = (sub: Subject) => {
     H: [100, 88, 77, 66, 56, 46, 37, 0],
     O: [56, 46, 37, 28, 20, 12, 0, 0],
   }
+  if (sub.disabled) return 0
+
   if (sub.special == 'LCVP') {
     switch (sub.grade) {
       case 'None':
@@ -143,15 +146,28 @@ export default function Points() {
               {subjects.map((sub, subIdx) => (
                 <tr
                   key={sub.uuid}
-                  className={`odd:bg-zinc-800/70 even:bg-zinc-800 [&>td]:border [&>td]:border-zinc-700 [&>td]:px-2 [&>td]:py-1 [&>td]:xs:px-3 [&>td]:xs:py-2`}
+                  className={`odd:bg-zinc-800/70 even:bg-zinc-800 [&>td]:border [&>td]:border-zinc-700 [&>td]:px-2 [&>td]:py-1 [&>td]:xs:px-3 [&>td]:xs:py-2 ${
+                    sub.disabled ? 'pointer-events-none opacity-70' : ''
+                  }`}
                 >
                   {/* NO. */}
                   <td
-                    className={`hidde !border-none sm:table-cell ${
+                    className={`pointer-events-auto cursor-pointer !border-none sm:table-cell ${
                       sub.special == 'LCVP'
                         ? 'bg-zinc-700'
                         : colours[sub.grade + (sub.level == 'O' ? 3 : -1)]
                     }`}
+                    onClick={() =>
+                      setSubjects(
+                        subjects
+                          .map((s, i) =>
+                            i == subIdx
+                              ? { ...sub, disabled: !s.disabled ?? true }
+                              : s
+                          )
+                          .sort((a, b) => calcPoints(b) - calcPoints(a))
+                      )
+                    }
                   >
                     {subIdx + 1}.
                   </td>
@@ -232,13 +248,13 @@ export default function Points() {
                                   ? {
                                       ...sub,
                                       grade: e.target
-                                        .value as typeof LCVP_GRADES[number],
+                                        .value as (typeof LCVP_GRADES)[number],
                                     }
                                   : {
                                       ...sub,
                                       grade: Number(
                                         e.target.value
-                                      ) as typeof GRADES[number],
+                                      ) as (typeof GRADES)[number],
                                     }
                                 : s
                             )
