@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer')
 const fs = require('fs')
 
 const SKIP_FILLED = false
-const ONLY_CURRENT_YEAR = false
+const ONLY_CURRENT_YEAR = true
 const TIMEOUT = 500
 
 const sels = {
