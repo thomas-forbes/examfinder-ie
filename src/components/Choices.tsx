@@ -181,7 +181,7 @@ export default function Choices({ papers, setPapers }) {
                 <div className="h-4 w-4">
                   <button
                     className="z-10 text-lg duration-300 hover:scale-110"
-                    onClick={() => {
+                    onClick={(e) => {
                       let tFavSubs = favSubs
                       if (favSubs.includes(option)) {
                         tFavSubs = favSubs.filter((x) => x != option)
@@ -195,6 +195,7 @@ export default function Choices({ papers, setPapers }) {
                         ),
                         sameSite: 'strict',
                       })
+                      e.stopPropagation()
                     }}
                   >
                     {favSubs.includes(option) ? (
