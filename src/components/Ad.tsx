@@ -16,13 +16,13 @@ export default function Ad() {
           </div>
           <div className="flex items-end border-l border-white">
             <Image
-              src="/rewise-logo.png"
+              src="/logo.png"
               width={30}
               height={30}
               alt="Alt"
-              className="mr-[-4px]"
+              className="mx-[10px]"
             />
-            <span className="text-sm">ewiseLearn</span>
+            <span className="text-sm">Scrúdú</span>
           </div>
         </div>
       </div>
