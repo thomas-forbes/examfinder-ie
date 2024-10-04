@@ -1,31 +1,22 @@
 import Image from 'next/image'
 
-// interface AdProps {
-//   isMobile?: boolean
-// }
-
 export default function Ad() {
   return (
-    <>
-      <div className="flex flex-col items-center">
-        <p className="text-sm font-bold">Another service you may like:</p>
-        <div className="m-1 flex w-[205x] gap-x-1 rounded-md bg-zinc-800 p-2">
-          <div className="flex flex-col">
-            <span className="text-xs">Paper questions by topic</span>
-            <span className="text-xs">AI marking scheme tutor</span>
-          </div>
-          <div className="flex items-end border-l border-white">
-            <Image
-              src="/logo.png"
-              width={30}
-              height={30}
-              alt="Alt"
-              className="mx-[10px]"
-            />
-            <span className="text-sm">Scrúdú</span>
-          </div>
+    <div className="max-w-sm mx-auto bg-zinc-800 rounded-lg shadow-lg overflow-hidden">
+      <p className="text-sm font-semibold text-center text-zinc-300 bg-zinc-700 py-1">Another service you may like:</p>
+      <div className="flex items-center p-3">
+        <div>
+          <h3 className="text-base font-bold text-white mb-1">Scrúdú</h3>
+          <p className="text-xs text-zinc-300">• Papers, quizzes, flashcards & more</p>
         </div>
+        <Image
+          src="/logo.png"
+          width={50}
+          height={50}
+          alt="Scrúdú Logo"
+          className="rounded-full ml-3"
+        />
       </div>
-    </>
+    </div>
   )
 }
