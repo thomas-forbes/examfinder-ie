@@ -37,9 +37,17 @@ const Question = ({
   </div>
 )
 
+function getDetails(type: Type | undefined): string {
+  if (!type) return ''
+  return type.type == 'Marking Scheme' ? type.type : type.details
+}
+
 export default function Slicing({ types, yearList, subject }: props) {
-  const [selectedCode, setSelectedCode] = useState<string>(types[0]?.code ?? '')
-  const type = types.find((t) => t.code === selectedCode) ?? types[0]
+  const [details, setDetails] = useState<string>(getDetails(types[0]))
+  useEffect(() => {
+    if (details === '' && !!types[0]) setDetails(getDetails(types[0]))
+  }, [types])
+  const type = types.find((t) => getDetails(t) === details)
 
   const [startYear, setStartYear] = useState(new Date().getFullYear())
   const [endYear, setEndYear] = useState(new Date().getFullYear())
@@ -50,10 +58,6 @@ export default function Slicing({ types, yearList, subject }: props) {
   const [downloadState, setDownloadState] = useState<
     'idle' | 'error' | 'loading'
   >('idle')
-
-  useEffect(() => {
-    setSelectedCode(types[0]?.code ?? '')
-  }, [types])
 
   return (
     <details className="w-80 space-y-4 rounded-md bg-zinc-900 px-4 py-3 sm:w-96">
@@ -67,18 +71,18 @@ export default function Slicing({ types, yearList, subject }: props) {
       </p>
       {/* TYPE */}
       <Question label="Paper">
-        <Select value={selectedCode} onValueChange={setSelectedCode}>
+        <Select value={details} onValueChange={setDetails}>
           <SelectTrigger className="w-full border-zinc-200/10 bg-zinc-800 text-zinc-200">
             <SelectValue />
           </SelectTrigger>
           <SelectContent className="border-zinc-200/10 bg-zinc-800">
             {types.map((x, i) => (
               <SelectItem
-                key={'label-' + i}
-                value={x.code}
+                key={i}
+                value={getDetails(x)}
                 className="text-zinc-400 focus:bg-zinc-700 focus:text-white"
               >
-                {x?.type == 'Marking Scheme' ? x.type : x?.details}
+                {getDetails(x)}
               </SelectItem>
             ))}
           </SelectContent>
@@ -186,7 +190,7 @@ export default function Slicing({ types, yearList, subject }: props) {
         ) : downloadState == 'loading' ? (
           <Spinner />
         ) : (
-          'Error. Check all fields and try again'
+          'Error'
         )}
       </button>
     </details>

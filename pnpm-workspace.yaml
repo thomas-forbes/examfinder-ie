@@ -1,0 +1,6 @@
+ignoredBuiltDependencies:
+  - puppeteer
+  - unrs-resolver
+
+onlyBuiltDependencies:
+  - muhammara

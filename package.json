@@ -24,7 +24,7 @@
     "cmdk": "^1.1.1",
     "fuse.js": "^6.6.2",
     "lucide-react": "^0.544.0",
-    "muhammara": "^3.8.0",
+    "muhammara": "^6.0.0",
     "next": "^14.2.33",
     "puppeteer": "^19.11.1",
     "react": "18",
