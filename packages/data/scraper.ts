@@ -283,7 +283,7 @@ async function main() {
     await scrapeExamData()
     logger.info('Successfully saved data to ../../apps/web/public/data.json')
   } catch (error) {
-    logger.error({ error }, 'Fatal error during execution')
+    logger.error({ error }, `Fatal error during execution: ${error}`)
     process.exit(1)
   }
 }
