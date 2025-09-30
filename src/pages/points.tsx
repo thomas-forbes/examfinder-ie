@@ -1,5 +1,4 @@
 import { useAutoAnimate } from '@formkit/auto-animate/react'
-import splitbee from '@splitbee/web'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { v4 as uuidV4 } from 'uuid'
@@ -66,8 +65,8 @@ export default function Points() {
     { subject: '', level: 'H', grade: 1, uuid: uuidV4() },
     { subject: '', level: 'H', grade: 1, uuid: uuidV4() },
     { subject: '', level: 'H', grade: 1, uuid: uuidV4() },
-    { subject: '', level: 'H', grade: 1, uuid: uuidV4() },
-    { subject: '', level: 'H', grade: 1, uuid: uuidV4() },
+    { subject: '', level: 'H', grade: 1, uuid: uuidV4(), disabled: true },
+    { subject: '', level: 'H', grade: 1, uuid: uuidV4(), disabled: true },
     {
       subject: 'LCVP',
       grade: 'None',
@@ -100,19 +99,7 @@ export default function Points() {
       <div className="flex min-h-screen flex-col items-center space-y-6 p-4 pt-6">
         {/* TEXT */}
         <div className="flex flex-col items-center space-y-4 text-center">
-          <h1 className="text-6xl font-bold">Leaving Cert Points Calculator</h1>
-          <p className="text-slate-300">
-            Built by a{' '}
-            <StyledLink
-              href="https://thomasforbes.com/"
-              target="_blank"
-              onClick={() => splitbee.track('thomasforbes.com')}
-              className="hover:text-slate-300"
-            >
-              student
-            </StyledLink>{' '}
-            for everyone
-          </p>
+          <h1 className="text-4xl font-bold">Leaving Cert Points Calculator</h1>
         </div>
         {/* HOME */}
         <Link href="/" className="w-72 no-underline">
@@ -162,7 +149,7 @@ export default function Points() {
                         subjects
                           .map((s, i) =>
                             i == subIdx
-                              ? { ...sub, disabled: !s.disabled ?? true }
+                              ? { ...sub, disabled: !s.disabled || true }
                               : s
                           )
                           .sort((a, b) => calcPoints(b) - calcPoints(a))
@@ -175,6 +162,7 @@ export default function Points() {
                   <td>
                     {sub.special == 'LCVP' ? (
                       <StyledLink
+                        name="lcvp"
                         href="https://www.citizensinformation.ie/en/education/state-examinations/leaving-certificate-vocational-programme/"
                         target="_blank"
                         className="!text-white underline"

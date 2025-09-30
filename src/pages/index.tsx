@@ -2,12 +2,10 @@ import splitbee from '@splitbee/web'
 import Link from 'next/link'
 import { useState } from 'react'
 
-import AdSpace from '../components/AdSpace'
 import Choices from '../components/Choices'
 import Footer from '../components/Footer'
 import PageHead from '../components/PageHead'
 import PaperList from '../components/PaperList'
-import StyledLink from '../components/StyledLink'
 
 export default function App() {
   const [papers, setPapers] = useState<
@@ -27,24 +25,12 @@ export default function App() {
     <>
       <PageHead />
       {/* MAIN COL */}
-      <div className="flex min-h-screen flex-col items-center space-y-6 p-4 pt-6">
+      <div className="flex min-h-screen flex-col items-center space-y-6 p-4 py-6">
         {/* TEXT */}
         <div className="flex flex-col items-center space-y-4 text-center">
-          <h1 className="text-6xl font-bold">
+          <h1 className="text-4xl font-bold">
             Easily Search Irish Past Papers
           </h1>
-          <p className="text-slate-300">
-            Built by a{' '}
-            <StyledLink
-              href="https://thomasforbes.com/"
-              target="_blank"
-              onClick={() => splitbee.track('thomasforbes.com')}
-              className="hover:text-slate-300"
-            >
-              student
-            </StyledLink>{' '}
-            for everyone
-          </p>
         </div>
         {/* CHOICES */}
         <Choices papers={papers} setPapers={setPapers} />
@@ -77,12 +63,6 @@ export default function App() {
         <div className="flex-grow" />
         {/* FOOTER */}
         <Footer />
-
-        <div className="hidden lg:block">
-          <div className="group fixed bottom-0 left-0 translate-y-6 cursor-pointer overflow-hidden p-2 text-white transition-all duration-300 hover:translate-y-0">
-            <AdSpace isMobile={false} />
-          </div>
-        </div>
       </div>
     </>
   )
