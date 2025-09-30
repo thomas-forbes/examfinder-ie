@@ -1,4 +1,3 @@
-import splitbee from '@splitbee/web'
 import StyledLink from './StyledLink'
 
 export default function Footer() {
@@ -10,7 +9,6 @@ export default function Footer() {
           <StyledLink
             name="sample-papers"
             target="_blank"
-            onClick={() => splitbee.track('buymeacoffee.com')}
             href="https://www.examinations.ie/?l=en&mc=ex&sc=sp"
             className="text-lg font-semibold text-orange-400 hover:text-orange-500"
           >
@@ -21,7 +19,6 @@ export default function Footer() {
           <StyledLink
             name="projects-coursework"
             target="_blank"
-            onClick={() => splitbee.track('buymeacoffee.com')}
             href="https://www.examinations.ie/?l=en&mc=ex&sc=he"
             className="text-lg font-semibold text-violet-400 hover:text-violet-500"
           >
@@ -33,7 +30,6 @@ export default function Footer() {
             name="bugs-features"
             href="https://tally.so/r/w76963"
             target="_blank"
-            onClick={() => splitbee.track('feedback')}
             className="text-lg font-semibold text-red-400 hover:text-red-500"
           >
             Bugs/Features

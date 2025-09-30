@@ -1,4 +1,4 @@
-import splitbee from '@splitbee/web'
+import posthog from 'posthog-js'
 import { useEffect, useState } from 'react'
 import { urlPaperType } from '../utils/consts'
 import Spinner from './Spinner'
@@ -142,7 +142,7 @@ export default function Slicing({ types, yearList, subject }: props) {
         onClick={async () => {
           if (!type) return
           setDownloadState('loading')
-          splitbee.track('Slice', {
+          posthog.capture('slice', {
             startYear,
             endYear,
             startPage,

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import posthog from 'posthog-js'
 import { useCallback } from 'react'
 import { twMerge } from 'tailwind-merge'
 
@@ -18,9 +19,11 @@ export default function StyledLink({
   className?: string
 }) {
   const handleOnClick = useCallback(() => {
-    // TODO: track
+    posthog.capture(name, {
+      href,
+    })
     onClick?.()
-  }, [onClick])
+  }, [name, href, onClick])
   return (
     <Link
       href={href}

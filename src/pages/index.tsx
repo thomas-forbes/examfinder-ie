@@ -1,7 +1,7 @@
-import splitbee from '@splitbee/web'
 import Link from 'next/link'
 import { useState } from 'react'
 
+import posthog from 'posthog-js'
 import Choices from '../components/Choices'
 import Footer from '../components/Footer'
 import PageHead from '../components/PageHead'
@@ -41,7 +41,7 @@ export default function App() {
             target="_blank"
             className="w-72 no-underline"
             rel="noreferrer"
-            onClick={() => splitbee.track('Formula and Tables')}
+            onClick={() => posthog.capture('formula-and-tables')}
           >
             <div className="rounded-lg bg-orange-500 px-4 py-3 font-semibold shadow-xl shadow-stone-900 duration-300 hover:scale-[1.02]">
               <h3 className="text-center text-xl text-white">

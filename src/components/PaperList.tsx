@@ -1,5 +1,5 @@
-import splitbee from '@splitbee/web'
 import Link from 'next/link'
+import posthog from 'posthog-js'
 import { useEffect } from 'react'
 import { urlPaperType } from '../utils/consts'
 
@@ -40,7 +40,7 @@ export default function PaperList({ papers }) {
           target="_blank"
           style={{ textDecoration: 'none' }}
           rel="noreferrer"
-          onClick={() => splitbee.track('Paper', paper)}
+          onClick={() => posthog.capture('paper', paper)}
           className="paperFade"
         >
           <div className="w-72 overflow-hidden rounded-xl bg-zinc-900 shadow-lg duration-300 hover:scale-[1.02] hover:shadow-2xl">
