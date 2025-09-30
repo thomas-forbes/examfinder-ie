@@ -19,22 +19,24 @@ jobs:
           bun-version: latest
 
       - name: Install dependencies
+        working-directory: ./packages/data
         run: bun install
 
       - name: Run scraper
+        working-directory: ./packages/data
         run: bun scrape
 
       - name: Check for changes
         id: git-check
         run: |
-          git diff --exit-code public/data.json || echo "changed=true" >> $GITHUB_OUTPUT
+          git diff --exit-code apps/web/public/data.json || echo "changed=true" >> $GITHUB_OUTPUT
 
       - name: Commit and push changes
         if: steps.git-check.outputs.changed == 'true'
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add public/data.json
+          git add apps/web/public/data.json
           git commit -m "chore: update exam data [skip ci]"
           git push
         env:
@@ -42,4 +44,4 @@ jobs:
 
       - name: No changes detected
         if: steps.git-check.outputs.changed != 'true'
-        run: echo "No changes to public/data.json - nothing to commit"
+        run: echo "No changes to apps/web/public/data.json - nothing to commit"
