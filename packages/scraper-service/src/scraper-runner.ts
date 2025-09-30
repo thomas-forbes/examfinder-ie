@@ -1,9 +1,19 @@
-#!/usr/bin/env node
-
 import puppeteer, { Page } from 'puppeteer'
-import { dom, fileIO, getCurrentYear, logger, sleep } from './helpers'
-import { writeFileSync } from 'fs'
-import { join } from 'path'
+import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs'
+import { join, dirname } from 'path'
+import pino from 'pino'
+
+const logger = pino({
+  level: process.env.LOG_LEVEL || 'info',
+  transport: {
+    target: 'pino-pretty',
+    options: {
+      colorize: true,
+      ignore: 'pid,hostname',
+      translateTime: 'HH:MM:ss',
+    },
+  },
+})
 
 // Configuration
 const CONFIG = {
@@ -56,10 +66,111 @@ const TYPE_CONVERTER = {
   deferredmarkingschemes: 'Deferred Marking Scheme',
 } as const
 
+// Utility functions
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
+const getCurrentYear = () => new Date().getFullYear().toString()
+
+// File I/O operations
+const fileIO = {
+  loadJSON<T>(path: string, defaultValue: T): T {
+    try {
+      if (existsSync(path)) {
+        return JSON.parse(readFileSync(path, 'utf-8'))
+      }
+      return defaultValue
+    } catch {
+      return defaultValue
+    }
+  },
+
+  saveJSON(path: string, data: unknown): void {
+    const dir = dirname(path)
+    if (!existsSync(dir)) {
+      mkdirSync(dir, { recursive: true })
+    }
+    writeFileSync(path, JSON.stringify(data, null, 2))
+  },
+}
+
+// DOM selector utilities
+const dom = {
+  async getOptionValues(page: Page, selector: string): Promise<string[]> {
+    const values = await page.$$eval(`${selector} > option`, (els: Element[]) =>
+      els
+        .map((v: Element) => (v as HTMLInputElement).getAttribute('value'))
+        .filter(
+          (v: string | null): v is string => v != null && v !== '0' && v !== ''
+        )
+    )
+    return values
+  },
+
+  async getSubjectOptions(
+    page: Page,
+    selector: string
+  ): Promise<Array<{ value: string; text: string }>> {
+    return await page.$$eval(`${selector} > option`, (els: Element[]) =>
+      els
+        .map((v: Element) => ({
+          value: (v as HTMLInputElement).getAttribute('value'),
+          text: v.textContent,
+        }))
+        .filter(
+          (v): v is { value: string; text: string } =>
+            v.value != null && v.value !== '' && v.value !== '0'
+        )
+    )
+  },
+
+  async selectAndWait(
+    page: Page,
+    selectSel: string,
+    value: string,
+    waitSel: string,
+    timeout = 500
+  ): Promise<void> {
+    try {
+      await page.select(selectSel, value)
+      await page.waitForSelector(waitSel, { timeout: 10000 })
+      await sleep(timeout)
+    } catch (error) {
+      logger.error(
+        { selector: selectSel, value, error },
+        'Failed to select and wait'
+      )
+      throw error
+    }
+  },
+
+  async extractPapers(
+    page: Page
+  ): Promise<Array<{ details: string; url: string }>> {
+    const urls = await page.$$eval('tbody > input', (els: Element[]) =>
+      els
+        .map((el: Element) => (el as HTMLInputElement).getAttribute('value'))
+        .filter((v: string | null): v is string => v != null)
+    )
+
+    const details = await page.$$eval('tr > .materialbody', (els: Element[]) =>
+      els
+        .map((el: Element) => el.textContent)
+        .filter(
+          (detail: string | null): detail is string =>
+            detail != null && !detail.includes('Click Here')
+        )
+    )
+
+    return urls.map((url: string, i: number) => ({
+      details: details[i] || '',
+      url,
+    }))
+  },
+}
+
 // Data management
 const dataManager = {
   load(): Data {
-    const outputPath = process.env.OUTPUT_PATH || '../../apps/web/public/data.json'
+    const outputPath = process.env.OUTPUT_PATH || '/app/data/data.json'
     return fileIO.loadJSON(outputPath, {
       lc: {},
       jc: {},
@@ -68,7 +179,7 @@ const dataManager = {
   },
 
   save(data: Data): void {
-    const outputPath = process.env.OUTPUT_PATH || join(process.cwd(), 'public', 'data.json')
+    const outputPath = process.env.OUTPUT_PATH || '/app/data/data.json'
     fileIO.saveJSON(outputPath, data)
   },
 
@@ -239,58 +350,6 @@ const scraper = {
 }
 
 /**
- * Scrapes exam data from examinations.ie
- */
-export async function scrapeExamData(): Promise<Data> {
-  const isProduction = process.env.VERCEL || process.env.RAILWAY_ENVIRONMENT
-  
-  const puppeteerConfig = {
-    headless: CONFIG.HEADLESS,
-    slowMo: CONFIG.SLOW_MO,
-    defaultViewport: null,
-    args: [
-      '--ignore-certificate-errors',
-      '--no-sandbox',
-      '--disable-setuid-sandbox',
-      '--disable-accelerated-2d-canvas',
-      '--disable-gpu',
-      '--disable-dev-shm-usage',
-      '--no-zygote',
-      '--single-process',
-    ],
-    ...(isProduction && {
-      executablePath: process.env.CHROME_EXECUTABLE_PATH || '/usr/bin/google-chrome-stable',
-    }),
-  }
-  
-  const browser = await puppeteer.launch(puppeteerConfig)
-  logger.info({ puppeteerConfig }, 'Launched puppeteer')
-
-  const page = await browser.newPage()
-  logger.info('Got new page')
-
-  const data = dataManager.load()
-  logger.info('Loaded data')
-
-  await pageSetup.initialize(page)
-  logger.info('Initialized page')
-
-  const typeOps = await dom.getOptionValues(page, SELECTORS.type)
-  logger.info({ typeCount: typeOps.length, types: typeOps }, 'Starting scrape')
-
-  for (const type of typeOps) {
-    await scraper.processType(page, data, type)
-  }
-
-  await browser.close()
-  
-  // Upload to S3 if configured
-  await uploadToS3(data)
-  
-  return data
-}
-
-/**
  * Uploads data to S3 if configured
  */
 async function uploadToS3(data: Data): Promise<void> {
@@ -303,7 +362,6 @@ async function uploadToS3(data: Data): Promise<void> {
   }
 
   try {
-    // Dynamic import to avoid dependency when running locally
     const { S3Client, PutObjectCommand } = await import('@aws-sdk/client-s3')
     
     const client = new S3Client({ region: awsRegion })
@@ -337,6 +395,53 @@ async function uploadToS3(data: Data): Promise<void> {
 }
 
 /**
+ * Scrapes exam data from examinations.ie
+ */
+export async function scrapeExamData(): Promise<Data> {
+  const puppeteerConfig = {
+    headless: CONFIG.HEADLESS,
+    slowMo: CONFIG.SLOW_MO,
+    defaultViewport: null,
+    args: [
+      '--ignore-certificate-errors',
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-accelerated-2d-canvas',
+      '--disable-gpu',
+      '--disable-dev-shm-usage',
+      '--no-zygote',
+    ],
+    executablePath: process.env.CHROME_EXECUTABLE_PATH || '/usr/bin/google-chrome-stable',
+  }
+  
+  const browser = await puppeteer.launch(puppeteerConfig)
+  logger.info({ puppeteerConfig }, 'Launched puppeteer')
+
+  const page = await browser.newPage()
+  logger.info('Got new page')
+
+  const data = dataManager.load()
+  logger.info('Loaded data')
+
+  await pageSetup.initialize(page)
+  logger.info('Initialized page')
+
+  const typeOps = await dom.getOptionValues(page, SELECTORS.type)
+  logger.info({ typeCount: typeOps.length, types: typeOps }, 'Starting scrape')
+
+  for (const type of typeOps) {
+    await scraper.processType(page, data, type)
+  }
+
+  await browser.close()
+  
+  // Upload to S3 if configured
+  await uploadToS3(data)
+  
+  return data
+}
+
+/**
  * Main execution function for CLI usage
  */
 async function main() {
@@ -344,7 +449,7 @@ async function main() {
     logger.info('Starting exam data scraping')
     const data = await scrapeExamData()
     
-    const outputPath = process.env.OUTPUT_PATH || '../../apps/web/public/data.json'
+    const outputPath = process.env.OUTPUT_PATH || '/app/data/data.json'
     logger.info({ outputPath }, 'Successfully saved data locally')
     
     logger.info('Scraping completed successfully')

@@ -52,13 +52,26 @@ pnpm start
 
 ### Scrape Exam Data
 
-Run the data scraper:
+#### Local Scraping (Development)
+
+Run the data scraper locally:
 
 ```bash
 pnpm scrape
 ```
 
 This will scrape exam data and save it to `apps/web/public/data.json`.
+
+#### Production Deployment
+
+The scraper runs automatically in production via Railway + Upstash QStash. See [DEPLOYMENT.md](./DEPLOYMENT.md) for setup instructions.
+
+**Quick Setup:**
+1. Deploy scraper service to Railway
+2. Configure Upstash QStash cron job  
+3. Scraper runs daily at 3 AM UTC from Ireland region
+
+See detailed deployment guide: [DEPLOYMENT.md](./DEPLOYMENT.md)
 
 ## Packages
 
@@ -68,7 +81,11 @@ The main Next.js web application that displays exam papers and marking schemes.
 
 ### @examfinder/data
 
-Data scraper that fetches exam information from examinations.ie using Puppeteer.
+Original data scraper package (for local development).
+
+### @examfinder/scraper-service
+
+Production scraper service - Express server with Puppeteer that runs on Railway and is triggered by Upstash QStash cron jobs from Ireland (EU-West-1).
 
 ## License
 
