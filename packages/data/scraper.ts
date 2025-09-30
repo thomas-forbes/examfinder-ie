@@ -241,8 +241,17 @@ async function scrapeExamData(): Promise<Data> {
   const puppetterConfig = {
     headless: CONFIG.HEADLESS,
     slowMo: CONFIG.SLOW_MO,
+    defaultViewport: null,
+    args: [
+      '--ignore-certificate-errors',
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-accelerated-2d-canvas',
+      '--disable-gpu',
+    ],
+    executablePath: '/usr/bin/google-chrome-stable',
   }
-  const browser = await puppeteer.launch()
+  const browser = await puppeteer.launch(puppetterConfig)
   logger.info({ puppetterConfig }, 'Launched puppeteer')
 
   const page = await browser.newPage()
