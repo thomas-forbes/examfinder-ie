@@ -157,6 +157,8 @@ const scraper = {
       return;
     }
 
+
+    logger.info({ exam, subject: subject.text, year }, 'Processing subject');
     await dom.selectAndWait(
       page,
       SELECTORS.subject,
@@ -178,6 +180,7 @@ const scraper = {
     year: string,
     exam: ExamType,
   ): Promise<void> {
+    logger.info({ exam, year, type }, 'Processing exam');
     await dom.selectAndWait(
       page,
       SELECTORS.exam,
@@ -187,8 +190,8 @@ const scraper = {
     );
     const subjectOps = await dom.getSubjectOptions(page, SELECTORS.subject);
     logger.info(
-      { exam, year, subjectCount: subjectOps.length },
-      'Processing exam',
+      { subjectCount: subjectOps.length },
+      'Got subject options',
     );
 
     for (const subject of subjectOps) {
@@ -202,6 +205,7 @@ const scraper = {
     type: string,
     year: string,
   ): Promise<void> {
+    logger.info({ year, type }, 'Processing year');
     await dom.selectAndWait(
       page,
       SELECTORS.year,
@@ -210,7 +214,7 @@ const scraper = {
       CONFIG.TIMEOUT,
     );
     const examOps = await dom.getOptionValues(page, SELECTORS.exam);
-    logger.info({ year, type, examCount: examOps.length }, 'Processing year');
+    logger.info({ examCount: examOps.length }, 'Got exam options');
 
     for (const exam of examOps as ExamType[]) {
       await this.processExam(page, data, type, year, exam);
@@ -218,6 +222,7 @@ const scraper = {
   },
 
   async processType(page: Page, data: Data, type: string): Promise<void> {
+    logger.info({ type }, 'Processing type');
     await dom.selectAndWait(
       page,
       SELECTORS.type,
@@ -225,7 +230,7 @@ const scraper = {
       SELECTORS.year,
       CONFIG.TIMEOUT,
     );
-    logger.info({ type }, 'Processing type');
+    logger.info('Selected type');
 
     for (const year of pageSetup.getYearOptions()) {
       await this.processYear(page, data, type, year);
@@ -237,14 +242,21 @@ const scraper = {
  * Scrapes exam data from examinations.ie
  */
 async function scrapeExamData(): Promise<Data> {
-  const browser = await puppeteer.launch({
+  const puppetterConfig = {
     headless: CONFIG.HEADLESS,
     slowMo: CONFIG.SLOW_MO,
-  });
+  }
+  const browser = await puppeteer.launch();
+  logger.info({puppetterConfig}, 'Launched puppeteer')
+
   const page = await browser.newPage();
+  logger.info('Got new page');
+
   const data = dataManager.load();
+  logger.info('Loaded data');
 
   await pageSetup.initialize(page);
+  logger.info('Initialized page');
 
   const typeOps = await dom.getOptionValues(page, SELECTORS.type);
   logger.info({ typeCount: typeOps.length, types: typeOps }, 'Starting scrape');
