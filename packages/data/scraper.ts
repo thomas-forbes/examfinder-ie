@@ -57,7 +57,8 @@ const TYPE_CONVERTER = {
 // Data management
 const dataManager = {
   load(): Data {
-    return fileIO.loadJSON('../../apps/web/public/data.json', {
+    const outputPath = process.env.OUTPUT_PATH || '../../apps/web/public/data.json'
+    return fileIO.loadJSON(outputPath, {
       lc: {},
       jc: {},
       lb: {},
@@ -65,7 +66,8 @@ const dataManager = {
   },
 
   save(data: Data): void {
-    fileIO.saveJSON('../../apps/web/public/data.json', data)
+    const outputPath = process.env.OUTPUT_PATH || '../../apps/web/public/data.json'
+    fileIO.saveJSON(outputPath, data)
   },
 
   convertPaperType(type: string): string {
@@ -275,13 +277,66 @@ async function scrapeExamData(): Promise<Data> {
 }
 
 /**
+ * Uploads data to S3 if configured
+ */
+async function uploadToS3(data: Data): Promise<void> {
+  const s3Bucket = process.env.S3_BUCKET
+  const awsRegion = process.env.AWS_REGION || 'eu-west-1'
+
+  if (!s3Bucket) {
+    logger.info('S3_BUCKET not configured, skipping upload')
+    return
+  }
+
+  try {
+    // Dynamic import to avoid dependency when running locally
+    const { S3Client, PutObjectCommand } = await import('@aws-sdk/client-s3')
+    
+    const client = new S3Client({ region: awsRegion })
+    const timestamp = new Date().toISOString()
+    
+    // Upload current data
+    await client.send(
+      new PutObjectCommand({
+        Bucket: s3Bucket,
+        Key: 'data.json',
+        Body: JSON.stringify(data, null, 2),
+        ContentType: 'application/json',
+      })
+    )
+    
+    // Upload timestamped backup
+    await client.send(
+      new PutObjectCommand({
+        Bucket: s3Bucket,
+        Key: `backups/data-${timestamp}.json`,
+        Body: JSON.stringify(data, null, 2),
+        ContentType: 'application/json',
+      })
+    )
+    
+    logger.info({ bucket: s3Bucket, timestamp }, 'Successfully uploaded data to S3')
+  } catch (error) {
+    logger.error({ error, bucket: s3Bucket }, 'Failed to upload to S3')
+    throw error
+  }
+}
+
+/**
  * Main execution function
  */
 async function main() {
   try {
     logger.info('Starting exam data scraping')
-    await scrapeExamData()
-    logger.info('Successfully saved data to ../../apps/web/public/data.json')
+    const data = await scrapeExamData()
+    
+    const outputPath = process.env.OUTPUT_PATH || '../../apps/web/public/data.json'
+    logger.info({ outputPath }, 'Successfully saved data locally')
+    
+    // Upload to S3 if configured
+    await uploadToS3(data)
+    
+    logger.info('Scraping completed successfully')
   } catch (error) {
     logger.error({ error }, `Fatal error during execution: ${error}`)
     process.exit(1)
