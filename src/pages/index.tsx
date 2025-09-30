@@ -1,13 +1,11 @@
-import splitbee from '@splitbee/web'
 import Link from 'next/link'
 import { useState } from 'react'
 
-import AdSpace from '../components/AdSpace'
+import posthog from 'posthog-js'
 import Choices from '../components/Choices'
 import Footer from '../components/Footer'
 import PageHead from '../components/PageHead'
 import PaperList from '../components/PaperList'
-import StyledLink from '../components/StyledLink'
 
 export default function App() {
   const [papers, setPapers] = useState<
@@ -27,24 +25,12 @@ export default function App() {
     <>
       <PageHead />
       {/* MAIN COL */}
-      <div className="flex min-h-screen flex-col items-center space-y-6 p-4 pt-6">
+      <div className="flex min-h-screen flex-col items-center space-y-6 p-4 py-6">
         {/* TEXT */}
         <div className="flex flex-col items-center space-y-4 text-center">
-          <h1 className="text-6xl font-bold">
+          <h1 className="text-2xl font-bold sm:text-4xl">
             Easily Search Irish Past Papers
           </h1>
-          <p className="text-slate-300">
-            Built by a{' '}
-            <StyledLink
-              href="https://thomasforbes.com/"
-              target="_blank"
-              onClick={() => splitbee.track('thomasforbes.com')}
-              className="hover:text-slate-300"
-            >
-              student
-            </StyledLink>{' '}
-            for everyone
-          </p>
         </div>
         {/* CHOICES */}
         <Choices papers={papers} setPapers={setPapers} />
@@ -55,16 +41,16 @@ export default function App() {
             target="_blank"
             className="w-72 no-underline"
             rel="noreferrer"
-            onClick={() => splitbee.track('Formula and Tables')}
+            onClick={() => posthog.capture('formula-and-tables')}
           >
-            <div className="rounded-lg bg-orange-500 px-4 py-3 font-semibold shadow-xl shadow-stone-900 duration-300 hover:scale-105">
+            <div className="rounded-lg bg-orange-500 px-4 py-3 font-semibold shadow-xl shadow-stone-900 duration-300 hover:scale-[1.02]">
               <h3 className="text-center text-xl text-white">
                 Formula and Tables Book
               </h3>
             </div>
           </Link>
           <Link href="/points" className="w-72 no-underline">
-            <div className="rounded-lg bg-violet-500 px-4 py-3 font-semibold shadow-xl shadow-stone-900 duration-300 hover:scale-105">
+            <div className="rounded-lg bg-violet-500 px-4 py-3 font-semibold shadow-xl shadow-stone-900 duration-300 hover:scale-[1.02]">
               <h3 className="text-center text-xl text-white">
                 Points Calculator
               </h3>
@@ -77,12 +63,6 @@ export default function App() {
         <div className="flex-grow" />
         {/* FOOTER */}
         <Footer />
-
-        <div className="hidden lg:block">
-          <div className="group fixed bottom-0 left-0 translate-y-6 cursor-pointer overflow-hidden p-2 text-white transition-all duration-300 hover:translate-y-0">
-            <AdSpace isMobile={false} />
-          </div>
-        </div>
       </div>
     </>
   )
