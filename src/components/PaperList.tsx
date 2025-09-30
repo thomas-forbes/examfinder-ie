@@ -43,7 +43,7 @@ export default function PaperList({ papers }) {
           onClick={() => splitbee.track('Paper', paper)}
           className="paperFade"
         >
-          <div className="w-72 overflow-hidden rounded-xl bg-zinc-900 shadow-lg duration-300 hover:scale-105 hover:shadow-2xl">
+          <div className="w-72 overflow-hidden rounded-xl bg-zinc-900 shadow-lg duration-300 hover:scale-[1.02] hover:shadow-2xl">
             {/* TYPE */}
             <p
               className={`truncate px-4 py-2 text-xl font-semibold ${typeToColor(

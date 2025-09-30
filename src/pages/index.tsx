@@ -43,14 +43,14 @@ export default function App() {
             rel="noreferrer"
             onClick={() => splitbee.track('Formula and Tables')}
           >
-            <div className="rounded-lg bg-orange-500 px-4 py-3 font-semibold shadow-xl shadow-stone-900 duration-300 hover:scale-105">
+            <div className="rounded-lg bg-orange-500 px-4 py-3 font-semibold shadow-xl shadow-stone-900 duration-300 hover:scale-[1.02]">
               <h3 className="text-center text-xl text-white">
                 Formula and Tables Book
               </h3>
             </div>
           </Link>
           <Link href="/points" className="w-72 no-underline">
-            <div className="rounded-lg bg-violet-500 px-4 py-3 font-semibold shadow-xl shadow-stone-900 duration-300 hover:scale-105">
+            <div className="rounded-lg bg-violet-500 px-4 py-3 font-semibold shadow-xl shadow-stone-900 duration-300 hover:scale-[1.02]">
               <h3 className="text-center text-xl text-white">
                 Points Calculator
               </h3>

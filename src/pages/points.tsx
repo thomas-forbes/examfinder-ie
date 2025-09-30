@@ -103,7 +103,7 @@ export default function Points() {
         </div>
         {/* HOME */}
         <Link href="/" className="w-72 no-underline">
-          <div className="rounded-lg bg-violet-500 px-4 py-3 font-semibold shadow-xl shadow-stone-900 duration-300 hover:scale-105">
+          <div className="rounded-lg bg-violet-500 px-4 py-3 font-semibold shadow-xl shadow-stone-900 duration-300 hover:scale-[1.02]">
             <h3 className="text-center text-xl text-white">Past Papers</h3>
           </div>
         </Link>

@@ -1,9 +1,14 @@
-import { Listbox } from '@headlessui/react'
-import { ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import splitbee from '@splitbee/web'
 import { useEffect, useState } from 'react'
 import { urlPaperType } from '../utils/consts'
 import Spinner from './Spinner'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from './ui/select'
 
 interface Type {
   code: string
@@ -33,10 +38,11 @@ const Question = ({
 )
 
 export default function Slicing({ types, yearList, subject }: props) {
-  const [type, setType] = useState<Type>(types[0]!)
+  const [selectedCode, setSelectedCode] = useState<string>(types[0]?.code ?? '')
+  const type = types.find((t) => t.code === selectedCode) ?? types[0]
 
-  const [startYear, setStartYear] = useState(2022)
-  const [endYear, setEndYear] = useState(2022)
+  const [startYear, setStartYear] = useState(new Date().getFullYear())
+  const [endYear, setEndYear] = useState(new Date().getFullYear())
 
   const [startPage, setStartPage] = useState(1)
   const [endPage, setEndPage] = useState(1)
@@ -46,12 +52,13 @@ export default function Slicing({ types, yearList, subject }: props) {
   >('idle')
 
   useEffect(() => {
-    setType(types[0]!)
+    setSelectedCode(types[0]?.code ?? '')
   }, [types])
+
   return (
     <details className="w-80 space-y-4 rounded-md bg-zinc-900 px-4 py-3 sm:w-96">
       {/* TITLE */}
-      <summary className="cursor-pointer text-center text-2xl font-bold">
+      <summary className="cursor-pointer text-center text-xl font-semibold">
         Slice Papers
       </summary>
       {/* EXPLAIN */}
@@ -60,30 +67,22 @@ export default function Slicing({ types, yearList, subject }: props) {
       </p>
       {/* TYPE */}
       <Question label="Paper">
-        <div className="space-y-2">
-          <Listbox value={type} onChange={setType}>
-            <Listbox.Button className="flex w-full flex-row items-center justify-between rounded-md border border-zinc-200/10 bg-zinc-800 px-2 py-1">
-              <span>
-                {type?.type == 'Marking Scheme' ? type.type : type?.details}
-              </span>{' '}
-              <ChevronUpDownIcon
-                className="h-5 w-5 text-gray-400"
-                aria-hidden="true"
-              />
-            </Listbox.Button>
-            <Listbox.Options className="w-full overflow-hidden rounded-md border border-zinc-200/10 bg-zinc-800">
-              {types.map((x, i) => (
-                <Listbox.Option
-                  key={'label-' + i}
-                  value={x}
-                  className="cursor-pointer select-none truncate px-2 py-1 text-zinc-400 hover:bg-zinc-700 ui-selected:bg-zinc-700 ui-selected:text-white"
-                >
-                  {x?.type == 'Marking Scheme' ? x.type : x?.details}
-                </Listbox.Option>
-              ))}
-            </Listbox.Options>
-          </Listbox>
-        </div>
+        <Select value={selectedCode} onValueChange={setSelectedCode}>
+          <SelectTrigger className="w-full border-zinc-200/10 bg-zinc-800 text-zinc-200">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent className="border-zinc-200/10 bg-zinc-800">
+            {types.map((x, i) => (
+              <SelectItem
+                key={'label-' + i}
+                value={x.code}
+                className="text-zinc-400 focus:bg-zinc-700 focus:text-white"
+              >
+                {x?.type == 'Marking Scheme' ? x.type : x?.details}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </Question>
       {/* YEARS / PAGES */}
       {[
@@ -135,8 +134,9 @@ export default function Slicing({ types, yearList, subject }: props) {
       {/* DOWNLOAD */}
       <button
         className="flex h-10 w-full items-center justify-center rounded-md bg-sky-500 px-4 py-2 text-lg font-semibold text-sky-100 outline-offset-2 transition active:transition-none enabled:hover:bg-sky-400 enabled:active:bg-sky-500 enabled:active:text-sky-100/80 disabled:cursor-not-allowed disabled:opacity-60 dark:bg-sky-600 enabled:dark:hover:bg-sky-500 enabled:dark:active:bg-sky-600 enabled:dark:active:text-sky-100/70"
-        disabled={downloadState == 'loading'}
+        disabled={downloadState == 'loading' || !type}
         onClick={async () => {
+          if (!type) return
           setDownloadState('loading')
           splitbee.track('Slice', {
             startYear,

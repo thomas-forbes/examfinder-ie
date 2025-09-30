@@ -1,11 +1,26 @@
-import { StarIcon as StarIconOutline } from '@heroicons/react/24/outline'
-import { StarIcon } from '@heroicons/react/24/solid'
+import { cn } from '@/lib/utils'
+import { Check, ChevronsUpDown, Star } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useCookie } from 'react-use'
 import data from '../../public/data.json'
-import Autocomplete from './Autocomplete'
-import Select from './Select'
 import Slicing from './Slicing'
+import { Button } from './ui/button'
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+} from './ui/command'
+import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from './ui/select'
+import { ToggleGroup, ToggleGroupItem } from './ui/toggle-group'
 
 export default function Choices({ papers, setPapers }) {
   const exams = [
@@ -16,9 +31,10 @@ export default function Choices({ papers, setPapers }) {
   const [exam, setExam] = useState('lc')
 
   const [favSubsCookie, updateFavSubs] = useCookie('favSubs')
-  const [favSubs, setFavSubs] = useState<string[]>(
-    favSubsCookie ? JSON.parse(favSubsCookie).sort() : []
-  )
+  const [favSubs, setFavSubs] = useState<string[]>([])
+  useEffect(() => {
+    setFavSubs(favSubsCookie ? JSON.parse(favSubsCookie).sort() : [])
+  }, [])
 
   const [subList, setSubList] = useState(Object.keys(data[exam]).sort())
   const [subject, setSubject] = useState<string>(
@@ -112,158 +128,257 @@ export default function Choices({ papers, setPapers }) {
     return lang
   }
 
+  const [subjectOpen, setSubjectOpen] = useState(false)
+  const [yearOpen, setYearOpen] = useState(false)
+
+  const toggleFavorite = (subjectName: string) => {
+    let tFavSubs = favSubs
+    if (favSubs.includes(subjectName)) {
+      tFavSubs = favSubs.filter((x) => x !== subjectName)
+    } else {
+      tFavSubs = [...favSubs, subjectName]
+    }
+    setFavSubs(tFavSubs)
+    updateFavSubs(JSON.stringify(tFavSubs), {
+      expires: new Date(Date.now() + 100 * 365 * 24 * 60 * 60 * 1000),
+      sameSite: 'strict',
+    })
+  }
+
   useEffect(() => {
     updateLevel(exam, subject, year)
     updateLang(exam, subject, year)
     updatePapers(exam, subject, year, level, lang)
   }, [])
+
+  const sortedSubjects = [...subList].sort((a, b) => {
+    if (favSubs.includes(a) && !favSubs.includes(b)) return -1
+    if (!favSubs.includes(a) && favSubs.includes(b)) return 1
+    return a.localeCompare(b)
+  })
+
   return (
     <div className="flex flex-col items-center space-y-6">
       {/* CHOICES */}
-      <div className="flex flex-row flex-wrap items-center justify-center gap-8">
+      <div className="flex flex-row flex-wrap items-center justify-center gap-4">
         {/* EXAM */}
-        <div className="w-52">
-          <Select
-            value={exam}
-            onChange={(s) => {
-              console.log(s)
-              setExam(s)
-              const tSubList = Object.keys(data[s]).sort()
-              setSubList(tSubList)
-              const tSubject = tSubList.includes(subject)
-                ? subject
-                : (tSubList[0] as string)
-              setSubject(tSubject)
+        <Select
+          value={exam}
+          onValueChange={(s) => {
+            console.log(s)
+            setExam(s)
+            const tSubList = Object.keys(data[s]).sort()
+            setSubList(tSubList)
+            const tSubject = tSubList.includes(subject)
+              ? subject
+              : (tSubList[0] as string)
+            setSubject(tSubject)
 
-              const tYearList = Object.keys(data[s][tSubject]).sort().reverse()
-              setYearList(tYearList)
-              const tYear = tYearList.includes(year)
-                ? year
-                : (tYearList[0] as string)
-              setYear(tYear)
+            const tYearList = Object.keys(data[s][tSubject]).sort().reverse()
+            setYearList(tYearList)
+            const tYear = tYearList.includes(year)
+              ? year
+              : (tYearList[0] as string)
+            setYear(tYear)
 
-              const level = updateLevel(s, tSubject, tYear)
-              const lang = updateLang(s, tSubject, tYear)
+            const level = updateLevel(s, tSubject, tYear)
+            const lang = updateLang(s, tSubject, tYear)
 
-              updatePapers(s, tSubject, tYear, level, lang)
-            }}
-            options={exams}
-            title={exams.find((e) => e.value == exam)!.label}
-          />
-        </div>
+            updatePapers(s, tSubject, tYear, level, lang)
+          }}
+        >
+          <SelectTrigger className="h-12 w-52 border-zinc-200/20 bg-zinc-900 text-base font-bold">
+            <SelectValue placeholder="Select exam" />
+          </SelectTrigger>
+          <SelectContent className="border-zinc-200/20 bg-zinc-900">
+            {exams.map((e) => (
+              <SelectItem key={e.value} value={e.value}>
+                {e.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
 
         {/* SUBJECT */}
-        <div className="w-64">
-          <Autocomplete
-            value={subject}
-            onChange={(s) => {
-              if (!s) return
-              setSubject(s)
-              const tYearList = Object.keys(data[exam][s]).sort().reverse()
-              setYearList(tYearList)
-              const tYear = tYearList.includes(year)
-                ? year
-                : (tYearList[0] as string)
-              setYear(tYear)
-
-              const level = updateLevel(exam, s, tYear)
-              const lang = updateLang(exam, s, tYear)
-
-              updatePapers(exam, s, tYear, level, lang)
-            }}
-            options={subList.sort((a, b) => {
-              if (favSubs.includes(a) && !favSubs.includes(b)) return -1
-              if (!favSubs.includes(a) && favSubs.includes(b)) return 1
-              return 0
-            })}
-            renderOption={(option) => (
-              <div className="flex flex-row items-center gap-2">
-                <div className="h-4 w-4">
-                  <button
-                    className="z-10 text-lg duration-300 hover:scale-110"
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      e.preventDefault()
-                      let tFavSubs = favSubs
-                      if (favSubs.includes(option)) {
-                        tFavSubs = favSubs.filter((x) => x != option)
-                      } else {
-                        tFavSubs = [...favSubs, option]
-                      }
-                      setFavSubs(tFavSubs)
-                      updateFavSubs(JSON.stringify(tFavSubs), {
-                        expires: new Date(
-                          Date.now() + 100 * 365 * 24 * 60 * 60 * 1000
-                        ),
-                        sameSite: 'strict',
-                      })
-                    }}
-                  >
-                    {favSubs.includes(option) ? (
-                      <StarIcon className="h-full w-full text-yellow-400" />
-                    ) : (
-                      <StarIconOutline className="h-full w-full text-gray-400" />
-                    )}
-                  </button>
-                </div>
-                <div>{option}</div>
+        <Popover open={subjectOpen} onOpenChange={setSubjectOpen}>
+          <PopoverTrigger asChild>
+            <Button
+              variant="outline"
+              role="combobox"
+              aria-expanded={subjectOpen}
+              className="h-12 w-64 justify-between border-zinc-200/20 bg-zinc-900 text-base font-bold hover:bg-zinc-800"
+            >
+              <div className="flex items-center gap-2">
+                {favSubs.includes(subject) && (
+                  <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                )}
+                <span className="truncate">{subject}</span>
               </div>
-            )}
-          />
-        </div>
+              <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-64 border-zinc-200/20 bg-zinc-900 p-0">
+            <Command className="bg-zinc-900">
+              <CommandInput
+                placeholder="Search subject..."
+                className="h-9 border-zinc-200/20"
+              />
+              <CommandEmpty>No subject found.</CommandEmpty>
+              <CommandGroup className="max-h-60 overflow-auto">
+                {sortedSubjects.map((sub) => (
+                  <CommandItem
+                    key={sub}
+                    value={sub}
+                    onSelect={(currentValue) => {
+                      const selected = sortedSubjects.find(
+                        (s) => s.toLowerCase() === currentValue.toLowerCase()
+                      )
+                      if (!selected) return
+                      setSubject(selected)
+                      setSubjectOpen(false)
+
+                      const tYearList = Object.keys(data[exam][selected])
+                        .sort()
+                        .reverse()
+                      setYearList(tYearList)
+                      const tYear = tYearList.includes(year)
+                        ? year
+                        : (tYearList[0] as string)
+                      setYear(tYear)
+
+                      const level = updateLevel(exam, selected, tYear)
+                      const lang = updateLang(exam, selected, tYear)
+
+                      updatePapers(exam, selected, tYear, level, lang)
+                    }}
+                    className="flex items-center justify-between"
+                  >
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          toggleFavorite(sub)
+                        }}
+                        className="transition-transform hover:scale-110"
+                      >
+                        {favSubs.includes(sub) ? (
+                          <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                        ) : (
+                          <Star className="h-4 w-4 text-gray-400" />
+                        )}
+                      </button>
+                      <span>{sub}</span>
+                    </div>
+                    <Check
+                      className={cn(
+                        'ml-2 h-4 w-4',
+                        subject === sub ? 'opacity-100' : 'opacity-0'
+                      )}
+                    />
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+            </Command>
+          </PopoverContent>
+        </Popover>
 
         {/* YEAR */}
-        <div className="w-32">
-          <Autocomplete
-            value={year}
-            onChange={(s) => {
-              if (!s) return
-              setYear(s)
+        <Popover open={yearOpen} onOpenChange={setYearOpen}>
+          <PopoverTrigger asChild>
+            <Button
+              variant="outline"
+              role="combobox"
+              aria-expanded={yearOpen}
+              className="h-12 w-32 justify-between border-zinc-200/20 bg-zinc-900 text-base font-bold hover:bg-zinc-800"
+            >
+              {year}
+              <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-32 border-zinc-200/20 bg-zinc-900 p-0">
+            <Command className="bg-zinc-900">
+              <CommandInput
+                placeholder="Search year..."
+                className="h-9 border-zinc-200/20"
+              />
+              <CommandEmpty>No year found.</CommandEmpty>
+              <CommandGroup className="max-h-60 overflow-auto">
+                {yearList.map((y) => (
+                  <CommandItem
+                    key={y}
+                    value={y}
+                    onSelect={(currentValue) => {
+                      const selected = yearList.find(
+                        (yr) => yr.toLowerCase() === currentValue.toLowerCase()
+                      )
+                      if (!selected) return
+                      setYear(selected)
+                      setYearOpen(false)
 
-              const level = updateLevel(exam, subject, s)
-              const lang = updateLang(exam, subject, s)
+                      const level = updateLevel(exam, subject, selected)
+                      const lang = updateLang(exam, subject, selected)
 
-              updatePapers(exam, subject, s, level, lang)
-            }}
-            options={yearList}
-          />
-        </div>
+                      updatePapers(exam, subject, selected, level, lang)
+                    }}
+                  >
+                    <Check
+                      className={cn(
+                        'mr-2 h-4 w-4',
+                        year === y ? 'opacity-100' : 'opacity-0'
+                      )}
+                    />
+                    {y}
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+            </Command>
+          </PopoverContent>
+        </Popover>
 
         {/* LEVEL */}
-        <div className="w-44">
-          <Select
-            value={level}
-            onChange={(s) => {
-              setLevel(s)
-
-              updatePapers(exam, subject, year, s, lang)
-            }}
-            options={levelList}
-            title={levelList.find((e) => e.value == level)?.label ?? 'No level'}
-          />
-        </div>
+        <Select
+          value={level}
+          onValueChange={(s) => {
+            setLevel(s)
+            updatePapers(exam, subject, year, s, lang)
+          }}
+        >
+          <SelectTrigger className="h-12 w-44 border-zinc-200/20 bg-zinc-900 text-base font-bold">
+            <SelectValue placeholder="Select level" />
+          </SelectTrigger>
+          <SelectContent className="border-zinc-200/20 bg-zinc-900">
+            {levelList.map((l) => (
+              <SelectItem key={l.value} value={l.value} disabled={l.disabled}>
+                {l.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
 
         {/* LANGUAGE */}
-        <div className="flex h-12 flex-row items-stretch divide-x divide-zinc-200/20 overflow-hidden rounded-md border border-zinc-200/20 ">
+        <ToggleGroup
+          variant="outline"
+          type="single"
+          value={lang}
+          onValueChange={(value) => {
+            if (!value) return // Prevent deselecting
+            setLang(value)
+            setPrefLang(value)
+            updatePrefLangCookie(value, { sameSite: 'strict' })
+            updatePapers(exam, subject, year, level, value)
+          }}
+          className="h-12"
+        >
           {langList.map((l) => (
-            <button
+            <ToggleGroupItem
               key={l.value}
-              className={`px-4 py-3 text-center font-bold duration-300 disabled:bg-zinc-900 disabled:opacity-50 ${
-                l.value == lang ? 'bg-zinc-800' : 'bg-zinc-900'
-              }`}
-              onClick={() => {
-                setLang(l.value)
-                setPrefLang(l.value)
-                updatePrefLangCookie(l.value, { sameSite: 'strict' })
-
-                updatePapers(exam, subject, year, level, l.value)
-              }}
+              value={l.value}
               disabled={l?.disabled}
             >
               {l.label}
-            </button>
+            </ToggleGroupItem>
           ))}
-        </div>
+        </ToggleGroup>
       </div>
       {/* SLICING */}
       <Slicing
