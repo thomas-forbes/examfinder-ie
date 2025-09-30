@@ -99,7 +99,9 @@ export default function Points() {
       <div className="flex min-h-screen flex-col items-center space-y-6 p-4 pt-6">
         {/* TEXT */}
         <div className="flex flex-col items-center space-y-4 text-center">
-          <h1 className="text-4xl font-bold">Leaving Cert Points Calculator</h1>
+          <h1 className="text-2xl font-bold sm:text-4xl">
+            Leaving Cert Points Calculator
+          </h1>
         </div>
         {/* HOME */}
         <Link href="/" className="w-72 no-underline">

@@ -28,7 +28,7 @@ export default function App() {
       <div className="flex min-h-screen flex-col items-center space-y-6 p-4 py-6">
         {/* TEXT */}
         <div className="flex flex-col items-center space-y-4 text-center">
-          <h1 className="text-4xl font-bold">
+          <h1 className="text-2xl font-bold sm:text-4xl">
             Easily Search Irish Past Papers
           </h1>
         </div>

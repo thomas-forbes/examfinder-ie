@@ -357,8 +357,9 @@ export default function Choices({ papers, setPapers }) {
 
         {/* LANGUAGE */}
         <ToggleGroup
-          variant="outline"
           type="single"
+          variant="outline"
+          size="lg"
           value={lang}
           onValueChange={(value) => {
             if (!value) return // Prevent deselecting
@@ -367,13 +368,13 @@ export default function Choices({ papers, setPapers }) {
             updatePrefLangCookie(value, { sameSite: 'strict' })
             updatePapers(exam, subject, year, level, value)
           }}
-          className="h-12"
         >
           {langList.map((l) => (
             <ToggleGroupItem
               key={l.value}
               value={l.value}
               disabled={l?.disabled}
+              className="h-12 border-zinc-200/20 bg-zinc-900 px-5 text-base font-bold"
             >
               {l.label}
             </ToggleGroupItem>
