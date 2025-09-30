@@ -40,6 +40,27 @@ Main scraping endpoint - protected by QStash signature verification.
 }
 ```
 
+### `POST /scrape/action`
+GitHub Actions endpoint - returns scraped data for committing to repo.
+
+**Headers:**
+- `x-github-action-secret`: GitHub Action secret
+
+**Response:**
+```json
+{
+  "success": true,
+  "message": "Scraping completed successfully",
+  "duration": 45000,
+  "timestamp": "2025-09-30T12:00:00.000Z",
+  "data": {
+    "lc": { /* exam data */ },
+    "jc": { /* exam data */ },
+    "lb": { /* exam data */ }
+  }
+}
+```
+
 ### `POST /scrape/manual`
 Manual trigger endpoint for testing (requires secret).
 
@@ -129,9 +150,10 @@ See [DEPLOYMENT.md](../../DEPLOYMENT.md) in the root directory for complete depl
 | `NODE_ENV` | No | Environment (production/development) |
 | `LOG_LEVEL` | No | Logging level (info/debug/error) |
 | `OUTPUT_PATH` | No | Local file path for scraped data |
-| `QSTASH_CURRENT_SIGNING_KEY` | Yes (prod) | QStash signature key |
-| `QSTASH_NEXT_SIGNING_KEY` | Yes (prod) | QStash next signature key |
-| `MANUAL_TRIGGER_SECRET` | Yes | Secret for manual triggers |
+| `GITHUB_ACTION_SECRET` | Yes | Secret for GitHub Actions endpoint |
+| `QSTASH_CURRENT_SIGNING_KEY` | No | QStash signature key (if using QStash) |
+| `QSTASH_NEXT_SIGNING_KEY` | No | QStash next signature key (if using QStash) |
+| `MANUAL_TRIGGER_SECRET` | No | Secret for manual triggers |
 | `AWS_REGION` | No | AWS region for S3 (default: eu-west-1) |
 | `AWS_ACCESS_KEY_ID` | No | AWS access key for S3 |
 | `AWS_SECRET_ACCESS_KEY` | No | AWS secret key for S3 |
@@ -139,6 +161,33 @@ See [DEPLOYMENT.md](../../DEPLOYMENT.md) in the root directory for complete depl
 | `CHROME_EXECUTABLE_PATH` | No | Path to Chrome binary |
 
 ## Architecture
+
+### GitHub Actions Mode (Recommended)
+
+```
+┌──────────────┐
+│ GitHub       │
+│ Actions      │ ──cron (daily 3AM)──┐
+└──────────────┘                     │
+                                     ▼
+                             ┌──────────────┐
+                             │ Railway      │
+                             │ Express      │
+                             │ + Puppeteer  │
+                             └──────────────┘
+                                     │
+                                     ├──────▶ Returns JSON
+                                     │
+                                     ▼
+                             ┌──────────────┐
+                             │ GitHub       │
+                             │ Commits data │
+                             └──────────────┘
+                                     │
+                                     └──────▶ Auto-deploys site
+```
+
+### QStash Mode (Alternative)
 
 ```
 ┌─────────────┐
@@ -148,7 +197,6 @@ See [DEPLOYMENT.md](../../DEPLOYMENT.md) in the root directory for complete depl
                                     ▼
                             ┌──────────────┐
                             │ Railway      │
-                            │              │
                             │ Express      │
                             │ + Puppeteer  │
                             └──────────────┘
@@ -160,9 +208,10 @@ See [DEPLOYMENT.md](../../DEPLOYMENT.md) in the root directory for complete depl
 
 ## Security
 
-- **QStash Signature Verification**: All `/scrape` requests verify QStash signatures
+- **GitHub Actions Secret**: `/scrape/action` endpoint protected by secret header
+- **QStash Signature Verification**: `/scrape` endpoint verifies QStash signatures (if using QStash)
 - **Manual Secret**: Manual triggers require a secret header
-- **No Public Access**: Only QStash can trigger scraping (unless manual secret is known)
+- **No Public Access**: Endpoints protected by secrets
 
 ## Monitoring
 

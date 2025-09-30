@@ -1,0 +1,78 @@
+name: Scrape Exam Data
+
+on:
+  schedule:
+    # Run daily at 3 AM UTC (4 AM Irish Summer Time, 3 AM Irish Winter Time)
+    - cron: '0 3 * * *'
+  workflow_dispatch: # Allow manual triggers
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Trigger Railway scraper
+        id: scrape
+        run: |
+          echo "Triggering scraper on Railway..."
+          
+          RESPONSE=$(curl -s -w "\n%{http_code}" -X POST \
+            "${{ secrets.RAILWAY_SCRAPER_URL }}/scrape/action" \
+            -H "x-github-action-secret: ${{ secrets.SCRAPER_SECRET }}" \
+            -H "Content-Type: application/json")
+          
+          HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
+          BODY=$(echo "$RESPONSE" | sed '$d')
+          
+          echo "HTTP Status: $HTTP_CODE"
+          echo "Response: $BODY"
+          
+          if [ "$HTTP_CODE" -ne 200 ]; then
+            echo "❌ Scraping failed with status $HTTP_CODE"
+            echo "$BODY"
+            exit 1
+          fi
+          
+          # Save the scraped data to file
+          echo "$BODY" | jq -r '.data' > apps/web/public/data.json
+          
+          echo "✅ Scraping completed successfully"
+          
+      - name: Check for changes
+        id: check_changes
+        run: |
+          if git diff --quiet apps/web/public/data.json; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No changes detected in data.json"
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "Changes detected in data.json"
+          fi
+          
+      - name: Commit and push changes
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          
+          git add apps/web/public/data.json
+          git commit -m "chore: update exam data $(date +'%Y-%m-%d %H:%M UTC')"
+          git push
+          
+          echo "✅ Changes committed and pushed"
+          
+      - name: No changes to commit
+        if: steps.check_changes.outputs.changed == 'false'
+        run: |
+          echo "ℹ️ No changes detected - skipping commit"
+          
+      - name: Notify on failure
+        if: failure()
+        run: |
+          echo "❌ Scraping workflow failed"
+          # Add notification here (email, Slack, etc.) if needed

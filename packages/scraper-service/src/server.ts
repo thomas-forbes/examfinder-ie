@@ -103,6 +103,47 @@ app.post('/scrape', async (req, res) => {
   }
 })
 
+// GitHub Actions endpoint - returns scraped data for committing
+app.post('/scrape/action', async (req, res) => {
+  // Check for GitHub Action secret
+  const secret = req.headers['x-github-action-secret']
+  if (secret !== process.env.GITHUB_ACTION_SECRET) {
+    return res.status(401).json({
+      success: false,
+      error: 'Unauthorized',
+    })
+  }
+
+  const startTime = Date.now()
+  
+  try {
+    logger.info('GitHub Action scraping triggered...')
+    
+    const data = await scrapeExamData()
+    
+    const duration = Date.now() - startTime
+    logger.info({ duration }, 'GitHub Action scraping completed')
+
+    // Return the scraped data so GitHub Actions can commit it
+    res.json({
+      success: true,
+      message: 'Scraping completed successfully',
+      duration,
+      timestamp: new Date().toISOString(),
+      data, // Include the full scraped data
+    })
+  } catch (error) {
+    const duration = Date.now() - startTime
+    logger.error({ error, duration }, 'GitHub Action scraping failed')
+
+    res.status(500).json({
+      success: false,
+      error: error instanceof Error ? error.message : String(error),
+      duration,
+    })
+  }
+})
+
 // Manual trigger endpoint (for testing, should be removed or protected in production)
 app.post('/scrape/manual', async (req, res) => {
   // Check for manual trigger secret
@@ -145,7 +186,8 @@ app.post('/scrape/manual', async (req, res) => {
 app.listen(PORT, () => {
   logger.info({ port: PORT }, `Scraper service listening on port ${PORT}`)
   logger.info('Endpoints:')
-  logger.info('  GET  /health         - Health check')
-  logger.info('  POST /scrape         - Trigger scraping (QStash protected)')
-  logger.info('  POST /scrape/manual  - Manual trigger (secret protected)')
+  logger.info('  GET  /health          - Health check')
+  logger.info('  POST /scrape          - Trigger scraping (QStash protected)')
+  logger.info('  POST /scrape/action   - GitHub Actions scraping (returns data)')
+  logger.info('  POST /scrape/manual   - Manual trigger (secret protected)')
 })

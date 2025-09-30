@@ -64,14 +64,20 @@ This will scrape exam data and save it to `apps/web/public/data.json`.
 
 #### Production Deployment
 
-The scraper runs automatically in production via Railway + Upstash QStash. See [DEPLOYMENT.md](./DEPLOYMENT.md) for setup instructions.
+The scraper runs automatically in production via **GitHub Actions + Railway**.
 
 **Quick Setup:**
 1. Deploy scraper service to Railway
-2. Configure Upstash QStash cron job  
-3. Scraper runs daily at 3 AM UTC from Ireland region
+2. Add Railway URL and secret to GitHub Secrets
+3. GitHub Actions triggers scraper daily at 3 AM UTC
+4. Scraped data auto-commits to repo
+5. Site auto-deploys with updated data
 
-See detailed deployment guide: [DEPLOYMENT.md](./DEPLOYMENT.md)
+**Deployment Options:**
+- **🌟 Recommended**: [GitHub Actions + Railway](./DEPLOYMENT-GITHUB-ACTIONS.md) - Simplest, auto-commits to git
+- **Alternative**: [Upstash QStash + Railway](./DEPLOYMENT.md) - HTTP-only triggers
+
+See detailed deployment guide: [DEPLOYMENT-GITHUB-ACTIONS.md](./DEPLOYMENT-GITHUB-ACTIONS.md)
 
 ## Packages
 
