@@ -127,14 +127,6 @@ const dataManager = {
 const pageSetup = {
   async initialize(page: Page): Promise<void> {
     await page.goto('https://www.examinations.ie/exammaterialarchive/')
-
-    await sleep(5000)
-    const html = await page.content()
-    logger.info({ html }, 'Page content')
-
-    await page.screenshot({ path: 'artifacts/page.png' })
-    logger.info('Screenshot saved')
-
     await page.waitForSelector(SELECTORS.agree)
     await page.click(SELECTORS.agree)
     await page.waitForSelector(SELECTORS.type)
@@ -249,15 +241,6 @@ async function scrapeExamData(): Promise<Data> {
   const puppetterConfig = {
     headless: CONFIG.HEADLESS,
     slowMo: CONFIG.SLOW_MO,
-    defaultViewport: null,
-    args: [
-      '--ignore-certificate-errors',
-      '--no-sandbox',
-      '--disable-setuid-sandbox',
-      '--disable-accelerated-2d-canvas',
-      '--disable-gpu',
-    ],
-    executablePath: '/usr/bin/google-chrome-stable',
   }
   const browser = await puppeteer.launch(puppetterConfig)
   logger.info({ puppetterConfig }, 'Launched puppeteer')
