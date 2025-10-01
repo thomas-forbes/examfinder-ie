@@ -18,6 +18,10 @@ jobs:
         with:
           bun-version: latest
 
+      - name: Log ip address
+        run: |
+          curl -s ifconfig.co/json | jq -r '.ip_addr'
+
       - name: Install dependencies
         working-directory: ./packages/data
         run: bun install
