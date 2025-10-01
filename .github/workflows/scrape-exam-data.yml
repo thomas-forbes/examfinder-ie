@@ -36,6 +36,18 @@ jobs:
         working-directory: ./packages/data
         run: bun scrape
 
+      - name: Upload Puppeteer artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: puppeteer-artifacts
+          path: |
+            artifacts/**/*.png
+            artifacts/**/*.html
+            artifacts/**/*.json
+          if-no-files-found: warn
+          retention-days: 7
+
       - name: Check for changes
         id: git-check
         run: |

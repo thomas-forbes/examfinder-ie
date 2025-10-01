@@ -127,6 +127,14 @@ const dataManager = {
 const pageSetup = {
   async initialize(page: Page): Promise<void> {
     await page.goto('https://www.examinations.ie/exammaterialarchive/')
+
+    await sleep(5000)
+    const html = await page.content()
+    logger.info({ html }, 'Page content')
+
+    await page.screenshot({ path: 'artifacts/page.png' })
+    logger.info('Screenshot saved')
+
     await page.waitForSelector(SELECTORS.agree)
     await page.click(SELECTORS.agree)
     await page.waitForSelector(SELECTORS.type)
