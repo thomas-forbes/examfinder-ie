@@ -202,18 +202,22 @@ const scraper = {
     year: string
   ): Promise<void> {
     logger.info({ year, type }, 'Processing year')
-    await dom.selectAndWait(
-      page,
-      SELECTORS.year,
-      year,
-      SELECTORS.exam,
-      CONFIG.TIMEOUT
-    )
-    const examOps = await dom.getOptionValues(page, SELECTORS.exam)
-    logger.info({ examCount: examOps.length }, 'Got exam options')
+    try {
+      await dom.selectAndWait(
+        page,
+        SELECTORS.year,
+        year,
+        SELECTORS.exam,
+        CONFIG.TIMEOUT
+      )
+      const examOps = await dom.getOptionValues(page, SELECTORS.exam)
+      logger.info({ examCount: examOps.length }, 'Got exam options')
 
-    for (const exam of examOps as ExamType[]) {
-      await this.processExam(page, data, type, year, exam)
+      for (const exam of examOps as ExamType[]) {
+        await this.processExam(page, data, type, year, exam)
+      }
+    } catch (error) {
+      logger.error({ error }, 'Error processing year')
     }
   },
 
