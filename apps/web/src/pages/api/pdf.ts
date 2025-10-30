@@ -42,9 +42,12 @@ export default async function pdf(req: NextApiRequest, res: NextApiResponse) {
       new muhammara.PDFStreamForResponse(res)
     )
 
-    streams.forEach((stream) => {
+    let totalPages = 0
+    streams.forEach((stream, index) => {
       const pdfReader = muhammara.createReader(stream)
       const pageCount = pdfReader.getPagesCount()
+      console.log(urls[index], pageCount)
+      totalPages += pageCount
       const copier = pdfWriter.createPDFCopyingContext(pdfReader as any)
       pages
         .filter((page) => page < pageCount)
@@ -56,8 +59,12 @@ export default async function pdf(req: NextApiRequest, res: NextApiResponse) {
     // ctx.drawRectangle(200, 100, 100, 100, { type: 'fill', color: '0xFFFFFF' })
     // pm.endContext().writePage()
 
-    pdfWriter.end()
-    res.end()
+    if (totalPages > 0) {
+      pdfWriter.end()
+      res.end()
+    } else {
+      res.status(400).end()
+    }
   } catch (e) {
     console.error(e)
     res.status(500).end()
