@@ -19,8 +19,6 @@ export default async function pdf(req: NextApiRequest, res: NextApiResponse) {
       (y) => `https://www.examinations.ie/archive/${type}/${y}/${code}`
     )
 
-    res.writeHead(200, { 'Content-Type': 'application/pdf' })
-
     const streams = (
       await Promise.allSettled(
         urls.map(async (url) => {
@@ -38,6 +36,7 @@ export default async function pdf(req: NextApiRequest, res: NextApiResponse) {
           (r as PromiseFulfilledResult<muhammara.PDFRStreamForBuffer>).value
       )
 
+    res.writeHead(200, { 'Content-Type': 'application/pdf' })
     const pdfWriter = muhammara.createWriter(
       new muhammara.PDFStreamForResponse(res)
     )
@@ -63,7 +62,7 @@ export default async function pdf(req: NextApiRequest, res: NextApiResponse) {
       pdfWriter.end()
       res.end()
     } else {
-      res.status(400).end()
+      res.status(500).end()
     }
   } catch (e) {
     console.error(e)

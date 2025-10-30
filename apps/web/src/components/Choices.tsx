@@ -3,7 +3,6 @@ import { Check, ChevronsUpDown, Star } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useCookie } from 'react-use'
 import data from '../../public/data.json'
-import Slicing from './Slicing'
 import { Button } from './ui/button'
 import {
   Command,
@@ -382,7 +381,7 @@ export default function Choices({ papers, setPapers }) {
         </ToggleGroup>
       </div>
       {/* SLICING */}
-      <Slicing
+      {/* <Slicing
         yearList={yearList.map((y) => parseInt(y))}
         subject={subject}
         types={papers
@@ -392,7 +391,7 @@ export default function Choices({ papers, setPapers }) {
             code: p.url,
             details: p.details,
           }))}
-      />
+      /> */}
     </div>
   )
 }
