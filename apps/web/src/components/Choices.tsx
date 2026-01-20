@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils'
 import { Check, ChevronsUpDown, Star } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import { useCookie } from 'react-use'
+import { useCookie, useLocalStorage } from 'react-use'
 import data from '../../public/data.json'
 import { Button } from './ui/button'
 import {
@@ -27,7 +27,10 @@ export default function Choices({ papers, setPapers }) {
     { value: 'jc', label: 'Junior Cert' },
     { value: 'lb', label: 'Leaving Cert Applied' },
   ]
-  const [exam, setExam] = useState('lc')
+
+  // Persisted selections with localStorage
+  const [exam, setExam] = useLocalStorage('examfinder-exam', 'lc')
+  const validExam: string = exam && data[exam] ? exam : 'lc'
 
   const [favSubsCookie, updateFavSubs] = useCookie('favSubs')
   const [favSubs, setFavSubs] = useState<string[]>([])
@@ -35,15 +38,27 @@ export default function Choices({ papers, setPapers }) {
     setFavSubs(favSubsCookie ? JSON.parse(favSubsCookie).sort() : [])
   }, [])
 
-  const [subList, setSubList] = useState(Object.keys(data[exam]).sort())
-  const [subject, setSubject] = useState<string>(
-    (favSubs.length > 0 ? favSubs[0] : subList[0]) as string
-  )
+  const initialSubList = Object.keys(data[validExam]).sort()
+  const [subList, setSubList] = useState(initialSubList)
 
-  const [yearList, setYearList] = useState(
-    Object.keys(data[exam][subject]).sort().reverse()
+  const [subject, setSubject] = useLocalStorage<string>(
+    'examfinder-subject',
+    initialSubList[0] as string
   )
-  const [year, setYear] = useState<string>(yearList[0] as string)
+  const validSubject: string =
+    subject && subList.includes(subject) ? subject : subList[0]!
+
+  const initialYearList = Object.keys(data[validExam][validSubject])
+    .sort()
+    .reverse()
+  const [yearList, setYearList] = useState(initialYearList)
+
+  const [year, setYear] = useLocalStorage<string>(
+    'examfinder-year',
+    initialYearList[0] as string
+  )
+  const validYear: string =
+    year && yearList.includes(year) ? year : yearList[0]!
 
   const [levelList, setLevelList] = useState([
     { value: 'AL', label: 'Higher Level', disabled: false },
@@ -51,39 +66,41 @@ export default function Choices({ papers, setPapers }) {
     { value: 'BL', label: 'Foundational Level', disabled: false },
     { value: 'CL', label: 'Common Level', disabled: false },
   ])
-  const [level, setLevel] = useState('AL')
+  const [level, setLevel] = useLocalStorage('examfinder-level', 'AL')
+  const validLevel: string = level || 'AL'
 
   const [langList, setLangList] = useState([
     { value: 'EV', label: 'English', disabled: false },
     { value: 'IV', label: 'Irish', disabled: false },
   ])
-  const [lang, setLang] = useState('EV')
+  const [lang, setLang] = useLocalStorage('examfinder-lang', 'EV')
+  const validLang: string = lang || 'EV'
   const [prefLangCookie, updatePrefLangCookie] = useCookie('prefLang')
   const [prefLang, setPrefLang] = useState(prefLangCookie || '')
 
   const updatePapers = (
-    exam: string,
-    subject: string,
-    year: string,
-    level: string,
-    lang: string
+    examVal: string,
+    subjectVal: string,
+    yearVal: string,
+    levelVal: string,
+    langVal: string
   ) => {
     setPapers(
-      data[exam][subject][year]
+      data[examVal][subjectVal][yearVal]
         .map((x) => ({
           ...x,
-          year,
-          subject,
-          level: levelList.find((y) => y.value == level)?.value || 'None',
-          lang,
-          exam,
+          year: yearVal,
+          subject: subjectVal,
+          level: levelList.find((y) => y.value == levelVal)?.value || 'None',
+          lang: langVal,
+          exam: examVal,
         }))
         .filter(
           (x) =>
-            x.url.includes(lang) || x.url.includes('BV')
-              ? x.url.includes(level) ||
+            x.url.includes(langVal) || x.url.includes('BV')
+              ? x.url.includes(levelVal) ||
                 x.url.includes('ZL') ||
-                (x.url.includes('CL') && (level == 'AL' || level == 'GL'))
+                (x.url.includes('CL') && (levelVal == 'AL' || levelVal == 'GL'))
               : false
           // sort Exam Papers then Marking Schemes
         )
@@ -93,38 +110,42 @@ export default function Choices({ papers, setPapers }) {
     )
   }
 
-  const updateLevel = (exam: string, subject: string, year: string) => {
+  const updateLevel = (
+    examVal: string,
+    subjectVal: string,
+    yearVal: string
+  ) => {
     const tLevelList = levelList.map((x) => ({
       ...x,
-      disabled: !data[exam][subject][year].some((paper: any) =>
+      disabled: !data[examVal][subjectVal][yearVal].some((paper: any) =>
         paper?.url?.includes(x.value)
       ),
     }))
     setLevelList(tLevelList)
 
     const tLevel =
-      tLevelList.find((x) => x.value == level && !x.disabled)?.value ||
+      tLevelList.find((x) => x.value == validLevel && !x.disabled)?.value ||
       tLevelList.find((x) => !x.disabled)?.value ||
       ''
     setLevel(tLevel)
     return tLevel
   }
-  const updateLang = (exam: string, subject: string, year: string) => {
+  const updateLang = (examVal: string, subjectVal: string, yearVal: string) => {
     const tLangList = langList.map((x) => ({
       ...x,
-      disabled: !data[exam][subject][year].some((paper: any) =>
+      disabled: !data[examVal][subjectVal][yearVal].some((paper: any) =>
         paper?.url?.includes(x.value)
       ),
     }))
     setLangList(tLangList)
 
     const availLangs = tLangList.filter((x) => !x.disabled)
-    let lang = ''
-    if (availLangs.some((x) => x.value == prefLang && !x.disabled))
-      lang = prefLang
-    else lang = availLangs[0]?.value || ''
-    setLang(lang)
-    return lang
+    let langVal = ''
+    if (availLangs.some((x) => x.value == validLang && !x.disabled))
+      langVal = validLang
+    else langVal = availLangs[0]?.value || ''
+    setLang(langVal)
+    return langVal
   }
 
   const [subjectOpen, setSubjectOpen] = useState(false)
@@ -145,9 +166,9 @@ export default function Choices({ papers, setPapers }) {
   }
 
   useEffect(() => {
-    updateLevel(exam, subject, year)
-    updateLang(exam, subject, year)
-    updatePapers(exam, subject, year, level, lang)
+    updateLevel(validExam, validSubject, validYear)
+    updateLang(validExam, validSubject, validYear)
+    updatePapers(validExam, validSubject, validYear, validLevel, validLang)
   }, [])
 
   const sortedSubjects = [...subList].sort((a, b) => {
@@ -162,31 +183,34 @@ export default function Choices({ papers, setPapers }) {
       <div className="flex flex-row flex-wrap items-center justify-center gap-4">
         {/* EXAM */}
         <Select
-          value={exam}
+          value={validExam}
           onValueChange={(s) => {
             console.log(s)
             setExam(s)
             const tSubList = Object.keys(data[s]).sort()
             setSubList(tSubList)
-            const tSubject = tSubList.includes(subject)
-              ? subject
+            const tSubject = tSubList.includes(validSubject)
+              ? validSubject
               : (tSubList[0] as string)
             setSubject(tSubject)
 
             const tYearList = Object.keys(data[s][tSubject]).sort().reverse()
             setYearList(tYearList)
-            const tYear = tYearList.includes(year)
-              ? year
+            const tYear = tYearList.includes(validYear)
+              ? validYear
               : (tYearList[0] as string)
             setYear(tYear)
 
-            const level = updateLevel(s, tSubject, tYear)
-            const lang = updateLang(s, tSubject, tYear)
+            const newLevel = updateLevel(s, tSubject, tYear)
+            const newLang = updateLang(s, tSubject, tYear)
 
-            updatePapers(s, tSubject, tYear, level, lang)
+            updatePapers(s, tSubject, tYear, newLevel, newLang)
           }}
         >
-          <SelectTrigger className="h-12 w-52 border-zinc-200/20 bg-zinc-900 text-base font-bold">
+          <SelectTrigger
+            className="h-12 w-52 border-zinc-200/20 bg-zinc-900 text-base font-bold"
+            suppressHydrationWarning
+          >
             <SelectValue placeholder="Select exam" />
           </SelectTrigger>
           <SelectContent className="border-zinc-200/20 bg-zinc-900">
@@ -208,10 +232,12 @@ export default function Choices({ papers, setPapers }) {
               className="h-12 w-64 justify-between border-zinc-200/20 bg-zinc-900 text-base font-bold hover:bg-zinc-800"
             >
               <div className="flex items-center gap-2">
-                {favSubs.includes(subject) && (
+                {favSubs.includes(validSubject) && (
                   <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                 )}
-                <span className="truncate">{subject}</span>
+                <span className="truncate" suppressHydrationWarning>
+                  {validSubject}
+                </span>
               </div>
               <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
             </Button>
@@ -236,19 +262,25 @@ export default function Choices({ papers, setPapers }) {
                       setSubject(selected)
                       setSubjectOpen(false)
 
-                      const tYearList = Object.keys(data[exam][selected])
+                      const tYearList = Object.keys(data[validExam][selected])
                         .sort()
                         .reverse()
                       setYearList(tYearList)
-                      const tYear = tYearList.includes(year)
-                        ? year
+                      const tYear = tYearList.includes(validYear)
+                        ? validYear
                         : (tYearList[0] as string)
                       setYear(tYear)
 
-                      const level = updateLevel(exam, selected, tYear)
-                      const lang = updateLang(exam, selected, tYear)
+                      const newLevel = updateLevel(validExam, selected, tYear)
+                      const newLang = updateLang(validExam, selected, tYear)
 
-                      updatePapers(exam, selected, tYear, level, lang)
+                      updatePapers(
+                        validExam,
+                        selected,
+                        tYear,
+                        newLevel,
+                        newLang
+                      )
                     }}
                     className="flex items-center justify-between"
                   >
@@ -271,7 +303,7 @@ export default function Choices({ papers, setPapers }) {
                     <Check
                       className={cn(
                         'ml-2 h-4 w-4',
-                        subject === sub ? 'opacity-100' : 'opacity-0'
+                        validSubject === sub ? 'opacity-100' : 'opacity-0'
                       )}
                     />
                   </CommandItem>
@@ -289,8 +321,9 @@ export default function Choices({ papers, setPapers }) {
               role="combobox"
               aria-expanded={yearOpen}
               className="h-12 w-32 justify-between border-zinc-200/20 bg-zinc-900 text-base font-bold hover:bg-zinc-800"
+              suppressHydrationWarning
             >
-              {year}
+              {validYear}
               <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
             </Button>
           </PopoverTrigger>
@@ -314,16 +347,30 @@ export default function Choices({ papers, setPapers }) {
                       setYear(selected)
                       setYearOpen(false)
 
-                      const level = updateLevel(exam, subject, selected)
-                      const lang = updateLang(exam, subject, selected)
+                      const newLevel = updateLevel(
+                        validExam,
+                        validSubject,
+                        selected
+                      )
+                      const newLang = updateLang(
+                        validExam,
+                        validSubject,
+                        selected
+                      )
 
-                      updatePapers(exam, subject, selected, level, lang)
+                      updatePapers(
+                        validExam,
+                        validSubject,
+                        selected,
+                        newLevel,
+                        newLang
+                      )
                     }}
                   >
                     <Check
                       className={cn(
                         'mr-2 h-4 w-4',
-                        year === y ? 'opacity-100' : 'opacity-0'
+                        validYear === y ? 'opacity-100' : 'opacity-0'
                       )}
                     />
                     {y}
@@ -336,13 +383,16 @@ export default function Choices({ papers, setPapers }) {
 
         {/* LEVEL */}
         <Select
-          value={level}
+          value={validLevel}
           onValueChange={(s) => {
             setLevel(s)
-            updatePapers(exam, subject, year, s, lang)
+            updatePapers(validExam, validSubject, validYear, s, validLang)
           }}
         >
-          <SelectTrigger className="h-12 w-44 border-zinc-200/20 bg-zinc-900 text-base font-bold">
+          <SelectTrigger
+            className="h-12 w-44 border-zinc-200/20 bg-zinc-900 text-base font-bold"
+            suppressHydrationWarning
+          >
             <SelectValue placeholder="Select level" />
           </SelectTrigger>
           <SelectContent className="border-zinc-200/20 bg-zinc-900">
@@ -355,30 +405,38 @@ export default function Choices({ papers, setPapers }) {
         </Select>
 
         {/* LANGUAGE */}
-        <ToggleGroup
-          type="single"
-          variant="outline"
-          size="lg"
-          value={lang}
-          onValueChange={(value) => {
-            if (!value) return // Prevent deselecting
-            setLang(value)
-            setPrefLang(value)
-            updatePrefLangCookie(value, { sameSite: 'strict' })
-            updatePapers(exam, subject, year, level, value)
-          }}
-        >
-          {langList.map((l) => (
-            <ToggleGroupItem
-              key={l.value}
-              value={l.value}
-              disabled={l?.disabled}
-              className="h-12 border-zinc-200/20 bg-zinc-900 px-5 text-base font-bold"
-            >
-              {l.label}
-            </ToggleGroupItem>
-          ))}
-        </ToggleGroup>
+        <div suppressHydrationWarning>
+          <ToggleGroup
+            type="single"
+            variant="outline"
+            size="lg"
+            value={validLang}
+            onValueChange={(value) => {
+              if (!value) return // Prevent deselecting
+              setLang(value)
+              setPrefLang(value)
+              updatePrefLangCookie(value, { sameSite: 'strict' })
+              updatePapers(
+                validExam,
+                validSubject,
+                validYear,
+                validLevel,
+                value
+              )
+            }}
+          >
+            {langList.map((l) => (
+              <ToggleGroupItem
+                key={l.value}
+                value={l.value}
+                disabled={l?.disabled}
+                className="h-12 border-zinc-200/20 bg-zinc-900 px-5 text-base font-bold"
+              >
+                {l.label}
+              </ToggleGroupItem>
+            ))}
+          </ToggleGroup>
+        </div>
       </div>
       {/* SLICING */}
       {/* <Slicing
