@@ -18,8 +18,6 @@ export const logger = pino({
 export const sleep = (ms: number) =>
   new Promise((resolve) => setTimeout(resolve, ms))
 
-export const getCurrentYear = () => new Date().getFullYear().toString()
-
 // File I/O operations
 export const fileIO = {
   loadJSON<T>(path: string, defaultValue: T): T {
@@ -74,6 +72,8 @@ export const dom = {
   ): Promise<void> {
     try {
       await page.select(selectSel, value)
+      // Wait for network to be idle after selection to ensure new data has loaded
+      await page.waitForNetworkIdle({ idleTime: 300, timeout: 10000 })
       await page.waitForSelector(waitSel, { timeout: 10000 })
       await sleep(timeout)
     } catch (error) {

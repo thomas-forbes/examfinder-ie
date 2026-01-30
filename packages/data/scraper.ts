@@ -1,12 +1,12 @@
 #!/usr/bin/env bun
 
 import puppeteer, { Page } from 'puppeteer'
-import { dom, fileIO, getCurrentYear, logger, sleep } from './helpers'
+import { dom, fileIO, logger, sleep } from './helpers'
 
 // Configuration
 const CONFIG = {
   SKIP_FILLED: false,
-  ONLY_CURRENT_YEAR: true,
+  ONLY_CURRENT_YEAR: false,
   TIMEOUT: 500,
   HEADLESS: true,
   SLOW_MO: 0,
@@ -134,8 +134,20 @@ const pageSetup = {
   },
 
   getYearOptions(): string[] {
-    const allYears = ['2024', '2023', '2022', '2021', '2020', '2019', '2018']
-    return CONFIG.ONLY_CURRENT_YEAR ? [getCurrentYear()] : allYears
+    const currentYear = new Date().getFullYear()
+    // const firstYear = 1995
+    const firstYear = 2023
+    const allYears = Array.from(
+      { length: currentYear - firstYear + 1 },
+      (_, i) => (currentYear - i).toString()
+    )
+
+    const result = CONFIG.ONLY_CURRENT_YEAR
+      ? [new Date().getFullYear().toString()]
+      : allYears
+
+    logger.info({ result }, 'getYearOptions')
+    return result
   },
 }
 
@@ -166,6 +178,16 @@ const scraper = {
       CONFIG.TIMEOUT
     )
     const papers = await dom.extractPapers(page)
+
+    // Don't save if no papers were found - this prevents accidentally
+    // deleting existing data when the page fails to load properly
+    if (papers.length === 0) {
+      logger.warn(
+        { exam, subject: subject.text, year, type },
+        'No papers found - skipping save to preserve existing data'
+      )
+      return
+    }
 
     dataManager.saveSubject(data, exam, subject.text, year, type, papers)
     dataManager.save(data)
