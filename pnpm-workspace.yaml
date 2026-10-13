@@ -7,4 +7,4 @@ ignoredBuiltDependencies:
   - unrs-resolver
 
 onlyBuiltDependencies:
-  - muhammara
+  - '@muhammara/native'

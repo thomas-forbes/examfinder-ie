@@ -35,8 +35,10 @@ export default function Choices({ papers, setPapers }) {
   const [favSubsCookie, updateFavSubs] = useCookie('favSubs')
   const [favSubs, setFavSubs] = useState<string[]>([])
   useEffect(() => {
+    // Synchronize cookie preferences after mounting.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setFavSubs(favSubsCookie ? JSON.parse(favSubsCookie).sort() : [])
-  }, [])
+  }, [favSubsCookie])
 
   const initialSubList = Object.keys(data[validExam]).sort()
   const [subList, setSubList] = useState(initialSubList)
@@ -160,12 +162,14 @@ export default function Choices({ papers, setPapers }) {
     }
     setFavSubs(tFavSubs)
     updateFavSubs(JSON.stringify(tFavSubs), {
-      expires: new Date(Date.now() + 100 * 365 * 24 * 60 * 60 * 1000),
+      expires: 36500,
       sameSite: 'strict',
     })
   }
 
   useEffect(() => {
+    // Initialize allowed levels and languages from persisted browser selections.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     updateLevel(validExam, validSubject, validYear)
     updateLang(validExam, validSubject, validYear)
     updatePapers(validExam, validSubject, validYear, validLevel, validLang)

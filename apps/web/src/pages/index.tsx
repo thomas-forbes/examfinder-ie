@@ -1,11 +1,15 @@
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
 import { useState } from 'react'
 
 import posthog from 'posthog-js'
-import Choices from '../components/Choices'
 import Footer from '../components/Footer'
 import PageHead from '../components/PageHead'
 import PaperList from '../components/PaperList'
+
+// Preferences come from browser storage. Render the controls on the client so
+// React 19 does not retain stale server labels under suppressHydrationWarning.
+const Choices = dynamic(() => import('../components/Choices'), { ssr: false })
 
 export default function App() {
   const [papers, setPapers] = useState<
@@ -60,7 +64,7 @@ export default function App() {
         {/* PAPERS */}
         <PaperList papers={papers} />
         {/* DIVIDER */}
-        <div className="flex-grow" />
+        <div className="grow" />
         {/* FOOTER */}
         <Footer />
       </div>

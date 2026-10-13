@@ -1,9 +1,9 @@
-import muhammara from 'muhammara'
+import muhammara from '@muhammara/native'
 import { type NextApiRequest, type NextApiResponse } from 'next'
 import { z } from 'zod'
 
 export default async function pdf(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== 'POST') res.status(405).end()
+  if (req.method !== 'POST') return res.status(405).end()
   try {
     const { years, pages, type, code } = z
       .object({
@@ -47,7 +47,7 @@ export default async function pdf(req: NextApiRequest, res: NextApiResponse) {
       const pageCount = pdfReader.getPagesCount()
       console.log(urls[index], pageCount)
       totalPages += pageCount
-      const copier = pdfWriter.createPDFCopyingContext(pdfReader as any)
+      const copier = pdfWriter.createPDFCopyingContext(pdfReader)
       pages
         .filter((page) => page < pageCount)
         .forEach((page) => copier.appendPDFPageFromPDF(page))

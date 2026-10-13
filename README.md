@@ -24,8 +24,12 @@ examfinder-ie/
 
 ### Install Dependencies
 
+Use Node.js 24 and pnpm 10.34.7 (pinned in `package.json`). The scraper also
+requires Bun 1.4.2 or newer. Install from the repository root so both workspace
+packages share `pnpm-lock.yaml`; do not generate a separate Bun lockfile.
+
 ```bash
-pnpm install
+pnpm install --frozen-lockfile
 ```
 
 ### Development
@@ -59,6 +63,31 @@ pnpm scrape
 ```
 
 This will scrape exam data and save it to `apps/web/public/data.json`.
+
+### Verification
+
+```bash
+pnpm exec playwright install chromium
+pnpm --filter @examfinder/data exec puppeteer browsers install chrome
+pnpm lint
+pnpm typecheck
+pnpm test
+pnpm build
+pnpm test:e2e
+pnpm audit --prod --audit-level high
+```
+
+The unit tests generate PDF fixtures in memory and test scraper helpers against
+local HTML and temporary JSON files. They do not scrape examinations.ie or update
+the checked-in exam data. Browser tests run the production build in isolated
+desktop and mobile Chromium contexts, block external requests, and check paper
+filters, persisted preferences, points calculations, navigation and page overflow.
+`pnpm build` must run before `pnpm test:e2e`.
+
+Next.js 16 uses the ESLint CLI and Tailwind 4 uses `@tailwindcss/postcss`.
+The PDF endpoint uses the maintained `@muhammara/native` package; its install
+script is explicitly allowed in `pnpm-workspace.yaml` so native prebuilds are
+available on supported platforms. Browser downloads remain explicit.
 
 ## Packages
 

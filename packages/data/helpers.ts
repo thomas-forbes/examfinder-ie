@@ -1,6 +1,6 @@
 import { readFileSync, writeFileSync } from 'fs'
 import pino from 'pino'
-import { Page } from 'puppeteer'
+import type { Page } from 'puppeteer'
 
 export const logger = pino({
   level: process.env.LOG_LEVEL || 'info',
