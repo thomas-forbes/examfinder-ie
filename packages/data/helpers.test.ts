@@ -10,8 +10,18 @@ describe('scraper helpers with an offline archive fixture', () => {
   let page: Page
 
   beforeAll(async () => {
-    browser = await puppeteer.launch({ headless: true })
+    browser = await puppeteer.launch({
+      headless: true,
+      // GitHub's Ubuntu runner blocks Chrome's user namespace sandbox. This
+      // browser only receives the trusted inline fixture below, never a URL.
+      args:
+        process.env.CI && process.platform === 'linux' ? ['--no-sandbox'] : [],
+    })
     page = await browser.newPage()
+    await page.setRequestInterception(true)
+    page.on('request', (request) => {
+      void request.abort()
+    })
     await page.setContent(`
       <select id="subject">
         <option value="0">Choose</option><option value="">Empty</option>
