@@ -135,3 +135,23 @@ test('continues when one year is unavailable', async () => {
     1
   )
 })
+
+test('returns an upstream error before writing a PDF when every year is unavailable', async () => {
+  globalThis.fetch = async () => new Response(null, { status: 403 })
+  const out = response()
+  await pdf(
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        years: [2024],
+        pages: [0],
+        type: 'exampapers',
+        code: 'fixture.pdf',
+      }),
+    } as NextApiRequest,
+    out.res
+  )
+  assert.equal(out.raw.statusCode, 502)
+  assert.equal(out.body().length, 0)
+  assert.equal(out.raw.headers['Content-Type'], undefined)
+})
