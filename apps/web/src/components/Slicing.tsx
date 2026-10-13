@@ -1,5 +1,5 @@
 import posthog from 'posthog-js'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { urlPaperType } from '../utils/consts'
 import Spinner from './Spinner'
 import {
@@ -43,10 +43,8 @@ function getDetails(type: Type | undefined): string {
 }
 
 export default function Slicing({ types, yearList, subject }: props) {
-  const [details, setDetails] = useState<string>(getDetails(types[0]))
-  useEffect(() => {
-    if (details === '' && !!types[0]) setDetails(getDetails(types[0]))
-  }, [types])
+  const [selectedDetails, setDetails] = useState<string>()
+  const details = selectedDetails ?? getDetails(types[0])
   const type = types.find((t) => getDetails(t) === details)
 
   const [startYear, setStartYear] = useState(new Date().getFullYear())
@@ -112,7 +110,7 @@ export default function Slicing({ types, yearList, subject }: props) {
         <Question label={label} key={label}>
           <input
             type="number"
-            className="w-full rounded-md border border-zinc-200/10 bg-zinc-800 px-2 py-1 text-zinc-200 shadow-md shadow-zinc-800/5 transition-colors duration-300 placeholder:text-zinc-500 focus:border-sky-600 focus:outline-none focus:ring-4 focus:ring-sky-600/10"
+            className="w-full rounded-md border border-zinc-200/10 bg-zinc-800 px-2 py-1 text-zinc-200 shadow-md shadow-zinc-800/5 transition-colors duration-300 placeholder:text-zinc-500 focus:border-sky-600 focus:outline-hidden focus:ring-4 focus:ring-sky-600/10"
             value={value}
             min={label.includes('Page') ? 1 : Math.min(...yearList)}
             max={label.includes('Page') ? undefined : Math.max(...yearList)}
@@ -137,7 +135,7 @@ export default function Slicing({ types, yearList, subject }: props) {
       ))}
       {/* DOWNLOAD */}
       <button
-        className="enabled:hover:bg-sky-400 enabled:active:bg-sky-500 enabled:active:text-sky-100/80 enabled:dark:hover:bg-sky-500 enabled:dark:active:bg-sky-600 enabled:dark:active:text-sky-100/70 flex h-10 w-full items-center justify-center rounded-md bg-sky-500 px-4 py-2 text-lg font-semibold text-sky-100 outline-offset-2 transition active:transition-none disabled:cursor-not-allowed disabled:opacity-60 dark:bg-sky-600"
+        className="hover:enabled:bg-sky-400 active:enabled:bg-sky-500 active:enabled:text-sky-100/80 dark:hover:enabled:bg-sky-500 dark:active:enabled:bg-sky-600 dark:active:enabled:text-sky-100/70 flex h-10 w-full items-center justify-center rounded-md bg-sky-500 px-4 py-2 text-lg font-semibold text-sky-100 outline-offset-2 transition active:transition-none disabled:cursor-not-allowed disabled:opacity-60 dark:bg-sky-600"
         disabled={downloadState == 'loading' || !type}
         onClick={async () => {
           if (!type) return

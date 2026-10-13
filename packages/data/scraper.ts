@@ -1,6 +1,6 @@
 #!/usr/bin/env bun
 
-import puppeteer, { Page } from 'puppeteer'
+import puppeteer, { type Page } from 'puppeteer'
 import { dom, fileIO, logger, sleep } from './helpers'
 
 // Configuration

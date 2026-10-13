@@ -1,0 +1,33 @@
+name: Verify workspace
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '24'
+      - run: npm install --global pnpm@10.34.7
+      - uses: oven-sh/setup-bun@v2.2.0
+        with:
+          bun-version: '1.4.2'
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm --filter @examfinder/data exec puppeteer browsers install chrome
+      - run: pnpm lint
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm build
+      - run: pnpm test:trace
+      - run: pnpm test:e2e
+      - run: pnpm audit --prod --audit-level high

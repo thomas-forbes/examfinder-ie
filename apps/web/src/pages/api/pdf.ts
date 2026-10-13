@@ -1,9 +1,9 @@
-import muhammara from 'muhammara'
+import muhammara from '@muhammara/native'
 import { type NextApiRequest, type NextApiResponse } from 'next'
 import { z } from 'zod'
 
 export default async function pdf(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== 'POST') res.status(405).end()
+  if (req.method !== 'POST') return res.status(405).end()
   try {
     const { years, pages, type, code } = z
       .object({
@@ -23,7 +23,7 @@ export default async function pdf(req: NextApiRequest, res: NextApiResponse) {
       await Promise.allSettled(
         urls.map(async (url) => {
           const res = await fetch(url)
-          if (!res.ok) throw new Error()
+          if (!res.ok) throw new Error(`Exam archive returned HTTP ${res.status}`)
           return new muhammara.PDFRStreamForBuffer(
             Buffer.from(await res.arrayBuffer())
           )
@@ -36,6 +36,13 @@ export default async function pdf(req: NextApiRequest, res: NextApiResponse) {
           (r as PromiseFulfilledResult<muhammara.PDFRStreamForBuffer>).value
       )
 
+    // A native writer emits a PDF header immediately. Report upstream failures
+    // before creating it, rather than returning HTTP 200 with a truncated PDF.
+    if (streams.length === 0) {
+      console.error('No requested exam PDFs could be fetched')
+      return res.status(502).end()
+    }
+
     res.writeHead(200, { 'Content-Type': 'application/pdf' })
     const pdfWriter = muhammara.createWriter(
       new muhammara.PDFStreamForResponse(res)
@@ -47,7 +54,7 @@ export default async function pdf(req: NextApiRequest, res: NextApiResponse) {
       const pageCount = pdfReader.getPagesCount()
       console.log(urls[index], pageCount)
       totalPages += pageCount
-      const copier = pdfWriter.createPDFCopyingContext(pdfReader as any)
+      const copier = pdfWriter.createPDFCopyingContext(pdfReader)
       pages
         .filter((page) => page < pageCount)
         .forEach((page) => copier.appendPDFPageFromPDF(page))

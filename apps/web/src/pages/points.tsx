@@ -135,7 +135,7 @@ export default function Points() {
               {subjects.map((sub, subIdx) => (
                 <tr
                   key={sub.uuid}
-                  className={`[&>td]:border [&>td]:border-zinc-700 [&>td]:px-2 [&>td]:py-1 [&>td]:xs:px-3 [&>td]:xs:py-2 odd:bg-zinc-800/70 even:bg-zinc-800 ${
+                  className={`[&>td]:border [&>td]:border-zinc-700 [&>td]:px-2 [&>td]:py-1 xs:[&>td]:px-3 xs:[&>td]:py-2 odd:bg-zinc-800/70 even:bg-zinc-800 ${
                     sub.disabled ? 'pointer-events-none opacity-70' : ''
                   }`}
                 >
@@ -173,7 +173,7 @@ export default function Points() {
                       </StyledLink>
                     ) : (
                       <input
-                        className="xs:text-base w-14 min-w-0 appearance-none rounded-none border-zinc-500 bg-transparent text-xs !text-white outline-none duration-300 placeholder:text-zinc-500 focus:border-blue-500 sm:w-auto"
+                        className="xs:text-base w-14 min-w-0 appearance-none rounded-none border-zinc-500 bg-transparent text-xs !text-white outline-hidden duration-300 placeholder:text-zinc-500 focus:border-blue-500 sm:w-auto"
                         placeholder="Subject..."
                         value={sub.subject}
                         disabled={!!sub.special}
@@ -193,7 +193,7 @@ export default function Points() {
                   {sub.special != 'LCVP' ? (
                     <td className="text-center">
                       <select
-                        className="bg-transparent outline-none"
+                        className="bg-transparent outline-hidden"
                         value={sub.level}
                         onChange={(e) =>
                           setSubjects(
@@ -227,7 +227,7 @@ export default function Points() {
                   {/* GRADE */}
                   <td className="text-center">
                     <select
-                      className="bg-transparent outline-none"
+                      className="bg-transparent outline-hidden"
                       value={sub.grade}
                       onChange={(e) =>
                         setSubjects(
@@ -270,7 +270,7 @@ export default function Points() {
             </u>
           </p>
         </div>
-        <div className="flex-grow"></div>
+        <div className="grow"></div>
         <Footer />
       </div>
     </>

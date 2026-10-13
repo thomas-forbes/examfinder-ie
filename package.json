@@ -2,16 +2,25 @@
   "name": "@examfinder/monorepo",
   "version": "0.1.0",
   "private": true,
-  "packageManager": "pnpm@10.17.1",
+  "packageManager": "pnpm@10.34.7",
   "scripts": {
     "build": "pnpm --filter @examfinder/web build",
     "dev": "pnpm --filter @examfinder/web dev",
-    "lint": "pnpm --filter @examfinder/web lint",
+    "lint": "pnpm -r --if-present lint",
     "start": "pnpm --filter @examfinder/web start",
-    "scrape": "pnpm --filter @examfinder/data scrape"
+    "scrape": "pnpm --filter @examfinder/data scrape",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r --if-present test",
+    "test:e2e": "playwright test",
+    "test:trace": "node scripts/check-pdf-trace.mjs"
   },
   "devDependencies": {
-    "prettier": "^2.8.8",
-    "prettier-plugin-tailwindcss": "^0.1.13"
+    "prettier": "^3.9.10",
+    "prettier-plugin-tailwindcss": "^0.8.1",
+    "@playwright/test": "^1.64.0"
+  },
+  "engines": {
+    "node": ">=24 <25",
+    "pnpm": ">=10.34.7 <11"
   }
 }
