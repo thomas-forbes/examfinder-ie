@@ -73,6 +73,7 @@ pnpm lint
 pnpm typecheck
 pnpm test
 pnpm build
+pnpm test:trace
 pnpm test:e2e
 pnpm audit --prod --audit-level high
 ```
@@ -83,6 +84,9 @@ the checked-in exam data. Browser tests run the production build in isolated
 desktop and mobile Chromium contexts, block external requests, and check paper
 filters, persisted preferences, points calculations, navigation and page overflow.
 `pnpm build` must run before `pnpm test:e2e`.
+`pnpm test:trace` reconstructs the PDF route from its traced deployment files
+in a temporary directory and verifies that it loads without the full workspace
+dependency tree, catching missing serverless runtime packages.
 
 Next.js 16 uses the ESLint CLI and Tailwind 4 uses `@tailwindcss/postcss`.
 The PDF endpoint uses the maintained `@muhammara/native` package; its install

@@ -11,7 +11,8 @@
     "scrape": "pnpm --filter @examfinder/data scrape",
     "typecheck": "pnpm -r typecheck",
     "test": "pnpm -r --if-present test",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "test:trace": "node scripts/check-pdf-trace.mjs"
   },
   "devDependencies": {
     "prettier": "^3.9.10",
