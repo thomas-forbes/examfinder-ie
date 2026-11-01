@@ -1787,6 +1787,58 @@
           "url": "LC001GLP000IV.pdf",
           "type": "Deferred Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Paper One / Higher Level (IV)",
+          "url": "LC001ALP100IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Paper One / Foundation Level (IV)",
+          "url": "LC001BLP100IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Paper One / Ordinary Level (IV)",
+          "url": "LC001GLP100IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Sound File / Foundation Level (IV)",
+          "url": "LC001BLP017IV.mp3",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Sound File (IV)",
+          "url": "LC001ZLP017IV.mp3",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Paper Two / Higher Level (IV)",
+          "url": "LC001ALP200IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Paper Two / Ordinary Level (IV)",
+          "url": "LC001GLP200IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC001ALP000IV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Foundation Level (IV)",
+          "url": "LC001BLP000IV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC001GLP000IV.pdf",
+          "type": "Marking Scheme"
+        }
       ]
     },
     "English": {
@@ -2800,6 +2852,38 @@
           "details": "Higher Level (EV)",
           "url": "LC002ALP000EV.pdf",
           "type": "Deferred Marking Scheme"
+        }
+      ],
+      "2026": [
+        {
+          "details": "Paper One / Higher Level (EV)",
+          "url": "LC002ALP100EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Paper One / Ordinary Level (EV)",
+          "url": "LC002GLP100EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Paper Two / Ordinary Level (EV)",
+          "url": "LC002GLP200EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Paper Two / Higher Level (EV)",
+          "url": "LC002ALP200EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC002ALP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC002GLP000EV.pdf",
+          "type": "Marking Scheme"
         }
       ]
     },
@@ -5613,6 +5697,88 @@
           "url": "LC003GLP000IV.pdf",
           "type": "Deferred Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Paper One / Higher Level (EV)",
+          "url": "LC003ALP100EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Paper One / Higher Level (IV)",
+          "url": "LC003ALP100IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Foundation Level (EV)",
+          "url": "LC003BLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Foundation Level (IV)",
+          "url": "LC003BLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Paper One / Ordinary Level (EV)",
+          "url": "LC003GLP100EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Paper One / Ordinary Level (IV)",
+          "url": "LC003GLP100IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Paper Two / Higher Level (EV)",
+          "url": "LC003ALP200EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Paper Two / Higher Level (IV)",
+          "url": "LC003ALP200IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Paper Two / Ordinary Level (EV)",
+          "url": "LC003GLP200EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Paper Two / Ordinary Level (IV)",
+          "url": "LC003GLP200IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Foundation Level (IV)",
+          "url": "LC003BLP000IV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC003ALP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC003ALP000IV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Foundation Level (EV)",
+          "url": "LC003BLP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC003GLP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC003GLP000IV.pdf",
+          "type": "Marking Scheme"
+        }
       ]
     },
     "History": {
@@ -6698,6 +6864,48 @@
         {
           "details": "Ordinary Level (IV)",
           "url": "LC004GLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC004ALP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC004ALP000IV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC004GLP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC004GLP000IV.pdf",
+          "type": "Marking Scheme"
+        }
+      ],
+      "2026": [
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC004GLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC004GLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC004ALP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC004ALP000IV.pdf",
           "type": "Exam Paper"
         },
         {
@@ -8357,6 +8565,83 @@
           "url": "LC005ALP000EV.pdf",
           "type": "Deferred Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Part 1 / Higher Level (EV)",
+          "url": "LC005ALP042EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Part 1 / Higher Level (IV)",
+          "url": "LC005ALP042IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Part 2 / Higher Level (EV)",
+          "url": "LC005ALP043EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Part 2 / Higher Level (IV)",
+          "url": "LC005ALP043IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Map / Common Level (EV)",
+          "url": "LC005CLP003EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Picture/Illustration / Common Level (EV)",
+          "url": "LC005CLP004EV.jpg",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Source Paper / Common Level (EV)",
+          "url": "LC005CLPC00EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Part 1 / Ordinary Level (EV)",
+          "url": "LC005GLP042EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Part 1 / Ordinary Level (IV)",
+          "url": "LC005GLP042IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Part 2 / Ordinary Level (EV)",
+          "url": "LC005GLP043EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Part 2 / Ordinary Level (IV)",
+          "url": "LC005GLP043IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC005ALP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC005ALP000IV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC005GLP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC005GLP000IV.pdf",
+          "type": "Marking Scheme"
+        }
       ]
     },
     "Latin": {
@@ -9287,6 +9572,28 @@
         {
           "details": "Higher Level (EV)",
           "url": "LC006ALP000EV.pdf",
+          "type": "Marking Scheme"
+        }
+      ],
+      "2026": [
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC006ALP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC006ALP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC006ALP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC006ALP000IV.pdf",
           "type": "Marking Scheme"
         }
       ]
@@ -11309,6 +11616,58 @@
           "url": "LC008GLP000IV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC008ALP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Picture/Illustration / Higher Level (BV)",
+          "url": "LC008ALP004BV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC008GLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Picture/Illustration / Ordinary Level (BV)",
+          "url": "LC008GLP004BV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC008ALP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC008GLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC008ALP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC008ALP000IV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC008GLP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC008GLP000IV.pdf",
+          "type": "Marking Scheme"
+        }
       ]
     },
     "Hebrew Studies": {
@@ -13203,6 +13562,53 @@
           "url": "LC010GLP000IV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Higher Level (BV)",
+          "url": "LC010ALP000BV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Aural Paper / Higher Level (BV)",
+          "url": "LC010ALPA00BV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Sound File / Common Level (EV)",
+          "url": "LC010CLP017EV.mp3",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (BV)",
+          "url": "LC010GLP000BV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Aural Paper / Ordinary Level (BV)",
+          "url": "LC010GLPA00BV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC010ALP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC010ALP000IV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC010GLP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC010GLP000IV.pdf",
+          "type": "Marking Scheme"
+        }
       ]
     },
     "German": {
@@ -14700,6 +15106,53 @@
         {
           "details": "Aural Paper / Ordinary Level (BV)",
           "url": "LC011GLPA00BV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC011ALP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC011ALP000IV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC011GLP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC011GLP000IV.pdf",
+          "type": "Marking Scheme"
+        }
+      ],
+      "2026": [
+        {
+          "details": "Higher Level (BV)",
+          "url": "LC011ALP000BV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Aural Paper / Higher Level (BV)",
+          "url": "LC011ALPA00BV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (BV)",
+          "url": "LC011GLP000BV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Aural Paper / Ordinary Level (BV)",
+          "url": "LC011GLPA00BV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Sound File / Common Level (BV)",
+          "url": "LC011CLP017BV.mp3",
           "type": "Exam Paper"
         },
         {
@@ -16619,6 +17072,78 @@
           "url": "LC012GLP000IV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC012ALP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC012ALP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section B / Higher Level (EV)",
+          "url": "LC012ALP015EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Aural Paper / Higher Level (EV)",
+          "url": "LC012ALPA00EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Aural Paper / Higher Level (IV)",
+          "url": "LC012ALPA00IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC012GLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC012GLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Aural Paper / Ordinary Level (EV)",
+          "url": "LC012GLPA00EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Aural Paper / Ordinary Level (IV)",
+          "url": "LC012GLPA00IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Sound File (BV)",
+          "url": "LC012ZLP017BV.mp3",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC012ALP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC012ALP000IV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC012GLP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC012GLP000IV.pdf",
+          "type": "Marking Scheme"
+        }
       ]
     },
     "Italian": {
@@ -18079,6 +18604,53 @@
         {
           "details": "Higher Level (BV)",
           "url": "LC013ALP000BV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC013ALP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC013ALP000IV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC013GLP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC013GLP000IV.pdf",
+          "type": "Marking Scheme"
+        }
+      ],
+      "2026": [
+        {
+          "details": "Higher Level (BV)",
+          "url": "LC013ALP000BV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Aural Paper / Higher Level (BV)",
+          "url": "LC013ALPA00BV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (BV)",
+          "url": "LC013GLP000BV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Aural Paper / Ordinary Level (BV)",
+          "url": "LC013GLPA00BV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Sound File (BV)",
+          "url": "LC013ZLP017BV.mp3",
           "type": "Exam Paper"
         },
         {
@@ -20920,6 +21492,58 @@
           "url": "LC014GLP000IV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC014ALP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC014ALP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Picture/Illustration / Higher Level (BV)",
+          "url": "LC014ALP004BV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC014GLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC014GLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Picture/Illustration / Ordinary Level (BV)",
+          "url": "LC014GLP004BV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC014ALP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC014ALP000IV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC014GLP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC014GLP000IV.pdf",
+          "type": "Marking Scheme"
+        }
       ]
     },
     "Dutch": {
@@ -21149,6 +21773,18 @@
         }
       ],
       "2025": [
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC017ALP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC017ALP000EV.pdf",
+          "type": "Marking Scheme"
+        }
+      ],
+      "2026": [
         {
           "details": "Higher Level (EV)",
           "url": "LC017ALP000EV.pdf",
@@ -21613,6 +22249,73 @@
           "url": "LC018GLP000IV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC018ALP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC018ALP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Aural Paper / Higher Level (EV)",
+          "url": "LC018ALPA00EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Aural Paper / Higher Level (IV)",
+          "url": "LC018ALPA00IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC018GLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC018GLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Aural Paper / Ordinary Level (EV)",
+          "url": "LC018GLPA00EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Aural Paper / Ordinary Level (IV)",
+          "url": "LC018GLPA00IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Sound File (BV)",
+          "url": "LC018ZLP017BV.mp3",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC018ALP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC018ALP000IV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC018GLP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC018GLP000IV.pdf",
+          "type": "Marking Scheme"
+        }
       ]
     },
     "Modern Greek": {
@@ -21910,6 +22613,18 @@
         }
       ],
       "2025": [
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC019ALP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC019ALP000EV.pdf",
+          "type": "Marking Scheme"
+        }
+      ],
+      "2026": [
         {
           "details": "Higher Level (EV)",
           "url": "LC019ALP000EV.pdf",
@@ -22922,6 +23637,48 @@
         }
       ],
       "2025": [
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC020ALP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC020ALP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC020GLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC020GLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC020ALP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC020ALP000IV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC020GLP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC020GLP000IV.pdf",
+          "type": "Marking Scheme"
+        }
+      ],
+      "2026": [
         {
           "details": "Higher Level (EV)",
           "url": "LC020ALP000EV.pdf",
@@ -24044,6 +24801,48 @@
           "url": "LC021GLP000IV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC021ALP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC021ALP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC021GLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC021GLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC021ALP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC021ALP000IV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC021GLP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC021GLP000IV.pdf",
+          "type": "Marking Scheme"
+        }
       ]
     },
     "Chemistry": {
@@ -25121,6 +25920,48 @@
           "url": "LC022GLP000IV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC022ALP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC022ALP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC022GLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC022GLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC022ALP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC022ALP000IV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC022GLP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC022GLP000IV.pdf",
+          "type": "Marking Scheme"
+        }
       ]
     },
     "Physics & Chemistry": {
@@ -26086,6 +26927,48 @@
         }
       ],
       "2025": [
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC023ALP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC023ALP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC023GLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC023GLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC023ALP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC023ALP000IV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC023GLP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC023GLP000IV.pdf",
+          "type": "Marking Scheme"
+        }
+      ],
+      "2026": [
         {
           "details": "Higher Level (EV)",
           "url": "LC023ALP000EV.pdf",
@@ -27143,6 +28026,48 @@
         }
       ],
       "2025": [
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC024ALP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC024ALP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC024GLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC024GLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC024ALP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC024ALP000IV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC024GLP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC024GLP000IV.pdf",
+          "type": "Marking Scheme"
+        }
+      ],
+      "2026": [
         {
           "details": "Higher Level (EV)",
           "url": "LC024ALP000EV.pdf",
@@ -28519,6 +29444,68 @@
           "details": "Higher Level (IV)",
           "url": "LC025ALP000IV.pdf",
           "type": "Deferred Marking Scheme"
+        }
+      ],
+      "2026": [
+        {
+          "details": "Section A&B / Higher Level (EV)",
+          "url": "LC025ALP038EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section A&B / Higher Level (IV)",
+          "url": "LC025ALP038IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section C / Higher Level (EV)",
+          "url": "LC025ALP040EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section C / Higher Level (IV)",
+          "url": "LC025ALP040IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section A&B / Ordinary Level (EV)",
+          "url": "LC025GLP038EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section A&B / Ordinary Level (IV)",
+          "url": "LC025GLP038IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section C / Ordinary Level (EV)",
+          "url": "LC025GLP040EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section C / Ordinary Level (IV)",
+          "url": "LC025GLP040IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC025ALP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC025ALP000IV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC025GLP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC025GLP000IV.pdf",
+          "type": "Marking Scheme"
         }
       ]
     },
@@ -30525,6 +31512,63 @@
         {
           "details": "Ordinary Level (IV)",
           "url": "LC027GLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC027ALP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC027ALP000IV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC027GLP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC027GLP000IV.pdf",
+          "type": "Marking Scheme"
+        }
+      ],
+      "2026": [
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC027ALP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC027ALP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC027GLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC027GLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Practical Test Day 1 / Common Level (BV)",
+          "url": "LC027CLP034BV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Practical Test Day 2 / Common Level (BV)",
+          "url": "LC027CLP035BV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Practical Test Day 3 / Common Level (BV)",
+          "url": "LC027CLP036BV.pdf",
           "type": "Exam Paper"
         },
         {
@@ -32672,6 +33716,63 @@
           "url": "LC029GLP000IV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC029ALP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC029ALP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC029GLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC029GLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Practical Test Day 1 / Common Level (EV)",
+          "url": "LC029CLP034EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Practical Test Day 2 / Common Level (EV)",
+          "url": "LC029CLP035EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Practical Test Day 3 / Common Level (EV)",
+          "url": "LC029CLP036EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC029ALP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC029ALP000IV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC029GLP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC029GLP000IV.pdf",
+          "type": "Marking Scheme"
+        }
       ]
     },
     "Accounting": {
@@ -33694,6 +34795,48 @@
         }
       ],
       "2025": [
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC032ALP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC032ALP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC032GLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC032GLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC032ALP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC032ALP000IV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC032GLP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC032GLP000IV.pdf",
+          "type": "Marking Scheme"
+        }
+      ],
+      "2026": [
         {
           "details": "Higher Level (EV)",
           "url": "LC032ALP000EV.pdf",
@@ -34956,6 +36099,68 @@
           "url": "LC033GLP000IV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Section 1 / Higher Level (EV)",
+          "url": "LC033ALP032EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section 1 / Higher Level (IV)",
+          "url": "LC033ALP032IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section 2 & 3 / Higher Level (EV)",
+          "url": "LC033ALP041EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section 2 & 3 / Higher Level (IV)",
+          "url": "LC033ALP041IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section 1 / Ordinary Level (EV)",
+          "url": "LC033GLP032EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section 1 / Ordinary Level (IV)",
+          "url": "LC033GLP032IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section 2 / Ordinary Level (EV)",
+          "url": "LC033GLP033EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section 2 / Ordinary Level (IV)",
+          "url": "LC033GLP033IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC033ALP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC033ALP000IV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC033GLP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC033GLP000IV.pdf",
+          "type": "Marking Scheme"
+        }
       ]
     },
     "Economics": {
@@ -35988,6 +37193,48 @@
           "url": "LC034GLP000IV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC034ALP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC034ALP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC034GLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC034GLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC034ALP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC034ALP000IV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC034GLP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC034GLP000IV.pdf",
+          "type": "Marking Scheme"
+        }
       ]
     },
     "Danish": {
@@ -36410,6 +37657,18 @@
         }
       ],
       "2025": [
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC039ALP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC039ALP000EV.pdf",
+          "type": "Marking Scheme"
+        }
+      ],
+      "2026": [
         {
           "details": "Higher Level (EV)",
           "url": "LC039ALP000EV.pdf",
@@ -38962,6 +40221,98 @@
           "url": "LC067GLP000IV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Composing / Higher Level (EV)",
+          "url": "LC067ALP006EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Composing / Higher Level (IV)",
+          "url": "LC067ALP006IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Elective / Higher Level (EV)",
+          "url": "LC067ALP007EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Elective / Higher Level (IV)",
+          "url": "LC067ALP007IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Listening / Higher Level (EV)",
+          "url": "LC067ALP008EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Listening / Higher Level (IV)",
+          "url": "LC067ALP008IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Composing / Ordinary Level (EV)",
+          "url": "LC067GLP006EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Composing / Ordinary Level (IV)",
+          "url": "LC067GLP006IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Listening / Ordinary Level (EV)",
+          "url": "LC067GLP008EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Listening / Ordinary Level (IV)",
+          "url": "LC067GLP008IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Sound File 1 (EV)",
+          "url": "LC067ZLP045EV.mp3",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Sound File 1 (IV)",
+          "url": "LC067ZLP045IV.mp3",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Sound File 2 (EV)",
+          "url": "LC067ZLP046EV.mp3",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Sound File 2 (IV)",
+          "url": "LC067ZLP046IV.mp3",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC067ALP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC067ALP000IV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC067GLP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC067GLP000IV.pdf",
+          "type": "Marking Scheme"
+        }
       ]
     },
     "Finnish": {
@@ -40306,6 +41657,53 @@
           "url": "LC058GLP000IV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Higher Level (BV)",
+          "url": "LC058ALP000BV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Aural Paper / Higher Level (BV)",
+          "url": "LC058ALPA00BV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (BV)",
+          "url": "LC058GLP000BV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Aural Paper / Ordinary Level (BV)",
+          "url": "LC058GLPA00BV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Sound File (BV)",
+          "url": "LC058ZLP017BV.mp3",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC058ALP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC058ALP000IV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC058GLP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC058GLP000IV.pdf",
+          "type": "Marking Scheme"
+        }
       ]
     },
     "Arabic": {
@@ -40834,6 +42232,28 @@
         }
       ],
       "2025": [
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC059ALP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC059GLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC059ALP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC059GLP000EV.pdf",
+          "type": "Marking Scheme"
+        }
+      ],
+      "2026": [
         {
           "details": "Higher Level (EV)",
           "url": "LC059ALP000EV.pdf",
@@ -41865,6 +43285,68 @@
           "url": "LC065GLP000IV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Section A / Higher Level (EV)",
+          "url": "LC065ALP014EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section A / Higher Level (IV)",
+          "url": "LC065ALP014IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section B&C / Higher Level (EV)",
+          "url": "LC065ALP039EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section B&C / Higher Level (IV)",
+          "url": "LC065ALP039IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section A / Ordinary Level (EV)",
+          "url": "LC065GLP014EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section A / Ordinary Level (IV)",
+          "url": "LC065GLP014IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section B&C / Ordinary Level (EV)",
+          "url": "LC065GLP039EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section B&C / Ordinary Level (IV)",
+          "url": "LC065GLP039IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC065ALP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC065ALP000IV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC065GLP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC065GLP000IV.pdf",
+          "type": "Marking Scheme"
+        }
       ]
     },
     "Gaeilge ChumarsÃ¡ideach": {
@@ -42344,6 +43826,18 @@
         {
           "details": "Ordinary Level (IV)",
           "url": "LC096GLP000IV.pdf",
+          "type": "Exam Paper"
+        }
+      ],
+      "2026": [
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC096GLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC096ALP000EV.pdf",
           "type": "Exam Paper"
         }
       ]
@@ -43500,6 +44994,68 @@
           "url": "LC098GLP000IV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Section A / Higher Level (EV)",
+          "url": "LC098ALP014EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section A / Higher Level (IV)",
+          "url": "LC098ALP014IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section B&C / Higher Level (EV)",
+          "url": "LC098ALP039EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section B&C / Higher Level (IV)",
+          "url": "LC098ALP039IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section A / Ordinary Level (EV)",
+          "url": "LC098GLP014EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section A / Ordinary Level (IV)",
+          "url": "LC098GLP014IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section B&C / Ordinary Level (EV)",
+          "url": "LC098GLP039EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section B&C / Ordinary Level (IV)",
+          "url": "LC098GLP039IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC098ALP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC098ALP000IV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC098GLP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Section A / Ordinary Level (IV)",
+          "url": "LC098GLP014IV.pdf",
+          "type": "Marking Scheme"
+        }
       ]
     },
     "Russian": {
@@ -44568,6 +46124,53 @@
           "url": "LC099GLP000IV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Higher Level (BV)",
+          "url": "LC099ALP000BV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Aural Paper / Higher Level (BV)",
+          "url": "LC099ALPA00BV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (BV)",
+          "url": "LC099GLP000BV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Aural Paper / Ordinary Level (BV)",
+          "url": "LC099GLPA00BV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Sound File (BV)",
+          "url": "LC099ZLP017BV.mp3",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC099ALP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC099ALP000IV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC099GLP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC099GLP000IV.pdf",
+          "type": "Marking Scheme"
+        }
       ]
     },
     "Computer Science": {
@@ -44895,6 +46498,68 @@
         {
           "details": "Ordinary Level (EV)",
           "url": "LC219GLP000EV.pdf",
+          "type": "Marking Scheme"
+        }
+      ],
+      "2026": [
+        {
+          "details": "Section A&B / Higher Level (EV)",
+          "url": "LC219ALP038EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section A&B / Higher Level (IV)",
+          "url": "LC219ALP038IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section C / Higher Level (EV)",
+          "url": "LC219ALP040EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section C / Higher Level (IV)",
+          "url": "LC219ALP040IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section A&B / Ordinary Level (EV)",
+          "url": "LC219GLP038EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section A&B / Ordinary Level (IV)",
+          "url": "LC219GLP038IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section C / Ordinary Level (EV)",
+          "url": "LC219GLP040EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section C / Ordinary Level (IV)",
+          "url": "LC219GLP040IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC219ALP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC219ALP000IV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC219GLP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC219GLP000IV.pdf",
           "type": "Marking Scheme"
         }
       ]
@@ -45514,6 +47179,28 @@
           "url": "LC223GLP000IV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC223ALP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC223GLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC223ALP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC223GLP000EV.pdf",
+          "type": "Marking Scheme"
+        }
       ]
     },
     "Physical Education": {
@@ -45728,6 +47415,48 @@
         }
       ],
       "2025": [
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC225ALP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC225ALP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC225GLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC225GLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC225ALP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC225ALP000IV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC225GLP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC225GLP000IV.pdf",
+          "type": "Marking Scheme"
+        }
+      ],
+      "2026": [
         {
           "details": "Higher Level (EV)",
           "url": "LC225ALP000EV.pdf",
@@ -46607,6 +48336,48 @@
           "url": "LC462CLP044IV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Common Level (EV)",
+          "url": "LC462CLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (IV)",
+          "url": "LC462CLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Audio Visual DVD / Common Level (EV)",
+          "url": "LC462CLP031EV.mov",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Audio Visual DVD / Common Level (IV)",
+          "url": "LC462CLP031IV.mov",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (EV)",
+          "url": "LC462CLP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Common Level (IV)",
+          "url": "LC462CLP000IV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Portfolio / Common Level (EV)",
+          "url": "LC462CLP044EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Portfolio / Common Level (IV)",
+          "url": "LC462CLP044IV.pdf",
+          "type": "Marking Scheme"
+        }
       ]
     },
     "Czech": {
@@ -46836,6 +48607,18 @@
         }
       ],
       "2025": [
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC547ALP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC547ALP000EV.pdf",
+          "type": "Marking Scheme"
+        }
+      ],
+      "2026": [
         {
           "details": "Higher Level (EV)",
           "url": "LC547ALP000EV.pdf",
@@ -47300,6 +49083,73 @@
           "url": "LC548GLP000IV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC548ALP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC548ALP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Aural Paper / Higher Level (EV)",
+          "url": "LC548ALPA00EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Aural Paper / Higher Level (IV)",
+          "url": "LC548ALPA00IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC548GLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC548GLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Aural Paper / Ordinary Level (EV)",
+          "url": "LC548GLPA00EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Aural Paper / Ordinary Level (IV)",
+          "url": "LC548GLPA00IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Sound File (BV)",
+          "url": "LC548ZLP017BV.mp3",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC548ALP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC548ALP000IV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC548GLP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC548GLP000IV.pdf",
+          "type": "Marking Scheme"
+        }
       ]
     },
     "Latvian": {
@@ -47522,6 +49372,18 @@
         }
       ],
       "2025": [
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC549ALP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC549ALP000EV.pdf",
+          "type": "Marking Scheme"
+        }
+      ],
+      "2026": [
         {
           "details": "Higher Level (EV)",
           "url": "LC549ALP000EV.pdf",
@@ -47984,6 +49846,73 @@
           "url": "LC550GLP000IV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC550ALP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC550ALP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Aural Paper / Higher Level (EV)",
+          "url": "LC550ALPA00EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Aural Paper / Higher Level (IV)",
+          "url": "LC550ALPA00IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC550GLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC550GLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Aural Paper / Ordinary Level (EV)",
+          "url": "LC550GLPA00EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Aural Paper / Ordinary Level (IV)",
+          "url": "LC550GLPA00IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Sound File (BV)",
+          "url": "LC550ZLP017BV.mp3",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC550ALP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC550ALP000IV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC550GLP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC550GLP000IV.pdf",
+          "type": "Marking Scheme"
+        }
       ]
     },
     "Hungarian": {
@@ -48206,6 +50135,18 @@
         }
       ],
       "2025": [
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC551ALP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC551ALP000EV.pdf",
+          "type": "Marking Scheme"
+        }
+      ],
+      "2026": [
         {
           "details": "Higher Level (EV)",
           "url": "LC551ALP000EV.pdf",
@@ -48661,6 +50602,18 @@
           "url": "LC553ALP000EV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC553ALP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC553ALP000EV.pdf",
+          "type": "Marking Scheme"
+        }
       ]
     },
     "Slovakian": {
@@ -48871,6 +50824,18 @@
         }
       ],
       "2025": [
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC554ALP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC554ALP000EV.pdf",
+          "type": "Marking Scheme"
+        }
+      ],
+      "2026": [
         {
           "details": "Higher Level (EV)",
           "url": "LC554ALP000EV.pdf",
@@ -49227,6 +51192,18 @@
         }
       ],
       "2025": [
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC559ALP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC559ALP000EV.pdf",
+          "type": "Marking Scheme"
+        }
+      ],
+      "2026": [
         {
           "details": "Higher Level (EV)",
           "url": "LC559ALP000EV.pdf",
@@ -50303,6 +52280,68 @@
           "url": "LC562GLP000IV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Section A / Higher Level (EV)",
+          "url": "LC562ALP014EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section A / Higher Level (IV)",
+          "url": "LC562ALP014IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section B&C / Higher Level (EV)",
+          "url": "LC562ALP039EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section B&C / Higher Level (IV)",
+          "url": "LC562ALP039IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section A / Ordinary Level (EV)",
+          "url": "LC562GLP014EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section A / Ordinary Level (IV)",
+          "url": "LC562GLP014IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section B&C / Ordinary Level (EV)",
+          "url": "LC562GLP039EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Section B&C / Ordinary Level (IV)",
+          "url": "LC562GLP039IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC562ALP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC562ALP000IV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC562GLP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC562GLP000IV.pdf",
+          "type": "Marking Scheme"
+        }
       ]
     },
     "Mandarin Chinese": {
@@ -50573,6 +52612,73 @@
           "url": "LC566GLP000IV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC566ALP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC566ALP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Aural Paper / Higher Level (EV)",
+          "url": "LC566ALPA00EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Aural Paper / Higher Level (IV)",
+          "url": "LC566ALPA00IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC566GLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC566GLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Aural Paper / Ordinary Level (EV)",
+          "url": "LC566GLPA00EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Aural Paper / Ordinary Level (IV)",
+          "url": "LC566GLPA00IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Sound File (BV)",
+          "url": "LC566ZLP017BV.mp3",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC566ALP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC566ALP000IV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC566GLP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC566GLP000IV.pdf",
+          "type": "Marking Scheme"
+        }
       ]
     },
     "Croatian": {
@@ -50709,6 +52815,18 @@
         }
       ],
       "2025": [
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC567ALP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC567ALP000EV.pdf",
+          "type": "Marking Scheme"
+        }
+      ],
+      "2026": [
         {
           "details": "Higher Level (EV)",
           "url": "LC567ALP000EV.pdf",
@@ -51042,6 +53160,48 @@
           "url": "LC568GLP000IV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC568ALP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC568ALP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC568GLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC568GLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC568ALP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "LC568ALP000IV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "LC568GLP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "LC568GLP000IV.pdf",
+          "type": "Marking Scheme"
+        }
       ]
     },
     "Office Admin And Customer": {
@@ -51055,6 +53215,18 @@
     },
     "Ukrainian": {
       "2025": [
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC570ALP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (EV)",
+          "url": "LC570ALP000EV.pdf",
+          "type": "Marking Scheme"
+        }
+      ],
+      "2026": [
         {
           "details": "Higher Level (EV)",
           "url": "LC570ALP000EV.pdf",
@@ -52125,6 +54297,23 @@
           "url": "JC001GLP000IV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Higher Level (IV)",
+          "url": "JC001ALP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "JC001GLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Sound File (IV)",
+          "url": "JC001ZLP017IV.mp3",
+          "type": "Exam Paper"
+        }
       ]
     },
     "English": {
@@ -53072,6 +55261,18 @@
           "details": "Ordinary Level (EV)",
           "url": "JC002GLP000EV.pdf",
           "type": "Marking Scheme"
+        }
+      ],
+      "2026": [
+        {
+          "details": "Higher Level (EV)",
+          "url": "JC002ALP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "JC002GLP000EV.pdf",
+          "type": "Exam Paper"
         }
       ]
     },
@@ -54871,6 +57072,28 @@
           "url": "JC003GLP000IV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Higher Level (EV)",
+          "url": "JC003ALP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Higher Level (IV)",
+          "url": "JC003ALP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (EV)",
+          "url": "JC003GLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "JC003GLP000IV.pdf",
+          "type": "Exam Paper"
+        }
       ]
     },
     "History": {
@@ -55938,6 +58161,18 @@
           "details": "Common Level (IV)",
           "url": "JC004CLP000IV.pdf",
           "type": "Marking Scheme"
+        }
+      ],
+      "2026": [
+        {
+          "details": "Common Level (EV)",
+          "url": "JC004CLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (IV)",
+          "url": "JC004CLP000IV.pdf",
+          "type": "Exam Paper"
         }
       ]
     },
@@ -57216,6 +59451,28 @@
           "details": "Common Level (IV)",
           "url": "JC005CLP000IV.pdf",
           "type": "Marking Scheme"
+        }
+      ],
+      "2026": [
+        {
+          "details": "Common Level (EV)",
+          "url": "JC005CLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (IV)",
+          "url": "JC005CLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Map / Common Level (EV)",
+          "url": "JC005CLP003EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Source Paper / Common Level (EV)",
+          "url": "JC005CLPC00EV.pdf",
+          "type": "Exam Paper"
         }
       ]
     },
@@ -60227,6 +62484,23 @@
           "url": "JC010CLP000IV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Common Level (EV)",
+          "url": "JC010CLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (IV)",
+          "url": "JC010CLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Sound File / Common Level (BV)",
+          "url": "JC010CLP017BV.mp3",
+          "type": "Exam Paper"
+        }
       ]
     },
     "German": {
@@ -61024,6 +63298,23 @@
           "details": "Common Level (IV)",
           "url": "JC011CLP000IV.pdf",
           "type": "Marking Scheme"
+        }
+      ],
+      "2026": [
+        {
+          "details": "Common Level (BV)",
+          "url": "JC011CLP000BV.mp3",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (EV)",
+          "url": "JC011CLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (IV)",
+          "url": "JC011CLP000IV.pdf",
+          "type": "Exam Paper"
         }
       ]
     },
@@ -61872,6 +64163,23 @@
           "details": "Common Level (IV)",
           "url": "JC012CLP000IV.pdf",
           "type": "Marking Scheme"
+        }
+      ],
+      "2026": [
+        {
+          "details": "Common Level (IV)",
+          "url": "JC012CLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (EV)",
+          "url": "JC012CLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Sound File / Common Level (EV)",
+          "url": "JC012CLP017EV.mp3",
+          "type": "Exam Paper"
         }
       ]
     },
@@ -62731,6 +65039,23 @@
           "url": "JC013CLP000IV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Common Level (EV)",
+          "url": "JC013CLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (IV)",
+          "url": "JC013CLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Sound File / Common Level (BV)",
+          "url": "JC013CLP017BV.mp3",
+          "type": "Exam Paper"
+        }
       ]
     },
     "Art": {
@@ -62779,6 +65104,18 @@
         {
           "details": "Common Level (IV)",
           "url": "JC014CLP000IV.pdf",
+          "type": "Marking Scheme"
+        }
+      ],
+      "2026": [
+        {
+          "details": "Common Level (IV)",
+          "url": "JC014CLP000IV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Common Level (EV)",
+          "url": "JC014CLP000EV.pdf",
           "type": "Marking Scheme"
         }
       ]
@@ -62870,6 +65207,18 @@
           "details": "Common Level (IV)",
           "url": "JC027CLP000IV.pdf",
           "type": "Marking Scheme"
+        }
+      ],
+      "2026": [
+        {
+          "details": "Common Level (EV)",
+          "url": "JC027CLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (IV)",
+          "url": "JC027CLP000IV.pdf",
+          "type": "Exam Paper"
         }
       ]
     },
@@ -65315,6 +67664,28 @@
           "url": "JC042CLP000IV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Common Level (EV)",
+          "url": "JC042CLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (IV)",
+          "url": "JC042CLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (IV)",
+          "url": "JC042CLP000IV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Common Level (EV)",
+          "url": "JC042CLP000EV.pdf",
+          "type": "Marking Scheme"
+        }
       ]
     },
     "Science": {
@@ -65883,6 +68254,18 @@
           "url": "JC057CLP000IV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Common Level (EV)",
+          "url": "JC057CLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (IV)",
+          "url": "JC057CLP000IV.pdf",
+          "type": "Exam Paper"
+        }
       ]
     },
     "Music": {
@@ -66193,6 +68576,38 @@
           "details": "Common Level (IV)",
           "url": "JC046CLP000IV.pdf",
           "type": "Marking Scheme"
+        }
+      ],
+      "2026": [
+        {
+          "details": "Common Level (EV)",
+          "url": "JC046CLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (IV)",
+          "url": "JC046CLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Sound File 1 / Common Level (EV)",
+          "url": "JC046CLP045EV.mp3",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Sound File 1 / Common Level (IV)",
+          "url": "JC046CLP045IV.mp3",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Sound File 2 / Common Level (EV)",
+          "url": "JC046CLP046EV.mp3",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Sound File 2 / Common Level (IV)",
+          "url": "JC046CLP046IV.mp3",
+          "type": "Exam Paper"
         }
       ]
     },
@@ -68749,6 +71164,18 @@
           "url": "JC052CLP000IV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Common Level (EV)",
+          "url": "JC052CLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (IV)",
+          "url": "JC052CLP000IV.pdf",
+          "type": "Exam Paper"
+        }
       ]
     },
     "Metalwork": {
@@ -71094,6 +73521,23 @@
           "url": "JC083GLP000IV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Higher Level (IV)",
+          "url": "JC083ALP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Ordinary Level (IV)",
+          "url": "JC083GLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Sound File (IV)",
+          "url": "JC083ZLP017IV.mp3",
+          "type": "Exam Paper"
+        }
       ]
     },
     "Classics": {
@@ -71184,6 +73628,28 @@
           "url": "JC106CLP000IV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Common Level (EV)",
+          "url": "JC106CLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (IV)",
+          "url": "JC106CLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (IV)",
+          "url": "JC106CLP000IV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Common Level (EV)",
+          "url": "JC106CLP000EV.pdf",
+          "type": "Marking Scheme"
+        }
       ]
     },
     "Applied Technology": {
@@ -71254,6 +73720,28 @@
         }
       ],
       "2025": [
+        {
+          "details": "Common Level (EV)",
+          "url": "JC125CLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (IV)",
+          "url": "JC125CLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (EV)",
+          "url": "JC125CLP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Common Level (IV)",
+          "url": "JC125CLP000IV.pdf",
+          "type": "Marking Scheme"
+        }
+      ],
+      "2026": [
         {
           "details": "Common Level (EV)",
           "url": "JC125CLP000EV.pdf",
@@ -71364,6 +73852,18 @@
           "url": "JC126CLP000IV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Common Level (EV)",
+          "url": "JC126CLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (IV)",
+          "url": "JC126CLP000IV.pdf",
+          "type": "Exam Paper"
+        }
       ]
     },
     "Graphics": {
@@ -71453,6 +73953,18 @@
           "details": "Common Level (IV)",
           "url": "JC137CLP000IV.pdf",
           "type": "Marking Scheme"
+        }
+      ],
+      "2026": [
+        {
+          "details": "Common Level (EV)",
+          "url": "JC137CLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (IV)",
+          "url": "JC137CLP000IV.pdf",
+          "type": "Exam Paper"
         }
       ]
     },
@@ -72648,6 +75160,18 @@
           "url": "JC223CLP000EV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Common Level (EV)",
+          "url": "JC223CLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (IV)",
+          "url": "JC223CLP000IV.pdf",
+          "type": "Exam Paper"
+        }
       ]
     },
     "Jewish Studies": {
@@ -73313,6 +75837,28 @@
           "url": "LB010CLP000EV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Common Level (EV)",
+          "url": "LB010CLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (IV)",
+          "url": "LB010CLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Sound File / Common Level (EV)",
+          "url": "LB010CLP017EV.mp3",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (EV)",
+          "url": "LB010CLP000EV.pdf",
+          "type": "Marking Scheme"
+        }
       ]
     },
     "German": {
@@ -73678,6 +76224,23 @@
         }
       ],
       "2025": [
+        {
+          "details": "Common Level (EV)",
+          "url": "LB011CLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Sound File / Common Level (EV)",
+          "url": "LB011CLP017EV.mp3",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (EV)",
+          "url": "LB011CLP000EV.pdf",
+          "type": "Marking Scheme"
+        }
+      ],
+      "2026": [
         {
           "details": "Common Level (EV)",
           "url": "LB011CLP000EV.pdf",
@@ -74146,6 +76709,28 @@
           "url": "LB012CLP000EV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Common Level (EV)",
+          "url": "LB012CLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (IV)",
+          "url": "LB012CLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Sound File / Common Level (EV)",
+          "url": "LB012CLP017EV.mp3",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (EV)",
+          "url": "LB012CLP000EV.pdf",
+          "type": "Marking Scheme"
+        }
       ]
     },
     "Italian": {
@@ -74526,6 +77111,23 @@
           "url": "LB013CLP000EV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Common Level (EV)",
+          "url": "LB013CLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Sound File / Common Level (EV)",
+          "url": "LB013CLP017EV.mp3",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (EV)",
+          "url": "LB013CLP000EV.pdf",
+          "type": "Marking Scheme"
+        }
       ]
     },
     "Gaeilge ChumarsÃ¡ideach": {
@@ -74864,6 +77466,23 @@
         }
       ],
       "2025": [
+        {
+          "details": "Common Level (IV)",
+          "url": "LB066CLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Sound File / Common Level (IV)",
+          "url": "LB066CLP017IV.mp3",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (IV)",
+          "url": "LB066CLP000IV.pdf",
+          "type": "Marking Scheme"
+        }
+      ],
+      "2026": [
         {
           "details": "Common Level (IV)",
           "url": "LB066CLP000IV.pdf",
@@ -75868,6 +78487,33 @@
           "url": "LB815CLP000EV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Common Level (EV)",
+          "url": "LB815CLP000EV.mp3",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (EV)",
+          "url": "LB815CLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (IV)",
+          "url": "LB815CLP000IV.mp3",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (IV)",
+          "url": "LB815CLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (EV)",
+          "url": "LB815CLP000EV.pdf",
+          "type": "Marking Scheme"
+        }
       ]
     },
     "Sign Language": {
@@ -76087,6 +78733,18 @@
         }
       ],
       "2025": [
+        {
+          "details": "Common Level (EV)",
+          "url": "LB816CLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (EV)",
+          "url": "LB816CLP000EV.pdf",
+          "type": "Marking Scheme"
+        }
+      ],
+      "2026": [
         {
           "details": "Common Level (EV)",
           "url": "LB816CLP000EV.pdf",
@@ -76847,6 +79505,23 @@
           "url": "LB832CLP000EV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Common Level (EV)",
+          "url": "LB832CLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (IV)",
+          "url": "LB832CLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (EV)",
+          "url": "LB832CLP000EV.pdf",
+          "type": "Marking Scheme"
+        }
       ]
     },
     "Hotel / Catering & Tourism": {
@@ -77242,6 +79917,28 @@
           "url": "LB833CLP018EV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Common Level (EV)",
+          "url": "LB833CLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (IV)",
+          "url": "LB833CLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (EV)",
+          "url": "LB833CLP000EV.pdf",
+          "type": "Marking Scheme"
+        },
+        {
+          "details": "Practical Paper / Common Level (EV)",
+          "url": "LB833CLP018EV.pdf",
+          "type": "Marking Scheme"
+        }
       ]
     },
     "Crafts & Design": {
@@ -77525,6 +80222,23 @@
         }
       ],
       "2025": [
+        {
+          "details": "Common Level (EV)",
+          "url": "LB835CLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (IV)",
+          "url": "LB835CLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (EV)",
+          "url": "LB835CLP000EV.pdf",
+          "type": "Marking Scheme"
+        }
+      ],
+      "2026": [
         {
           "details": "Common Level (EV)",
           "url": "LB835CLP000EV.pdf",
@@ -77893,6 +80607,23 @@
           "url": "LB836CLP000EV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Common Level (EV)",
+          "url": "LB836CLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (IV)",
+          "url": "LB836CLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (EV)",
+          "url": "LB836CLP000EV.pdf",
+          "type": "Marking Scheme"
+        }
       ]
     },
     "Technology": {
@@ -78148,6 +80879,18 @@
         }
       ],
       "2025": [
+        {
+          "details": "Common Level (EV)",
+          "url": "LB839CLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (EV)",
+          "url": "LB839CLP000EV.pdf",
+          "type": "Marking Scheme"
+        }
+      ],
+      "2026": [
         {
           "details": "Common Level (EV)",
           "url": "LB839CLP000EV.pdf",
@@ -78518,6 +81261,23 @@
           "url": "LB845CLP000EV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Common Level (EV)",
+          "url": "LB845CLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (IV)",
+          "url": "LB845CLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (EV)",
+          "url": "LB845CLP000EV.pdf",
+          "type": "Marking Scheme"
+        }
       ]
     },
     "Childcare / Community Care": {
@@ -78838,6 +81598,18 @@
           "url": "LB846CLP000EV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Common Level (EV)",
+          "url": "LB846CLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (EV)",
+          "url": "LB846CLP000EV.pdf",
+          "type": "Marking Scheme"
+        }
       ]
     },
     "Office Admin And Customer": {
@@ -79106,6 +81878,23 @@
         }
       ],
       "2025": [
+        {
+          "details": "Common Level (EV)",
+          "url": "LB847CLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (IV)",
+          "url": "LB847CLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (EV)",
+          "url": "LB847CLP000EV.pdf",
+          "type": "Marking Scheme"
+        }
+      ],
+      "2026": [
         {
           "details": "Common Level (EV)",
           "url": "LB847CLP000EV.pdf",
@@ -79541,6 +82330,28 @@
           "url": "LB848CLP00EV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Common Level (EV)",
+          "url": "LB848CLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Map / Common Level (EV)",
+          "url": "LB848CLP003EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Source Paper / Common Level (EV)",
+          "url": "LB848CLPC00EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (EV)",
+          "url": "LB848CLP000EV.pdf",
+          "type": "Marking Scheme"
+        }
       ]
     },
     "Information & Communication Tech.": {
@@ -79744,6 +82555,18 @@
         }
       ],
       "2025": [
+        {
+          "details": "Common Level (EV)",
+          "url": "LB849CLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (EV)",
+          "url": "LB849CLP000EV.pdf",
+          "type": "Marking Scheme"
+        }
+      ],
+      "2026": [
         {
           "details": "Common Level (EV)",
           "url": "LB849CLP000EV.pdf",
@@ -80074,6 +82897,23 @@
         }
       ],
       "2025": [
+        {
+          "details": "Common Level (EV)",
+          "url": "LB850CLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (IV)",
+          "url": "LB850CLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (EV)",
+          "url": "LB850CLP000EV.pdf",
+          "type": "Marking Scheme"
+        }
+      ],
+      "2026": [
         {
           "details": "Common Level (EV)",
           "url": "LB850CLP000EV.pdf",
@@ -80508,6 +83348,23 @@
           "url": "LB810CLP000EV.pdf",
           "type": "Marking Scheme"
         }
+      ],
+      "2026": [
+        {
+          "details": "Common Level (EV)",
+          "url": "LB810CLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Audio Visual DVD / Common Level (EV)",
+          "url": "LB810CLP031EV.mov",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (EV)",
+          "url": "LB810CLP000EV.pdf",
+          "type": "Marking Scheme"
+        }
       ]
     },
     "Mathematical Applications": {
@@ -80594,6 +83451,23 @@
         }
       ],
       "2025": [
+        {
+          "details": "Common Level (EV)",
+          "url": "LB830CLP000EV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (IV)",
+          "url": "LB830CLP000IV.pdf",
+          "type": "Exam Paper"
+        },
+        {
+          "details": "Common Level (EV)",
+          "url": "LB830CLP000EV.pdf",
+          "type": "Marking Scheme"
+        }
+      ],
+      "2026": [
         {
           "details": "Common Level (EV)",
           "url": "LB830CLP000EV.pdf",
