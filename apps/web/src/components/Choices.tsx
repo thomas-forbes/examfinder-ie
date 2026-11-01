@@ -117,7 +117,7 @@ export default function Choices({ papers, setPapers }) {
   ) => {
     const tLevelList = levelList.map((x) => ({
       ...x,
-      disabled: !data[examVal][subjectVal][yearVal].some((paper: any) =>
+      disabled: !data[examVal][subjectVal][yearVal].some((paper: { url: string }) =>
         paper?.url?.includes(x.value)
       ),
     }))
@@ -133,7 +133,7 @@ export default function Choices({ papers, setPapers }) {
   const updateLang = (examVal: string, subjectVal: string, yearVal: string) => {
     const tLangList = langList.map((x) => ({
       ...x,
-      disabled: !data[examVal][subjectVal][yearVal].some((paper: any) =>
+      disabled: !data[examVal][subjectVal][yearVal].some((paper: { url: string }) =>
         paper?.url?.includes(x.value)
       ),
     }))

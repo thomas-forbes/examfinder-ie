@@ -22,10 +22,17 @@ examfinder-ie/
 
 ## Getting Started
 
+### Requirements
+
+Use Node.js 24 (`nvm use`) and the pinned pnpm version via Corepack.
+The scraper also requires Bun. Install all dependencies from the repository root;
+`pnpm-lock.yaml` is the shared lockfile for both packages.
+
 ### Install Dependencies
 
 ```bash
-pnpm install
+corepack enable
+pnpm install --frozen-lockfile
 ```
 
 ### Development
@@ -50,9 +57,34 @@ pnpm build
 pnpm start
 ```
 
+### Validation
+
+```bash
+pnpm typecheck
+pnpm lint
+pnpm build
+pnpm audit
+```
+
+### Dependency compatibility
+
+- Tailwind stays on v3.4 with `tailwind-merge` v2, which supports its class names.
+  Tailwind v4 requires a separate styling and browser compatibility migration.
+- TypeScript stays on v6 and ESLint on v9 to satisfy the lint plugins' peer ranges.
+- pnpm stays on its updated v10 line to preserve the workspace configuration.
+- `muhammara` has been replaced by its maintained successor, `@muhammara/native`.
+- Two moderate `minimatch` audit findings remain in ESLint/TypeScript lint tooling.
+  Their fix requires a major transitive upgrade; no incompatible override is applied.
+- Lint reports existing hook/unused-variable warnings. New React Compiler effect
+  and purity diagnostics are warnings during this dependency migration.
+
 ### Scrape Exam Data
 
-Run the data scraper:
+Install the browser used by Puppeteer, then run the data scraper:
+
+```bash
+pnpm --filter @examfinder/data exec puppeteer browsers install chrome
+```
 
 ```bash
 pnpm scrape

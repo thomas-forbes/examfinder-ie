@@ -13,7 +13,9 @@ function typeToColor(type: string) {
   }
 }
 
-const sortPapers = (a: any, b: any) => {
+type SortablePaper = { type: string; details: string }
+
+const sortPapers = (a: SortablePaper, b: SortablePaper) => {
   if (a.type.includes('Deferred') && !b.type.includes('Deferred')) return 1
   if (!a.type.includes('Deferred') && b.type.includes('Deferred')) return -1
   if (a.type.includes('Marking') && !b.type.includes('Marking')) return 1

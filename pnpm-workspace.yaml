@@ -7,4 +7,8 @@ ignoredBuiltDependencies:
   - unrs-resolver
 
 onlyBuiltDependencies:
-  - muhammara
+  - '@muhammara/native'
+
+# postcss-load-config retains an old optional YAML peer in the lockfile.
+overrides:
+  'yaml@<2.8.3': '^2.8.3'
