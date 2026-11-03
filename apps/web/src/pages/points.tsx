@@ -13,7 +13,6 @@ const GRADES = [1, 2, 3, 4, 5, 6, 7, 8] as const
 type Subject = {
   subject: string
   uuid: string
-  disabled?: boolean
 } & (
   | {
       level: 'H' | 'O'
@@ -31,8 +30,6 @@ const calcPoints = (sub: Subject) => {
     H: [100, 88, 77, 66, 56, 46, 37, 0],
     O: [56, 46, 37, 28, 20, 12, 0, 0],
   }
-  if (sub.disabled) return 0
-
   if (sub.special == 'LCVP') {
     switch (sub.grade) {
       case 'None':
@@ -65,8 +62,6 @@ export default function Points() {
     { subject: '', level: 'H', grade: 1, uuid: uuidV4() },
     { subject: '', level: 'H', grade: 1, uuid: uuidV4() },
     { subject: '', level: 'H', grade: 1, uuid: uuidV4() },
-    { subject: '', level: 'H', grade: 1, uuid: uuidV4(), disabled: true },
-    { subject: '', level: 'H', grade: 1, uuid: uuidV4(), disabled: true },
     {
       subject: 'LCVP',
       grade: 'None',
@@ -135,28 +130,15 @@ export default function Points() {
               {subjects.map((sub, subIdx) => (
                 <tr
                   key={sub.uuid}
-                  className={`[&>td]:border [&>td]:border-zinc-700 [&>td]:px-2 [&>td]:py-1 [&>td]:xs:px-3 [&>td]:xs:py-2 odd:bg-zinc-800/70 even:bg-zinc-800 ${
-                    sub.disabled ? 'pointer-events-none opacity-70' : ''
-                  }`}
+                  className="[&>td]:border [&>td]:border-zinc-700 [&>td]:px-2 [&>td]:py-1 [&>td]:xs:px-3 [&>td]:xs:py-2 odd:bg-zinc-800/70 even:bg-zinc-800"
                 >
                   {/* NO. */}
                   <td
-                    className={`pointer-events-auto cursor-pointer !border-none sm:table-cell ${
+                    className={`!border-none sm:table-cell ${
                       sub.special == 'LCVP'
                         ? 'bg-zinc-700'
                         : colours[sub.grade + (sub.level == 'O' ? 3 : -1)]
                     }`}
-                    onClick={() =>
-                      setSubjects(
-                        subjects
-                          .map((s, i) =>
-                            i == subIdx
-                              ? { ...sub, disabled: !s.disabled || true }
-                              : s
-                          )
-                          .sort((a, b) => calcPoints(b) - calcPoints(a))
-                      )
-                    }
                   >
                     {subIdx + 1}.
                   </td>
