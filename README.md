@@ -92,6 +92,9 @@ pnpm scrape
 
 This will scrape exam data and save it to `apps/web/public/data.json`.
 
+If Turnstile loops, follow the [data package instructions](packages/data/README.md#using-an-existing-chrome-session-when-turnstile-loops)
+to complete the challenge in Chrome manually and attach the scraper.
+
 ## Packages
 
 ### @examfinder/web

@@ -12,6 +12,8 @@ const CONFIG = {
 	SLOW_MO: 0,
 } as const;
 
+const ARCHIVE_URL = "https://www.examinations.ie/exammaterialarchive/";
+
 // Selectors for the exam archive page
 const SELECTORS = {
 	agree: "#MaterialArchive__noTable__cbv__AgreeCheck",
@@ -125,10 +127,12 @@ const dataManager = {
 
 // Page initialization and navigation
 const pageSetup = {
-	async initialize(page: Page): Promise<void> {
-		await page.goto("https://www.examinations.ie/exammaterialarchive/");
-		await page.waitForSelector(SELECTORS.agree);
-		await page.click(SELECTORS.agree);
+	async initialize(page: Page, attached = false): Promise<void> {
+		if (!attached) await page.goto(ARCHIVE_URL);
+		await page.waitForSelector(SELECTORS.agree, { timeout: 5 * 60_000 });
+		if (!(await page.$eval(SELECTORS.agree, (el) => (el as HTMLInputElement).checked))) {
+			await page.click(SELECTORS.agree);
+		}
 		await page.waitForSelector(SELECTORS.type);
 		logger.info("Page initialized successfully");
 	},
@@ -268,27 +272,39 @@ async function scrapeExamData(): Promise<Data> {
 		headless: CONFIG.HEADLESS,
 		slowMo: CONFIG.SLOW_MO,
 	};
-	const browser = await puppeteer.launch(puppetterConfig);
-	logger.info({ puppetterConfig }, "Launched puppeteer");
+	const browserURL = process.env.SCRAPE_BROWSER_URL;
+	const browser = browserURL
+		? await puppeteer.connect({ browserURL, defaultViewport: null })
+		: await puppeteer.launch(puppetterConfig);
+	logger.info({ attached: Boolean(browserURL) }, "Connected to browser");
 
-	const page = await browser.newPage();
-	logger.info("Got new page");
+	try {
+		const page = browserURL
+			? (await browser.pages()).find((tab) => tab.url().startsWith(ARCHIVE_URL))
+			: await browser.newPage();
+		if (!page) {
+			throw new Error("Open the examinations.ie exam material archive in the debugging Chrome session and complete Turnstile before running the scraper.");
+		}
+		logger.info("Got new page");
 
-	const data = dataManager.load();
-	logger.info("Loaded data");
+		const data = dataManager.load();
+		logger.info("Loaded data");
 
-	await pageSetup.initialize(page);
-	logger.info("Initialized page");
+		await pageSetup.initialize(page, Boolean(browserURL));
+		logger.info("Initialized page");
 
-	const typeOps = await dom.getOptionValues(page, SELECTORS.type);
-	logger.info({ typeCount: typeOps.length, types: typeOps }, "Starting scrape");
+		const typeOps = await dom.getOptionValues(page, SELECTORS.type);
+		logger.info({ typeCount: typeOps.length, types: typeOps }, "Starting scrape");
 
-	for (const type of typeOps) {
-		await scraper.processType(page, data, type);
+		for (const type of typeOps) {
+			await scraper.processType(page, data, type);
+		}
+
+		return data;
+	} finally {
+		if (browserURL) await browser.disconnect();
+		else await browser.close();
 	}
-
-	await browser.close();
-	return data;
 }
 
 /**
